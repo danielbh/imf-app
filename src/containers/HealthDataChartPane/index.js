@@ -6,28 +6,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import HealthDataChart from './chart';
+import { connect } from 'react-redux';
+import { mapDataToObject } from "./reducer";
 
-const HealthDataChartPane = ({ duration, weight, bodyFat }) => (
+export const HealthDataChartPane = ({ data }) => (
   <div>
-    <HealthDataChart title="Duration" color="green" data={duration} />
-    <HealthDataChart title="Weight (kg)" color="blue" data={weight} />
-    <HealthDataChart title="Body Fat %" color="red" data={bodyFat} />
+    <HealthDataChart title="Duration" color="green" data={data.duration} />
+    <HealthDataChart title="Weight (kg)" color="blue" data={data.weight} />
+    <HealthDataChart title="Body Fat %" color="red" data={data.bodyFat} />
   </div>
 );
 
 HealthDataChartPane.propTypes = {
-  duration: PropTypes.array.isRequired,
-  weight: PropTypes.array.isRequired,
-  bodyFat: PropTypes.array.isRequired
+  data: PropTypes.shape({
+    duration: PropTypes.array,
+    weight: PropTypes.array,
+    bodyFat: PropTypes.array
+  }),
 };
 
-export default HealthDataChartPane;
+const mapStateToProps = state => ({
+  data: mapDataToObject(state.data)
+});
+
+export default connect(mapStateToProps)(HealthDataChartPane);
 
 // TODO: Add as selector
-//   dataAsObject: () => (require('../../data.json').reduce((result, e) => {
-//     result.duration.push({ date: e.date, value: e.duration });
-//     result.weight.push({ date: e.date, value: e.weight });
-//     result.bodyFat.push({ date: e.date, value: e.bodyFat });
-//     return result;
-//   }, { duration: [], weight: [], bodyFat: [] })
-// )
+

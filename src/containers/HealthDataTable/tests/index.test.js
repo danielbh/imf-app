@@ -1,10 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { HealthDataTable } from '../index';
 import {
   BootstrapTable,
   TableHeaderColumn
 } from 'react-bootstrap-table';
+
+import  HealthDataTableContainer from '../index';
+import {Provider} from 'react-redux';
+import configureMockStore from 'redux-mock-store';
 
 const renderComponent = (props = {}) => shallow(
   <HealthDataTable data={['data']} />
@@ -98,6 +102,32 @@ describe('<HealthDataTable />', () => {
           expect(bodyFatColumn().childAt(0).text()).toEqual('Body Fat %');
         });
       });
+    });
+  });
+
+  describe('test connect', () => {
+
+    it('should pass the data from connect', () => {
+      const mockStore = configureMockStore();
+
+      const store = mockStore({
+        data: [
+          { date: 1, duration: 1, weight: 4, bodyFat: 3 },
+          { date: 2, duration: 3, weight: 6, bodyFat: 8 }
+        ],
+      });
+
+      const expected =  [
+        { date: 1, duration: 1, weight: 4, bodyFat: 3 },
+        { date: 2, duration: 3, weight: 6, bodyFat: 8 }
+      ]
+      const wrapper = mount(
+        <Provider store={store}>
+          <HealthDataTableContainer />
+        </Provider>
+      );
+
+      expect(wrapper.find(BootstrapTable).at(0).node.props.data).toEqual(expected);
     });
   });
 });

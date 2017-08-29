@@ -1,8 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
-import HealthDataChartPane from '../index';
+import { HealthDataChartPane } from '../index';
+import  HealthDataChartPaneContainer from '../index';
 import HealthDataChart from '../chart';
+import {Provider} from 'react-redux';
+import configureMockStore from 'redux-mock-store';
+
 
 const data = {
   duration: [{ date: 1, value: 1 }, { date: 2, value: 3 }],
@@ -12,9 +16,7 @@ const data = {
 
 const renderComponent = (props = {}) => shallow(
   <HealthDataChartPane
-    duration={data.duration}
-    weight={data.weight}
-    bodyFat={data.bodyFat}
+    data={data}
     {...props}
   />
 );
@@ -68,4 +70,27 @@ describe('<HealthDataChartPane />', () => {
     });
   });
 
+  describe('test connect', () => {
+
+    it('should pass the data from connect', () => {
+      const mockStore = configureMockStore();
+
+      const store = mockStore({
+        data: [
+          { date: 1, duration: 1, weight: 4, bodyFat: 3 },
+          { date: 2, duration: 3, weight: 6, bodyFat: 8 }
+        ],
+      });
+
+      const wrapper = mount(
+        <Provider store={store}>
+          <HealthDataChartPaneContainer />
+        </Provider>
+      );
+
+      expect(wrapper.find(HealthDataChart).at(0).node.props.data).toEqual([{ date: 1, value: 1 }, { date: 2, value: 3 }]);
+      expect(wrapper.find(HealthDataChart).at(1).node.props.data).toEqual([{ date: 1, value: 4 }, { date: 2, value: 6 }]);
+      expect(wrapper.find(HealthDataChart).at(2).node.props.data).toEqual([{ date: 1, value: 3 }, { date: 2, value: 8 }]);
+    });
+  });
 });

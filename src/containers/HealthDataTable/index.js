@@ -42,7 +42,7 @@ HealthDataTable.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  data: state.get('data')
+  data: state.data
 });
 
 export default connect(mapStateToProps)(HealthDataTable);
