@@ -125,6 +125,10 @@ describe('<HealthDataChart />', () => {
           expect(lineChart().childAt(4).props().stroke).toEqual('#FFFFFF');
         });
 
+        it('does not have dots on line', () => {
+          expect(lineChart().childAt(4).props().dot).toEqual(false);
+        });
+
       });
     });
 

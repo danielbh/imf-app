@@ -35,7 +35,7 @@ const HealthDataChart = ({ data, color, title }) => (
         <YAxis domain={['dataMin', 'dataMax']} padding={{ bottom: 30, top: 30 }} />
         <CartesianGrid strokeDasharray="2 2" vertical={false} />
         <Tooltip />
-        <Line type="monotone" dataKey="value" stroke={color} />
+        <Line type="monotone" dataKey="value" dot={false} stroke={color} />
       </LineChart>
     </ResponsiveContainer>
   </Wrapper>
