@@ -10,20 +10,22 @@ import {
   BootstrapTable,
   TableHeaderColumn
 } from 'react-bootstrap-table';
-
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 
+const Wrapper = styled.div``;
+
 export const HealthDataTable = ({ data }) => (
-  <div>
+  <Wrapper>
     <BootstrapTable
       data={data}
-      // exportCSV
-      // selectRow={{ mode: 'checkbox' }}
-      // deleteRow
-      // insertRow
+      exportCSV
+      selectRow={{ mode: 'checkbox' }}
+      deleteRow
+      insertRow
       pagination
       //options={{  }}
     >
@@ -33,7 +35,7 @@ export const HealthDataTable = ({ data }) => (
       <TableHeaderColumn dataField="weight">Weight (kg)</TableHeaderColumn>
       <TableHeaderColumn dataField="bodyFat">Body Fat %</TableHeaderColumn>
     </BootstrapTable>
-  </div>
+  </Wrapper>
 );
 
 

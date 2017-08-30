@@ -16,19 +16,13 @@
  */
 
 import {
-  CHANGE_USERNAME,
+  ADD_ENTRY,
+  DELETE_ENTRY,
 } from './constants';
 
-/**
- * Changes the input field of the form
- *
- * @param  {name} name The new text of the input field
- *
- * @return {object}    An action object with a type of CHANGE_USERNAME
- */
-export function changeUsername(name) {
+export function deleteEntry(id) {
   return {
-    type: CHANGE_USERNAME,
-    name
+    type: ADD_ENTRY,
+    id
   };
 }

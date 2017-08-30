@@ -36,6 +36,22 @@ describe('<HealthDataTable />', () => {
       expect(renderBootstrapTable().props().pagination).toEqual(true);
     });
 
+    it('has an exportCSV button', () => {
+      expect(renderBootstrapTable().props().exportCSV).toEqual(true);
+    });
+
+    it('has deleteRow button', () => {
+      expect(renderBootstrapTable().props().deleteRow).toEqual(true);
+    });
+
+    it('has an insertRow button', () => {
+      expect(renderBootstrapTable().props().insertRow).toEqual(true);
+    });
+
+    it('uses selectRow in checkbox mode', () => {
+      expect(renderBootstrapTable().props().selectRow).toEqual({mode: 'checkbox'});
+    });
+
     describe('Columns', () => {
       it('has 5 columns', () => {
         expect(renderComponent().find(TableHeaderColumn).length).toEqual(5);
