@@ -83,7 +83,7 @@ describe('<HealthDataChart />', () => {
         });
 
         it('has the correct padding', () => {
-          expect(lineChart().childAt(1).props().padding).toEqual({ bottom: 30, top: 30 });
+          expect(lineChart().childAt(1).props().padding).toEqual({ bottom: 5});
         });
       });
 

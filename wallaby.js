@@ -39,7 +39,8 @@ module.exports = function (wallaby) {
         // as in node_modules/react-scripts/utils/createJestConfig.js
         moduleNameMapper: {
            '^.+\\.(jpg|jpeg|png|gif|svg)$': require.resolve('react-scripts/config/jest/fileTransform.js'),
-          '^.+\\.css$': require.resolve('react-scripts/config/jest/cssTransform.js')
+          '^.+\\.css$': require.resolve('react-scripts/config/jest/cssTransform.js'),
+          'data.json': wallaby.localProjectDir + 'src/data.json'
         }
       });
     },

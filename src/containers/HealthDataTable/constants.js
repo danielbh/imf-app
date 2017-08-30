@@ -9,7 +9,5 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export default {
-  DELETE_ENTRY: 'DELETE_ENTRY',
-  ADD_ENTRY: 'ADD_ENTRY'
-}
+export const DELETE_ENTRY = 'DELETE_ENTRY';
+export const  ADD_ENTRY = 'ADD_ENTRY';

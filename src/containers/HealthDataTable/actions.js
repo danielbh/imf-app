@@ -1,28 +1,20 @@
-/*
- * Home Actions
- *
- * Actions change things in your application
- * Since this boilerplate uses a uni-directional data flow, specifically redux,
- * we have these actions which are the only way your application interacts with
- * your application state. This guarantees that your state is up to date and nobody
- * messes it up weirdly somewhere.
- *
- * To add a new Action:
- * 1) Import your constant
- * 2) Add a function like this:
- *    export function yourAction(var) {
- *        return { type: YOUR_ACTION_CONSTANT, var: var }
- *    }
- */
-
 import {
   ADD_ENTRY,
   DELETE_ENTRY,
 } from './constants';
 
-export function deleteEntry(id) {
-  return {
-    type: ADD_ENTRY,
-    id
-  };
-}
+import uuid from 'node-uuid'
+
+export const addEntry = (date, duration, weight, bodyFat) => ({
+  type: ADD_ENTRY,
+  date,
+  duration,
+  weight,
+  bodyFat,
+  id: uuid.v4() // TODO: Change to server generated id later
+});
+
+export const deleteEntry = (id) => ({
+  type: DELETE_ENTRY,
+  id
+});

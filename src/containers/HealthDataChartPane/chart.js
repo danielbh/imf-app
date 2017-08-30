@@ -32,8 +32,8 @@ const HealthDataChart = ({ data, color, title }) => (
         margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
       >
         <XAxis dataKey="date" interval={5} />
-        <YAxis domain={['dataMin', 'dataMax']} padding={{ bottom: 30, top: 30 }} />
-        <CartesianGrid strokeDasharray="2 2" vertical={false} />
+        <YAxis domain={['dataMin', 'dataMax']} padding={{ bottom: 5}} />
+        <CartesianGrid strokeDasharray="2 2" vertical={false} horizontal={false} />
         <Tooltip />
         <Line type="monotone" dataKey="value" dot={false} stroke={color} />
       </LineChart>
