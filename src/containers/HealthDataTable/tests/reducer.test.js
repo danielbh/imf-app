@@ -1,4 +1,4 @@
-import { healthDataTableReducer } from '../reducer'
+import { healthDataTable } from '../reducer'
 import {
   addEntry,
   deleteEntries
@@ -10,7 +10,7 @@ import importedData from '../../../data.json';
 describe('healthDataReducer', () => {
 
   it('returns initial state', () => {
-    expect(healthDataTableReducer(undefined, {})).toEqual(importedData)
+    expect(healthDataTable(undefined, {})).toEqual(importedData)
   });
 
   it('adds an entry', () => {
@@ -24,7 +24,7 @@ describe('healthDataReducer', () => {
 
     const expected = [ ...importedData, newEntry ]
 
-    expect(healthDataTableReducer(undefined, { ...newEntry, type: 'ADD_ENTRY' })).toEqual(expected)
+    expect(healthDataTable(undefined, { ...newEntry, type: 'ADD_ENTRY' })).toEqual(expected)
 
   });
 
@@ -39,7 +39,7 @@ describe('healthDataReducer', () => {
 
     const expected = ([first, second] = initialState) => ([first, second]);
 
-    expect(healthDataTableReducer(initialState, {ids: ['id3', 'id4'], type: 'DELETE_ENTRY'}))
+    expect(healthDataTable(initialState, {ids: ['id3', 'id4'], type: 'DELETE_ENTRY'}))
       .toEqual(expected())
   });
 });

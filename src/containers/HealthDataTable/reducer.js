@@ -5,7 +5,7 @@ import {
 } from './constants';
 
 // TODO: Use immutableJS here?
-export const healthDataTableReducer = (state = importedData, action) => {
+export const healthDataTable = (state = importedData, action) => {
   switch (action.type) {
     case ADD_ENTRY:
       return [...state, {
@@ -21,4 +21,4 @@ export const healthDataTableReducer = (state = importedData, action) => {
     default:
       return state
   }
-}
+};
