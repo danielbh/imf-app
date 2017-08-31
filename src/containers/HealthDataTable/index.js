@@ -33,11 +33,11 @@ export const HealthDataTable = ({ data, addRow, deleteRows }) => (
         handleConfirmDeleteRow: next => next()
       }}
     >
-      <TableHeaderColumn dataField="id" isKey hidden export hiddenOnInsert >id</TableHeaderColumn>
-      <TableHeaderColumn dataField="date">Date</TableHeaderColumn>
-      <TableHeaderColumn dataField="duration">Duration (hrs)</TableHeaderColumn>
-      <TableHeaderColumn dataField="weight">Weight (kg)</TableHeaderColumn>
-      <TableHeaderColumn dataField="bodyFat">Body Fat %</TableHeaderColumn>
+      <TableHeaderColumn dataField="id" isKey hidden export hiddenOnInsert autoValue>id</TableHeaderColumn>
+      <TableHeaderColumn dataField="date" editable={{ type: 'date' }}>Date</TableHeaderColumn>
+      <TableHeaderColumn dataField="duration" editable={{ type: 'number' }} >Duration (hrs)</TableHeaderColumn>
+      <TableHeaderColumn dataField="weight" editable={{ type: 'number' }} >Weight (kg)</TableHeaderColumn>
+      <TableHeaderColumn dataField="bodyFat" editable={{ type: 'number' }} >Body Fat %</TableHeaderColumn>
     </BootstrapTable>
   </Wrapper>
 );
@@ -55,7 +55,6 @@ export function mapDispatchToProps(dispatch) {
     deleteRows: ids => dispatch(deleteEntries(ids))
   };
 }
-
 
 const mapStateToProps = state => ({
   data: state.data

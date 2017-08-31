@@ -19,6 +19,6 @@ export const healthDataTable = (state = importedData, action) => {
       return state.filter(entry => !action.ids.find(id => id === entry.id));
 
     default:
-      return state
+      return state;
   }
 };

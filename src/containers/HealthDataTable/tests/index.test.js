@@ -101,11 +101,19 @@ describe('<HealthDataTable />', () => {
         it('is hidden on import', () => {
           expect(idColumn().props().hiddenOnInsert).toEqual(true);
         });
+
+        it('generates an autoValue', () => {
+          expect(idColumn().props().autoValue).toEqual(true);
+        });
       });
 
       describe('date column', () => {
         it('has correct dataField', () => {
           expect(dateColumn().props().dataField).toEqual('date');
+        });
+
+        it('is of type date', () => {
+          expect(dateColumn().props().editable.type).toEqual('date');
         });
 
         it('has correct text value', () => {
@@ -121,6 +129,10 @@ describe('<HealthDataTable />', () => {
         it('has correct text value', () => {
           expect(weightColumn().childAt(0).text()).toEqual('Weight (kg)');
         });
+
+        it('is of type number', () => {
+          expect(weightColumn().props().editable.type).toEqual('number');
+        });
       });
 
       describe('duration column', () => {
@@ -131,6 +143,10 @@ describe('<HealthDataTable />', () => {
         it('has correct text value', () => {
           expect(durationColumn().childAt(0).text()).toEqual('Duration (hrs)');
         });
+
+        it('is of type number', () => {
+          expect(durationColumn().props().editable.type).toEqual('number');
+        });
       });
 
       describe('body fat column', () => {
@@ -140,6 +156,10 @@ describe('<HealthDataTable />', () => {
 
         it('has correct text value', () => {
           expect(bodyFatColumn().childAt(0).text()).toEqual('Body Fat %');
+        });
+
+        it('is of type number', () => {
+          expect(bodyFatColumn().props().editable.type).toEqual('number');
         });
       });
     });
