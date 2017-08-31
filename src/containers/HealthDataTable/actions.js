@@ -5,7 +5,7 @@ import {
 
 import uuid from 'node-uuid'
 
-export const addEntry = (date, duration, weight, bodyFat) => ({
+export const addEntry = ({ date, duration, weight, bodyFat }) => ({
   type: ADD_ENTRY,
   date,
   duration,
@@ -14,7 +14,7 @@ export const addEntry = (date, duration, weight, bodyFat) => ({
   id: uuid.v4() // TODO: Change to server generated id later
 });
 
-export const deleteEntry = (id) => ({
+export const deleteEntries = (ids) => ({
   type: DELETE_ENTRY,
-  id
+  ids
 });

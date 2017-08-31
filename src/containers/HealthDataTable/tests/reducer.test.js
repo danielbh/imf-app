@@ -1,7 +1,7 @@
 import { healthDataTableReducer } from '../reducer'
 import {
   addEntry,
-  deleteEntry
+  deleteEntries
 } from "../actions";
 
 import importedData from '../../../data.json';
@@ -14,7 +14,7 @@ describe('healthDataReducer', () => {
   });
 
   it('adds an entry', () => {
-    const expected = {
+    const newEntry = {
       id: 'id',
       date: '1-May-17',
       duration: '11',
@@ -22,21 +22,24 @@ describe('healthDataReducer', () => {
       bodyFat: '14'
     };
 
-    expect(healthDataTableReducer(undefined, {...expected, type: 'ADD_ENTRY'})).toEqual(expected)
+    const expected = [ ...importedData, newEntry ]
+
+    expect(healthDataTableReducer(undefined, { ...newEntry, type: 'ADD_ENTRY' })).toEqual(expected)
 
   });
 
   it('deletes an entry', () => {
 
     const initialState = [
-      {id: 'id', date: '1-May-17',  duration: '11', weight: '69', bodyFat: '14'},
+      {id: 'id1', date: '1-May-17',  duration: '11', weight: '69', bodyFat: '14'},
       {id: 'id2', date: '1-May-17',  duration: '11', weight: '69', bodyFat: '14'},
       {id: 'id3', date: '1-May-17',  duration: '11', weight: '69', bodyFat: '14'},
       {id: 'id4', date: '1-May-17',  duration: '11', weight: '69', bodyFat: '14'}
     ];
 
-    const expected = ([first, second, third]) => ([first, second, third])
+    const expected = ([first, second] = initialState) => ([first, second]);
 
-    expect(healthDataTableReducer(initialState, {id: 'id4', type: 'DELETE_ENTRY'})).toEqual(expected(initialState))
+    expect(healthDataTableReducer(initialState, {ids: ['id3', 'id4'], type: 'DELETE_ENTRY'}))
+      .toEqual(expected())
   });
 });

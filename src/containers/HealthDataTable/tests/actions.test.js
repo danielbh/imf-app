@@ -1,6 +1,6 @@
 import {
   addEntry,
-  deleteEntry
+  deleteEntries
 } from '../actions';
 
 import {
@@ -10,19 +10,24 @@ import {
 
 import uuid from 'node-uuid'
 
-const addEntryFactory = () => addEntry('1-May-17', '11', '69', '14');
+const addEntryFactory = () => addEntry({
+  date: '1-May-17',
+  duration: '11',
+  weight: '69',
+  bodyFat: '14'
+});
 
 describe('HealthDataTable actions', () => {
 
   describe('Add Entry Action', () => {
 
     it('receives an action type', () => {
-      expect(addEntry().type).toEqual('ADD_ENTRY');
+      expect(addEntryFactory().type).toEqual('ADD_ENTRY');
     });
 
     it('creates entry with new id', () => {
       uuid.v4 = jest.fn().mockReturnValueOnce('fake-id');
-      expect(addEntry().id).toEqual('fake-id');
+      expect(addEntryFactory().id).toEqual('fake-id');
     });
 
     it('creates a new entry with a date', () => {
@@ -45,11 +50,11 @@ describe('HealthDataTable actions', () => {
   describe('Delete Entry Action', () => {
 
     it('receives an action type', () => {
-      expect(deleteEntry().type).toEqual('DELETE_ENTRY')
+      expect(deleteEntries().type).toEqual('DELETE_ENTRY')
     });
 
     it('passes an id into action', () => {
-      expect(deleteEntry('fake-id').id).toEqual('fake-id')
+      expect(deleteEntries('fake-id').ids).toEqual('fake-id')
     });
   });
 

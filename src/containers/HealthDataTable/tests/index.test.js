@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { HealthDataTable } from '../index';
+
 import {
   BootstrapTable,
   TableHeaderColumn
@@ -9,9 +9,17 @@ import {
 import  HealthDataTableContainer from '../index';
 import {Provider} from 'react-redux';
 import configureMockStore from 'redux-mock-store';
+import uuid from 'node-uuid'
+
+import { HealthDataTable, mapDispatchToProps } from '../index';
+import {addEntry, deleteEntries} from '../actions'
 
 const renderComponent = (props = {}) => shallow(
-  <HealthDataTable data={['data']} />
+  <HealthDataTable
+    data={['data']}
+    addRow={() => 'addRow'}
+    deleteRows={() => 'deleteRows'}
+  />
 );
 
 // We use a function to decouple tests.
@@ -50,6 +58,14 @@ describe('<HealthDataTable />', () => {
 
     it('uses selectRow in checkbox mode', () => {
       expect(renderBootstrapTable().props().selectRow).toEqual({mode: 'checkbox'});
+    });
+
+    it('should pass add row to BootstrapTable', () => {
+      expect(renderBootstrapTable().props().options.afterInsertRow()).toEqual('addRow');
+    });
+
+    it('should pass delete rows to BootstrapTable', () => {
+      expect(renderBootstrapTable().props().options.afterDeleteRow()).toEqual('deleteRows');
     });
 
     describe('Columns', () => {
@@ -144,6 +160,47 @@ describe('<HealthDataTable />', () => {
       );
 
       expect(wrapper.find(BootstrapTable).at(0).node.props.data).toEqual(expected);
+    });
+  });
+
+  describe('mapDispatchToProps', () => {
+
+    describe('addRow', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        expect(result.addRow).toBeDefined();
+      });
+
+      it('should dispatch addRow when called', () => {
+        // fake uuid for action creator
+        uuid.v4 = jest.fn().mockReturnValue('fake-id');
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        const newEntry = {
+          date: '1-May-17',
+          duration: '11',
+          weight: '69',
+          bodyFat: '14'
+        };
+        result.addRow(newEntry);
+        expect(dispatch).toHaveBeenCalledWith(addEntry(newEntry));
+      });
+    });
+
+    describe('deleteRows', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        expect(result.deleteRows).toBeDefined();
+      });
+
+      it('should dispatch deletRows when called', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        result.deleteRows(['id']);
+        expect(dispatch).toHaveBeenCalledWith(deleteEntries(['id']));
+      });
     });
   });
 });

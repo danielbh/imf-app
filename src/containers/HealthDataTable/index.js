@@ -12,13 +12,14 @@ import {
 } from 'react-bootstrap-table';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { addEntry, deleteEntries } from "./actions";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 
 const Wrapper = styled.div``;
 
-export const HealthDataTable = ({ data }) => (
+export const HealthDataTable = ({ data, addRow, deleteRows }) => (
   <Wrapper>
     <BootstrapTable
       data={data}
@@ -27,7 +28,7 @@ export const HealthDataTable = ({ data }) => (
       deleteRow
       insertRow
       pagination
-      //options={{  }}
+      options={{ afterInsertRow: addRow, afterDeleteRow: deleteRows }}
     >
       <TableHeaderColumn dataField="id" isKey hidden export>id</TableHeaderColumn>
       <TableHeaderColumn dataField="date">Date</TableHeaderColumn>
@@ -40,11 +41,21 @@ export const HealthDataTable = ({ data }) => (
 
 
 HealthDataTable.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  addRow: PropTypes.func.isRequired,
+  deleteRows: PropTypes.func.isRequired
 };
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    addRow: (row) => dispatch(addEntry(row)),
+    deleteRows: (ids) => dispatch(deleteEntries(ids))
+  };
+}
+
 
 const mapStateToProps = state => ({
   data: state.data
 });
 
-export default connect(mapStateToProps)(HealthDataTable);
+export default connect(mapStateToProps, mapDispatchToProps)(HealthDataTable);
