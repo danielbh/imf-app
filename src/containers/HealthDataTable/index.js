@@ -3,6 +3,8 @@
  * Table
  *
  */
+import 'bootstrap/dist/css/bootstrap.css';
+import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -12,10 +14,7 @@ import {
 } from 'react-bootstrap-table';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { addEntry, deleteEntries } from "./actions";
-
-import 'bootstrap/dist/css/bootstrap.css';
-import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
+import { addEntry, deleteEntries } from './actions';
 
 const Wrapper = styled.div``;
 
@@ -28,9 +27,13 @@ export const HealthDataTable = ({ data, addRow, deleteRows }) => (
       deleteRow
       insertRow
       pagination
-      options={{ afterInsertRow: addRow, afterDeleteRow: deleteRows }}
+      options={{
+        afterInsertRow: addRow,
+        afterDeleteRow: deleteRows,
+        handleConfirmDeleteRow: next => next()
+      }}
     >
-      <TableHeaderColumn dataField="id" isKey hidden export>id</TableHeaderColumn>
+      <TableHeaderColumn dataField="id" isKey hidden export hiddenOnInsert >id</TableHeaderColumn>
       <TableHeaderColumn dataField="date">Date</TableHeaderColumn>
       <TableHeaderColumn dataField="duration">Duration (hrs)</TableHeaderColumn>
       <TableHeaderColumn dataField="weight">Weight (kg)</TableHeaderColumn>
@@ -48,8 +51,8 @@ HealthDataTable.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    addRow: (row) => dispatch(addEntry(row)),
-    deleteRows: (ids) => dispatch(deleteEntries(ids))
+    addRow: row => dispatch(addEntry(row)),
+    deleteRows: ids => dispatch(deleteEntries(ids))
   };
 }
 

@@ -1,20 +1,18 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-
 import {
   BootstrapTable,
   TableHeaderColumn
 } from 'react-bootstrap-table';
 
-import  HealthDataTableContainer from '../index';
-import {Provider} from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import uuid from 'node-uuid'
+import uuid from 'node-uuid';
+import { Provider } from 'react-redux';
 
-import { HealthDataTable, mapDispatchToProps } from '../index';
-import {addEntry, deleteEntries} from '../actions'
+import HealthDataTableContainer, { HealthDataTable, mapDispatchToProps } from '../index';
+import { addEntry, deleteEntries } from '../actions';
 
-const renderComponent = (props = {}) => shallow(
+const renderComponent = () => shallow(
   <HealthDataTable
     data={['data']}
     addRow={() => 'addRow'}
@@ -68,6 +66,12 @@ describe('<HealthDataTable />', () => {
       expect(renderBootstrapTable().props().options.afterDeleteRow()).toEqual('deleteRows');
     });
 
+    it('should pass handleConfirmDeleteRow to BootstrapTable', () => {
+      const next = jest.fn();
+      renderBootstrapTable().props().options.handleConfirmDeleteRow(next);
+      expect(next).toHaveBeenCalled();
+    });
+
     describe('Columns', () => {
       it('has 5 columns', () => {
         expect(renderComponent().find(TableHeaderColumn).length).toEqual(5);
@@ -92,6 +96,10 @@ describe('<HealthDataTable />', () => {
 
         it('has correct text value', () => {
           expect(idColumn().childAt(0).text()).toEqual('id');
+        });
+
+        it('is hidden on import', () => {
+          expect(idColumn().props().hiddenOnInsert).toEqual(true);
         });
       });
 
@@ -149,7 +157,7 @@ describe('<HealthDataTable />', () => {
         ],
       });
 
-      const expected =  [
+      const expected = [
         { date: 1, duration: 1, weight: 4, bodyFat: 3 },
         { date: 2, duration: 3, weight: 6, bodyFat: 8 }
       ]
@@ -164,7 +172,6 @@ describe('<HealthDataTable />', () => {
   });
 
   describe('mapDispatchToProps', () => {
-
     describe('addRow', () => {
       it('should be injected', () => {
         const dispatch = jest.fn();
