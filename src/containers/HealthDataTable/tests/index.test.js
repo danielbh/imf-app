@@ -9,8 +9,16 @@ import configureMockStore from 'redux-mock-store';
 import uuid from 'node-uuid';
 import { Provider } from 'react-redux';
 
+
 import HealthDataTableContainer, { HealthDataTable, mapDispatchToProps } from '../index';
 import { addEntry, deleteEntries } from '../actions';
+
+import {
+  validateDate,
+  validateDuration,
+  validateBodyFat,
+  validateWeight
+} from '../insertValidation';
 
 const renderComponent = () => shallow(
   <HealthDataTable
@@ -55,7 +63,7 @@ describe('<HealthDataTable />', () => {
     });
 
     it('uses selectRow in checkbox mode', () => {
-      expect(renderBootstrapTable().props().selectRow).toEqual({mode: 'checkbox'});
+      expect(renderBootstrapTable().props().selectRow).toEqual({ mode: 'checkbox' });
     });
 
     it('should pass add row to BootstrapTable', () => {
@@ -116,6 +124,10 @@ describe('<HealthDataTable />', () => {
           expect(dateColumn().props().editable.type).toEqual('date');
         });
 
+        it('contains the correct validation function', () => {
+          expect(dateColumn().props().editable.validator).toEqual(validateDate);
+        });
+
         it('has correct text value', () => {
           expect(dateColumn().childAt(0).text()).toEqual('Date');
         });
@@ -133,6 +145,10 @@ describe('<HealthDataTable />', () => {
         it('is of type number', () => {
           expect(weightColumn().props().editable.type).toEqual('number');
         });
+
+        it('contains the correct validation function', () => {
+          expect(weightColumn().props().editable.validator).toEqual(validateWeight);
+        });
       });
 
       describe('duration column', () => {
@@ -146,6 +162,10 @@ describe('<HealthDataTable />', () => {
 
         it('is of type number', () => {
           expect(durationColumn().props().editable.type).toEqual('number');
+        });
+
+        it('contains the correct validation function', () => {
+          expect(durationColumn().props().editable.validator).toEqual(validateDuration);
         });
       });
 
@@ -161,6 +181,10 @@ describe('<HealthDataTable />', () => {
         it('is of type number', () => {
           expect(bodyFatColumn().props().editable.type).toEqual('number');
         });
+
+        it('contains the correct validation function', () => {
+          expect(bodyFatColumn().props().editable.validator).toEqual(validateBodyFat);
+        });
       });
     });
   });
@@ -174,7 +198,7 @@ describe('<HealthDataTable />', () => {
         data: [
           { date: 1, duration: 1, weight: 4, bodyFat: 3 },
           { date: 2, duration: 3, weight: 6, bodyFat: 8 }
-        ],
+        ]
       });
 
       const expected = [

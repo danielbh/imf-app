@@ -4,7 +4,7 @@
  *
  */
 import 'bootstrap/dist/css/bootstrap.css';
-import 'react-bootstrap-table/dist/react-bootstrap-table.min.css';
+import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -15,8 +15,18 @@ import {
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { addEntry, deleteEntries } from './actions';
+import { validateDate, validateBodyFat, validateWeight, validateDuration } from './insertValidation';
 
-const Wrapper = styled.div``;
+// IMPORTANT: Default css behavior is overridden to hide toastr notification which appears on invalid insert
+// submits. The recommended solution does not work. See documentation here:
+// http://allenfang.github.io/react-bootstrap-table/docs.html#beforeShowError
+// At the moment this is also not supported in the unit testing framework. Please see the following link
+// for more information: https://github.com/styled-components/jest-styled-components/issues/64
+const Wrapper = styled.div`
+  .s-alert-wrapper {
+     display: none;
+  }
+`;
 
 export const HealthDataTable = ({ data, addRow, deleteRows }) => (
   <Wrapper>
@@ -33,11 +43,36 @@ export const HealthDataTable = ({ data, addRow, deleteRows }) => (
         handleConfirmDeleteRow: next => next()
       }}
     >
-      <TableHeaderColumn dataField="id" isKey hidden export hiddenOnInsert autoValue>id</TableHeaderColumn>
-      <TableHeaderColumn dataField="date" editable={{ type: 'date' }}>Date</TableHeaderColumn>
-      <TableHeaderColumn dataField="duration" editable={{ type: 'number' }} >Duration (hrs)</TableHeaderColumn>
-      <TableHeaderColumn dataField="weight" editable={{ type: 'number' }} >Weight (kg)</TableHeaderColumn>
-      <TableHeaderColumn dataField="bodyFat" editable={{ type: 'number' }} >Body Fat %</TableHeaderColumn>
+
+      <TableHeaderColumn
+        dataField="id"
+        isKey
+        hidden
+        export
+        hiddenOnInsert
+        autoValue
+      >id</TableHeaderColumn>
+
+      <TableHeaderColumn
+        dataField="date"
+        editable={{ type: 'date', validator: validateDate }}
+      >Date</TableHeaderColumn>
+
+      <TableHeaderColumn
+        dataField="duration"
+        editable={{ type: 'number', validator: validateDuration }}
+      >Duration (hrs)</TableHeaderColumn>
+
+      <TableHeaderColumn
+        dataField="weight"
+        editable={{ type: 'number', validator: validateWeight }}
+      >Weight (kg)</TableHeaderColumn>
+
+      <TableHeaderColumn
+        dataField="bodyFat"
+        editable={{ type: 'number', validator: validateBodyFat }}
+      >Body Fat %</TableHeaderColumn>
+
     </BootstrapTable>
   </Wrapper>
 );

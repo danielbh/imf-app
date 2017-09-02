@@ -14,7 +14,7 @@ export const addEntry = ({ date, duration, weight, bodyFat }) => ({
   id: uuid.v4() // TODO: Change to server generated id later
 });
 
-export const deleteEntries = (ids) => ({
+export const deleteEntries = ids => ({
   type: DELETE_ENTRY,
   ids
 });
