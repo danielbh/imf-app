@@ -12,13 +12,22 @@ describe('healthDataReducer', () => {
   it('adds an entry', () => {
     const newEntry = {
       id: 'id',
-      date: '1-May-17',
+      date: '2017-09-22',
       duration: '11',
       weight: '69',
       bodyFat: '14'
     };
 
-    const expected = [...importedData, newEntry];
+    // Table form submit formats date differently so we need to account for this in action creator
+    const addedEntry = {
+      id: 'id',
+      date: '22-Sep-17',
+      duration: '11',
+      weight: '69',
+      bodyFat: '14'
+    };
+
+    const expected = [...importedData, addedEntry];
 
     expect(healthDataTable(undefined, { ...newEntry, type: 'ADD_ENTRY' })).toEqual(expected);
   });
@@ -37,3 +46,4 @@ describe('healthDataReducer', () => {
       .toEqual(expected());
   });
 });
+

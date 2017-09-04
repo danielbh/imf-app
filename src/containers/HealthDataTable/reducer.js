@@ -1,8 +1,10 @@
+import moment from 'moment';
 import importedData from '../../data.json';
 import {
   ADD_ENTRY,
   DELETE_ENTRY
 } from './constants';
+
 
 // TODO: Use immutableJS here?
 export const healthDataTable = (state = importedData, action) => {
@@ -10,7 +12,7 @@ export const healthDataTable = (state = importedData, action) => {
     case ADD_ENTRY:
       return [...state, {
         id: action.id,
-        date: action.date,
+        date: moment(action.date).format('D-MMM-YY'),
         duration: action.duration,
         weight: action.weight,
         bodyFat: action.bodyFat

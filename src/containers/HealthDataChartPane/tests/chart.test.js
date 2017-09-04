@@ -5,8 +5,18 @@ import H4 from '../../../components/H4';
 import HealthDataChart from '../chart';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
+const data = [
+  { date: 1, value: 1 },
+  { date: 2, value: 3 },
+  { date: 3, value: 7 },
+  { date: 4, value: 3 },
+  { date: 5, value: 2 },
+  { date: 6, value: 1 },
+  { date: 7, value: 9 }
+];
+
 const renderComponent = (props = {}) => shallow(
-  <HealthDataChart color="#FFFFFF" title="title" id="id" data={['data']} {...props} />
+  <HealthDataChart color="#FFFFFF" title="title" id="id" data={data} {...props} />
 );
 
 const responsiveContainer = () => renderComponent().childAt(1);
@@ -50,7 +60,7 @@ describe('<HealthDataChart />', () => {
       });
 
       it('is passed the correct data', () => {
-        expect(lineChart().props().data).toEqual(['data']);
+        expect(lineChart().props().data).toEqual(data);
       });
 
       it('has the correct margin value', () => {
@@ -58,9 +68,12 @@ describe('<HealthDataChart />', () => {
       });
 
       describe('<XAxis />', () => {
-
         it('displays the XAxis Component', () => {
           expect(lineChart().childAt(0).type()).toEqual(XAxis);
+        });
+
+        it('has the correct value for domain', () => {
+          expect(lineChart().childAt(0).props().domain).toEqual([1, 7]);
         });
 
         it('has the right dataKey', () => {
@@ -78,8 +91,7 @@ describe('<HealthDataChart />', () => {
         });
 
         it('has the correct value for domain', () => {
-          expect(lineChart().childAt(1).props().domain).toEqual(['dataMin', 'dataMax']);
-
+          expect(lineChart().childAt(1).props().domain).toEqual([1, 9]);
         });
 
         it('has the correct padding', () => {
