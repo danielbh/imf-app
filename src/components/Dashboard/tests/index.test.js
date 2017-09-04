@@ -4,6 +4,9 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
+import Toolbar from '../../Toolbar';
+import CenteredSection from '../../CenteredSection';
+import Section from '../../Section';
 import HealthDataChartPane from '../../../containers/HealthDataChartPane';
 import HealthDataTable from '../../../containers/HealthDataTable';
 import Dashboard from '../index';
@@ -17,15 +20,23 @@ describe('<Dashboard />', () => {
     expect(renderComponent().type()).toEqual('article');
   });
 
-  describe('<HealthChartDataPane />', () => {
-    it('renders HealthDataChartPane', () => {
-      expect(renderComponent().find(HealthDataChartPane).length).toEqual(1);
-    });
+  it('has Sections', () => {
+    expect(renderComponent().find(Section).length).toEqual(1);
   });
 
-  describe('<HealthDataTable />', () => {
-    it('renders HealthDataTable', () => {
-      expect(renderComponent().find(HealthDataTable).length).toEqual(1);
-    });
+  it('has Centered Sections', () => {
+    expect(renderComponent().find(CenteredSection).length).toEqual(2);
+  });
+
+  it('renders HealthDataChartPane', () => {
+    expect(renderComponent().find(HealthDataChartPane).length).toEqual(1);
+  });
+
+  it('renders HealthDataTable', () => {
+    expect(renderComponent().find(HealthDataTable).length).toEqual(1);
+  });
+
+  it('renders Toolbar', () => {
+    expect(renderComponent().find(Toolbar).length).toEqual(1);
   });
 });

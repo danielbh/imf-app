@@ -3,7 +3,6 @@
  * Table
  *
  */
-import 'bootstrap/dist/css/bootstrap.css';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 import React from 'react';
