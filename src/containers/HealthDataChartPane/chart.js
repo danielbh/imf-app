@@ -30,8 +30,8 @@ const HealthDataChart = ({ data, color, title }) => {
     return acc;
   }, { xValues: [], yValues: [] });
 
-  const xMaxMin = [Math.min.apply(0, xValues), Math.max.apply(0, xValues)];
-  const yMaxMin = [Math.min.apply(0, yValues), Math.max.apply(0, yValues)];
+  const xDomain = [Math.min.apply(0, xValues.reverse()), Math.max.apply(0, xValues.reverse())];
+  const yDomain = [Math.min.apply(0, yValues), Math.max.apply(0, yValues)];
 
   return (
     <Wrapper>
@@ -41,8 +41,8 @@ const HealthDataChart = ({ data, color, title }) => {
           data={data}
           margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
         >
-          <XAxis domain={xMaxMin} dataKey="date" interval={5} />
-          <YAxis domain={yMaxMin} padding={{ bottom: 5 }} />
+          <XAxis domain={xDomain} dataKey="date" interval={5} />
+          <YAxis domain={yDomain} padding={{ bottom: 5 }} />
           <CartesianGrid strokeDasharray="2 2" vertical={false} horizontal={false} />
           <Tooltip />
           <Line type="monotone" dataKey="value" dot={false} stroke={color} />

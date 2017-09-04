@@ -1,5 +1,5 @@
 [
-  { "id":"1", "date":"1-May-17", "duration": 15, "weight": 70, "bodyFat": 16 },
+  { "id":"1", "date":"1-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
   { "id":"2", "date":"30-Apr-17", "duration": 16, "weight": 70, "bodyFat": 14},
   { "id":"3", "date":"27-Apr-17", "duration": 16, "weight": 70, "bodyFat": 14},
   { "id":"4", "date":"26-Apr-17", "duration": 16, "weight": 71, "bodyFat": 12},
@@ -15,9 +15,9 @@
   { "id":"14", "date":"16-Apr-17", "duration": 20, "weight": 69, "bodyFat": 14 },
   { "id":"15", "date":"15-Apr-17", "duration": 21, "weight": 68, "bodyFat": 15 },
   { "id":"16", "date":"14-Apr-17", "duration": 21, "weight": 68.5, "bodyFat": 16 },
-  { "id":"17", "date":"30-Mar-17", "duration": 22, "weight": 69, "bodyFat": 17 },
-  { "id":"18", "date":"29-Mar-17", "duration": 22, "weight": 70, "bodyFat": 17 },
-  { "id":"19", "date":"28-Mar-17", "duration": 19, "weight": 70, "bodyFat": 16 },
-  { "id":"20", "date":"27-Mar-17", "duration": 24, "weight": 70, "bodyFat": 15 },
-  { "id":"21", "date":"26-Mar-17", "duration": 10, "weight": 70, "bodyFat": 15 }
+  { "id":"17", "date":"30-May-17", "duration": 22, "weight": 69, "bodyFat": 17 },
+  { "id":"18", "date":"29-May-17", "duration": 22, "weight": 70, "bodyFat": 17 },
+  { "id":"19", "date":"28-May-17", "duration": 19, "weight": 70, "bodyFat": 16 },
+  { "id":"20", "date":"27-May-17", "duration": 24, "weight": 70, "bodyFat": 15 },
+  { "id":"21", "date":"26-May-17", "duration": 10, "weight": 70, "bodyFat": 15 }
 ]
