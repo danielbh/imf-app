@@ -18,6 +18,14 @@ describe('Insert entry form validation', () => {
         { isValid: false, notification: { type: 'danger', msg: 'You must enter a valid date', title: 'Error' } };
       expect(actual).toEqual(expected);
     });
+
+    it('does not accept a date that is after today', () => {
+      const afterToday = new Date(8640000000000000);
+      const actual = validateDate(afterToday);
+      const expected =
+        { isValid: false, notification: { type: 'danger', msg: 'The date cannot be after today', title: 'Error' } };
+      expect(actual).toEqual(expected);
+    });
   });
 
   describe('Validate duration', () => {
@@ -80,6 +88,30 @@ describe('Insert entry form validation', () => {
           } };
       expect(actual).toEqual(expected);
     });
+
+    it('does not accept a weight value less than 0% and returns error', () => {
+      const actual = validateWeight('-1');
+      const expected =
+        { isValid: false,
+          notification: {
+            type: 'danger',
+            msg: 'Weight cannot be less than 0 kg',
+            title: 'Error'
+          } };
+      expect(actual).toEqual(expected);
+    });
+
+    it('does not accept a weight value more than 1000 kg and returns error', () => {
+      const actual = validateWeight('1001');
+      const expected =
+        { isValid: false,
+          notification: {
+            type: 'danger',
+            msg: 'Weight cannot be more than 1000 kg',
+            title: 'Error'
+          } };
+      expect(actual).toEqual(expected);
+    });
   });
 
   describe('Validate body fat', () => {
@@ -101,7 +133,7 @@ describe('Insert entry form validation', () => {
       expect(actual).toEqual(expected);
     });
 
-    it('does not accept a body value fat less than 0% and returns error', () => {
+    it('does not accept a body fat value less than 0% and returns error', () => {
       const actual = validateBodyFat('-1');
       const expected =
         { isValid: false,

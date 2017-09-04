@@ -1,9 +1,20 @@
 
 export function validateDate(value, row) {
+  let response = {
+    isValid: false,
+    notification: { type: 'danger', msg: 'You must enter a valid date', title: 'Error' }
+  };
+
   if (Date.parse(value)) {
-    return { isValid: true, notification: { type: 'success', msg: '', title: '' } };
+    if (value > new Date()) {
+      return {
+        isValid: false,
+        notification: { type: 'danger', msg: 'The date cannot be after today', title: 'Error' }
+      };
+    }
+    response = { isValid: true, notification: { type: 'success', msg: '', title: '' } };
   }
-  return { isValid: false, notification: { type: 'danger', msg: 'You must enter a valid date', title: 'Error' } };
+  return response;
 }
 
 export function validateDuration(value, row) {
@@ -13,10 +24,9 @@ export function validateDuration(value, row) {
 }
 
 export function validateWeight(value, row) {
-  if (isNaN(parseInt(value, 0))) {
-    return { isValid: false, notification: { type: 'danger', msg: 'Weight must be a number', title: 'Error' } };
-  }
-  return { isValid: true, notification: { type: 'success', msg: '', title: '' } };
+  const response = { isValid: true, notification: { type: 'success', msg: '', title: '' } };
+  const error = errorIfInvalidNumberOutsideRange({ value, fieldName: 'Weight', units: ' kg', high: 1000 });
+  return error || response;
 }
 
 export function validateBodyFat(value, row) {

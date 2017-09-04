@@ -1,7 +1,6 @@
-import { mapDataToObject } from "../reducer";
+import { mapDataToObject } from '../reducer';
 
 it('maps data array to an object', () => {
-
   const testData = [
     { date: 1, duration: 1, weight: 4, bodyFat: 3 },
     { date: 2, duration: 3, weight: 6, bodyFat: 8 }
@@ -13,6 +12,5 @@ it('maps data array to an object', () => {
     bodyFat: [{ date: 1, value: 3 }, { date: 2, value: 8 }]
   };
 
-  expect(mapDataToObject(testData)).toEqual(expected)
-
+  expect(mapDataToObject(testData)).toEqual(expected);
 });

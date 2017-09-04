@@ -1,14 +1,9 @@
+import uuid from 'node-uuid';
+
 import {
   addEntry,
   deleteEntries
 } from '../actions';
-
-import {
-  ADD_ENTRY,
-  DELETE_ENTRY
-} from '../constants';
-
-import uuid from 'node-uuid'
 
 const addEntryFactory = () => addEntry({
   date: '1-May-17',
@@ -31,30 +26,29 @@ describe('HealthDataTable actions', () => {
     });
 
     it('creates a new entry with a date', () => {
-      expect(addEntryFactory().date).toEqual('1-May-17')
+      expect(addEntryFactory().date).toEqual('1-May-17');
     });
 
     it('creates a new entry with a duration', () => {
-      expect(addEntryFactory().duration).toEqual('11')
+      expect(addEntryFactory().duration).toEqual('11');
     });
 
     it('creates a new entry with weight', () => {
-      expect(addEntryFactory().weight).toEqual('69')
+      expect(addEntryFactory().weight).toEqual('69');
     });
 
     it('creates a new entry with body fat', () => {
-      expect(addEntryFactory().bodyFat).toEqual('14')
+      expect(addEntryFactory().bodyFat).toEqual('14');
     });
   });
 
   describe('Delete Entry Action', () => {
-
     it('receives an action type', () => {
-      expect(deleteEntries().type).toEqual('DELETE_ENTRY')
+      expect(deleteEntries().type).toEqual('DELETE_ENTRY');
     });
 
     it('passes an id into action', () => {
-      expect(deleteEntries('fake-id').ids).toEqual('fake-id')
+      expect(deleteEntries('fake-id').ids).toEqual('fake-id');
     });
   });
 
