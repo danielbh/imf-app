@@ -2,7 +2,7 @@
  * Create the store with asynchronously loaded reducers
  */
 import { createStore, compose } from 'redux';
-import createReducer from './reducers'
+import createReducer from './reducers';
 
 export default function configureStore(initialState = {}) {
 

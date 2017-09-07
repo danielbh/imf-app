@@ -10,6 +10,6 @@ import { healthDataTable } from './containers/HealthDataTable/reducer'
  */
 export default function createReducer() {
   return combineReducers({
-    data: healthDataTable,
+    data: healthDataTable
   });
 }
