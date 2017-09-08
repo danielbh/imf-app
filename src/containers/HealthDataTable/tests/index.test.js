@@ -223,7 +223,7 @@ describe('<HealthDataTable />', () => {
         expect(result.addRow).toBeDefined();
       });
 
-      it('should dispatch addRow when called', () => {
+      it('should dispatch addRow action when called', () => {
         // fake uuid for action creator
         uuid.v4 = jest.fn().mockReturnValue('fake-id');
         const dispatch = jest.fn();
@@ -246,7 +246,7 @@ describe('<HealthDataTable />', () => {
         expect(result.deleteRows).toBeDefined();
       });
 
-      it('should dispatch deletRows when called', () => {
+      it('should dispatch deleteRows action when called', () => {
         const dispatch = jest.fn();
         const result = mapDispatchToProps(dispatch);
         result.deleteRows(['id']);

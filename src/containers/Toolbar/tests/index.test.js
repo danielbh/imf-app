@@ -2,15 +2,22 @@
  * Created by danielhollcraft on 9/8/17.
  */
 import React from 'react';
+import 'jest-styled-components'
 import { shallow } from 'enzyme';
 import { create } from 'react-test-renderer'
 import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
-import { Toolbar } from '../index'
-import 'jest-styled-components'
+import { Toolbar, mapDispatchToProps } from '../index'
+import {
+  selectWeek,
+  selectMonth,
+  selectThreeMonth,
+  selectYear,
+  selectAll
+} from '../actions'
 
 const renderComponent = (props) => shallow(
   <Toolbar {...props} />
-);
+)
 
 describe('<Toolbar />', () => {
   it('has expected structure and styles', () => {
@@ -52,6 +59,83 @@ describe('<Toolbar />', () => {
       const component = renderComponent({ selectAll });
       component.find(Button).at(4).simulate('click');
       expect(selectAll).toBeCalled();
+    });
+  });
+
+  describe('mapDispatchToProps', () => {
+    describe('selectWeek', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        expect(result.selectWeek).toBeDefined();
+      });
+
+      it('should dispatch selectWeek action when called', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        result.selectWeek();
+        expect(dispatch).toHaveBeenCalledWith(selectWeek());
+      });
+    });
+
+    describe('selectMonth', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        expect(result.selectMonth).toBeDefined();
+      });
+
+      it('should dispatch selectMonth action when called', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        result.selectMonth();
+        expect(dispatch).toHaveBeenCalledWith(selectMonth());
+      });
+    });
+
+    describe('selectThreeMonth', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        expect(result.selectThreeMonth).toBeDefined();
+      });
+
+      it('should dispatch selectThreeMonth action when called', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        result.selectThreeMonth();
+        expect(dispatch).toHaveBeenCalledWith(selectThreeMonth());
+      });
+    });
+
+    describe('selectYear', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        expect(result.selectYear).toBeDefined();
+      });
+
+      it('should dispatch selectYear action when called', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        result.selectYear();
+        expect(dispatch).toHaveBeenCalledWith(selectYear());
+      });
+    });
+
+    describe('selectAll', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        expect(result.selectAll).toBeDefined();
+      });
+
+      it('should dispatch selectAll action when called', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        result.selectAll();
+        expect(dispatch).toHaveBeenCalledWith(selectAll());
+      });
     });
   });
 });

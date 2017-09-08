@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import {
+  selectWeek,
+  selectMonth,
+  selectThreeMonth,
+  selectYear,
+  selectAll
+} from './actions'
 
 const Wrapper = styled.div`
   .toolbar {
@@ -15,7 +22,7 @@ const Wrapper = styled.div`
   }
 `;
 export const Toolbar = ({
-  selectWeek, 
+  selectWeek,
   selectMonth,
   selectThreeMonth,
   selectYear,
@@ -43,7 +50,13 @@ Toolbar.propTypes = {
 };
 
 export function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    selectWeek: () => dispatch(selectWeek()),
+    selectMonth: () => dispatch(selectMonth()),
+    selectThreeMonth: () => dispatch(selectThreeMonth()),
+    selectYear: () => dispatch(selectYear()),
+    selectAll: () => dispatch(selectAll())
+  };
 }
 
 Toolbar.defaultProps = {};
