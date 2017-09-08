@@ -17,7 +17,7 @@ module.exports = function (wallaby) {
     files: [
       'src/**/*.js',
       '!src/**/*.test.js',
-      { pattern: '**/*.css', ignore: true }
+      'src/**/*.snap'
     ],
 
     tests: ['src/**/*.test.js'],
@@ -45,7 +45,8 @@ module.exports = function (wallaby) {
       });
     },
 
-    testFramework: 'jest'
+    testFramework: 'jest',
+    debug: true
   };
 };
 

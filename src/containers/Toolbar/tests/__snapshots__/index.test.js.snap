@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Toolbar /> has expected structure and styles 1`] = `
+.c0 .toolbar {
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-justify-content: flex-end;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="toolbar btn-toolbar"
+    role="toolbar"
+  >
+    <div
+      className="btn-group"
+    >
+      <button
+        className="btn btn-default"
+        disabled={false}
+        onClick={undefined}
+        type="button"
+      >
+        1W
+      </button>
+      <button
+        className="btn btn-default"
+        disabled={false}
+        onClick={undefined}
+        type="button"
+      >
+        1M
+      </button>
+      <button
+        className="btn btn-default"
+        disabled={false}
+        onClick={undefined}
+        type="button"
+      >
+        3M
+      </button>
+      <button
+        className="btn btn-default"
+        disabled={false}
+        onClick={undefined}
+        type="button"
+      >
+        1Y
+      </button>
+      <button
+        className="btn btn-default"
+        disabled={false}
+        onClick={undefined}
+        type="button"
+      >
+        All
+      </button>
+    </div>
+  </div>
+</div>
+`;
