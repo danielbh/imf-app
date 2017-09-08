@@ -39,10 +39,9 @@ export const HealthDataTable = ({ data, addRow, deleteRows }) => (
       options={{
         afterInsertRow: addRow,
         afterDeleteRow: deleteRows,
-        handleConfirmDeleteRow: next => next()
+        handleConfirmDeleteRow: next => next() // Overrides default behavior which triggers an alert.
       }}
     >
-
       <TableHeaderColumn
         dataField="id"
         isKey
