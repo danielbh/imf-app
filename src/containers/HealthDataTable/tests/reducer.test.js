@@ -6,7 +6,7 @@ import importedData from '../../../data.json';
 describe('healthDataReducer', () => {
 
   it('returns initial state', () => {
-    expect(healthDataTable(undefined, {})).toEqual(importedData);
+    expect(healthDataTable(undefined, {})).toEqual([]);
   });
 
   it('adds an entry', () => {
@@ -27,7 +27,7 @@ describe('healthDataReducer', () => {
       bodyFat: '14'
     };
 
-    const expected = [...importedData, addedEntry];
+    const expected = [addedEntry];
 
     expect(healthDataTable(undefined, { ...newEntry, type: 'ADD_ENTRY' })).toEqual(expected);
   });

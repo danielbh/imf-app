@@ -8,7 +8,7 @@ import { healthDataTable } from './containers/HealthDataTable/reducer'
 /**
  * Creates the main reducer
  */
-export default function createReducer() {
+export default function rootReducer() {
   return combineReducers({
     data: healthDataTable
   });

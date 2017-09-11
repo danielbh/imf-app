@@ -1,13 +1,10 @@
 import moment from 'moment';
-import importedData from '../../data.json';
 import {
   ADD_ENTRY,
   DELETE_ENTRY
 } from './constants';
 
-
-// TODO: Use immutableJS here?
-export const healthDataTable = (state = importedData, action) => {
+export const healthDataTable = (state = [], action) => {
   switch (action.type) {
     case ADD_ENTRY:
       return [...state, {
