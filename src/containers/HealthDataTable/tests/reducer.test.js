@@ -1,12 +1,9 @@
 import { healthDataTable } from '../reducer';
 
-import importedData from '../../../data.json';
-
-
-describe('healthDataReducer', () => {
+describe('HealthDataTable reducer', () => {
 
   it('returns initial state', () => {
-    expect(healthDataTable(undefined, {})).toEqual([]);
+    expect(healthDataTable()).toEqual([]);
   });
 
   it('adds an entry', () => {

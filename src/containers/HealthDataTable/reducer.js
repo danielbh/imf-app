@@ -4,7 +4,7 @@ import {
   DELETE_ENTRY
 } from './constants';
 
-export const healthDataTable = (state = [], action) => {
+export const healthDataTable = (state = [], action = {}) => {
   switch (action.type) {
     case ADD_ENTRY:
       return [...state, {

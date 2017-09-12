@@ -2,31 +2,34 @@
  * Created by danielhollcraft on 9/8/17.
  */
 import {
-  selectWeek,
-  selectMonth,
-  selectThreeMonth,
-  selectYear,
-  selectAll
+  setDateRange
 } from '../actions'
+
+import {
+  WEEK,
+  MONTH,
+  THREE_MONTHS,
+  YEAR
+} from "../constants";
 
 describe('Toolbar actions', () => {
   it('selects week', () => {
-    expect(selectWeek()).toEqual({type: 'SET_WEEK_RANGE'})
+    expect(setDateRange(WEEK)).toEqual({ type: 'SET_DATE_RANGE', range: 'WEEK' })
   });
 
   it('selects one month', () => {
-    expect(selectMonth()).toEqual({type: 'SET_MONTH_RANGE'})
+    expect(setDateRange(MONTH)).toEqual({ type: 'SET_DATE_RANGE', range: 'MONTH' })
   });
 
   it('selects three months', () => {
-    expect(selectThreeMonth()).toEqual({type: 'SET_THREE_MONTH_RANGE'})
+    expect(setDateRange(THREE_MONTHS)).toEqual({ type: 'SET_DATE_RANGE', range: 'THREE_MONTHS' })
   });
 
   it('selects one year', () => {
-    expect(selectYear()).toEqual({type: 'SET_YEAR_RANGE'})
+    expect(setDateRange(YEAR)).toEqual({ type: 'SET_DATE_RANGE' , range: 'YEAR' })
   });
 
   it('selects "all time"', () => {
-    expect(selectAll()).toEqual({type: 'SET_ALL_RANGE'})
+    expect(setDateRange()).toEqual({ type: 'SET_DATE_RANGE', range: 'ALL' })
   });
 });

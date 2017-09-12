@@ -4,12 +4,16 @@ import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import {
-  selectWeek,
-  selectMonth,
-  selectThreeMonth,
-  selectYear,
-  selectAll
+  setDateRange
 } from './actions'
+
+import {
+  WEEK,
+    MONTH,
+    THREE_MONTHS,
+    YEAR,
+    ALL
+} from "./constants";
 
 const Wrapper = styled.div`
   .toolbar {
@@ -21,6 +25,7 @@ const Wrapper = styled.div`
     justify-content: flex-end;
   }
 `;
+
 export const Toolbar = ({
   selectWeek,
   selectMonth,
@@ -51,11 +56,11 @@ Toolbar.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    selectWeek: () => dispatch(selectWeek()),
-    selectMonth: () => dispatch(selectMonth()),
-    selectThreeMonth: () => dispatch(selectThreeMonth()),
-    selectYear: () => dispatch(selectYear()),
-    selectAll: () => dispatch(selectAll())
+    selectWeek: () => dispatch(setDateRange(WEEK)),
+    selectMonth: () => dispatch(setDateRange(MONTH)),
+    selectThreeMonth: () => dispatch(setDateRange(THREE_MONTHS)),
+    selectYear: () => dispatch(setDateRange(YEAR)),
+    selectAll: () => dispatch(setDateRange(ALL))
   };
 }
 

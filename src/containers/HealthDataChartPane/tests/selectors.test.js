@@ -1,4 +1,4 @@
-import { mapDataToObject } from '../reducer';
+import { mapDataToObject } from '../selectors';
 
 it('maps data array to an object', () => {
   const testData = [

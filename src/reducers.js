@@ -4,12 +4,14 @@
  */
 import { combineReducers } from 'redux';
 import { healthDataTable } from './containers/HealthDataTable/reducer'
+import { toolbar } from './containers/Toolbar/reducer'
 
 /**
- * Creates the main reducer
+ * Creates the app reducer
  */
-export default function rootReducer() {
-  return combineReducers({
-    data: healthDataTable
-  });
-}
+const app = combineReducers({
+    healthDataTable,
+    toolbar
+});
+
+export default app;

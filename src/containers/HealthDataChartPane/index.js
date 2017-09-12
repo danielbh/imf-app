@@ -7,7 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import HealthDataChart from './chart';
 import { connect } from 'react-redux';
-import { mapDataToObject } from "./reducer";
+import { mapDataToObject } from "./selectors";
 
 export const HealthDataChartPane = ({ data }) => (
   <div>
@@ -30,6 +30,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(HealthDataChartPane);
-
-// TODO: Add as selector
-
