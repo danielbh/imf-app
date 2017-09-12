@@ -1,9 +1,9 @@
 import uuid from 'node-uuid';
+
 import {
   ADD_ENTRY,
   DELETE_ENTRY
 } from './constants';
-
 
 export const addEntry = ({ date, duration, weight, bodyFat }) => ({
   type: ADD_ENTRY,

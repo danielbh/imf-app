@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import Toolbar from '../../../containers/Toolbar';
+import DateRangeToolbar from '../../DateRangeToolbar';
 import CenteredSection from '../../CenteredSection';
 import Section from '../../Section';
 import HealthDataChartPane from '../../../containers/HealthDataChartPane';
@@ -36,7 +36,7 @@ describe('<Dashboard />', () => {
     expect(renderComponent().find(HealthDataTable).length).toEqual(1);
   });
 
-  it('renders Toolbar', () => {
-    expect(renderComponent().find(Toolbar).length).toEqual(1);
+  it('renders DateRangeToolbar', () => {
+    expect(renderComponent().find(DateRangeToolbar).length).toEqual(1);
   });
 });

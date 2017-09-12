@@ -2,7 +2,7 @@
  * Create the store with asynchronously loaded reducers
  */
 import { createStore, compose } from 'redux';
-import app from './reducers';
+import app from './containers/App/reducers';
 import importedData from './data.json';
 
 export default function configureStore(initialState = { data: importedData }) {

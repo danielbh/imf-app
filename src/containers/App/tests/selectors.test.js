@@ -1,4 +1,4 @@
-import { toolbar } from '../reducer';
+import { getEntriesInRange } from '../selectors';
 
 const data = [
   { "id":"1", "date":"22-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
@@ -14,7 +14,7 @@ const data = [
 ];
 
 
-describe('Toolbar reducer', () => {
+describe('dateRange reducer', () => {
   beforeAll(() => {
     // Side-effects!! If you want to parallelize these test cases in the future
     // and tests elsewhere depend on the date, this will cause issues.
@@ -23,18 +23,18 @@ describe('Toolbar reducer', () => {
   });
 
   it('returns default value', () => {
-    expect(toolbar()).toEqual([]);
+    expect(getEntriesInRange()).toEqual(undefined);
   });
 
   it('selects entries that happened in the past week', () => {
-    expect(toolbar(data, 'SET_WEEK_RANGE')).toEqual([
+    expect(getEntriesInRange(data, 'WEEK')).toEqual([
       { "id":"1", "date":"22-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"21-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 }
     ])
   });
 
   it('selects entries that happened in the last month', () => {
-    expect(toolbar(data, 'SET_MONTH_RANGE')).toEqual([
+    expect(getEntriesInRange(data, 'MONTH')).toEqual([
       { "id":"1", "date":"22-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"21-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"17-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
@@ -43,7 +43,7 @@ describe('Toolbar reducer', () => {
   });
 
   it('selects entries that happened in the last three months', () => {
-    expect(toolbar(data, 'SET_THREE_MONTH_RANGE')).toEqual([
+    expect(getEntriesInRange(data, 'THREE_MONTHS')).toEqual([
       { "id":"1", "date":"22-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"21-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"17-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
@@ -54,7 +54,7 @@ describe('Toolbar reducer', () => {
   });
 
   it('selects entries that happened in the last year', () => {
-    expect(toolbar(data, 'SET_YEAR_RANGE')).toEqual([
+    expect(getEntriesInRange(data, 'YEAR')).toEqual([
       { "id":"1", "date":"22-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"21-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"17-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
@@ -67,6 +67,6 @@ describe('Toolbar reducer', () => {
   });
 
   it('selects all entries', () => {
-    expect(toolbar(data, 'SET_ALL_RANGE')).toEqual(data)
+    expect(getEntriesInRange(data, 'ALL')).toEqual(data)
   });
 });

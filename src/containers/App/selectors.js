@@ -8,9 +8,9 @@ import {
   MONTH,
   THREE_MONTHS,
   YEAR
-} from "./constants";
+} from "../App/constants";
 
-export const toolbar = (state = [], action) => {
+export const getEntriesInRange = (state, action) => {
 
   const returnEntriesInRange =
     (units, thresh = 1) => state.filter(e => moment(moment()).diff(e.date, units) < thresh);

@@ -10,9 +10,9 @@ import {
   MONTH,
   THREE_MONTHS,
   YEAR
-} from "../constants";
+} from "../../App/constants";
 
-describe('Toolbar actions', () => {
+describe('DateRangeToolbar actions', () => {
   it('selects week', () => {
     expect(setDateRange(WEEK)).toEqual({ type: 'SET_DATE_RANGE', range: 'WEEK' })
   });

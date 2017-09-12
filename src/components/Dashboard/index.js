@@ -4,14 +4,14 @@ import HealthDataChartPane from '../../containers/HealthDataChartPane';
 import HealthDataTable from '../../containers/HealthDataTable';
 import CenteredSection from '../CenteredSection';
 import Section from '../Section';
-import Toolbar from '../../containers/Toolbar';
+import Toolbar from '../DateRangeToolbar';
 
 const Dashboard = () => (
   <article>
     <Helmet
       title="Home Page"
       meta={[
-        { name: 'description', content: 'A React.js Boilerplate application homepage' },
+        { name: 'description', content: 'A health metric tracker' },
       ]}
     />
     <div>

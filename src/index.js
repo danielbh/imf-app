@@ -1,5 +1,6 @@
 import 'sanitize.css/sanitize.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap-theme.min.css';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
