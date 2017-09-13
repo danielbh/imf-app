@@ -13,6 +13,7 @@ import {
 } from 'react-bootstrap-table';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { addEntry, deleteEntries } from './actions';
 import { validateDate, validateBodyFat, validateWeight, validateDuration } from './insertValidation';
 
@@ -89,8 +90,14 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
+const convertDatesToHR = data => data.reduce((acc, val) => {
+  val.date = moment(val.date).format('D-MMM-YY');
+  acc.push(val);
+  return acc;
+}, []);
+
 const mapStateToProps = state => ({
-  data: state.data
+  data: convertDatesToHR(state.data)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HealthDataTable);

@@ -7,7 +7,7 @@ import {
 
 export const addEntry = ({ date, duration, weight, bodyFat }) => ({
   type: ADD_ENTRY,
-  date,
+  date: new Date(date).getTime(),
   duration,
   weight,
   bodyFat,

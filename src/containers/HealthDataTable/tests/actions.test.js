@@ -26,7 +26,7 @@ describe('HealthDataTable actions', () => {
     });
 
     it('creates a new entry with a date', () => {
-      expect(addEntryFactory().date).toEqual('1-May-17');
+      expect(addEntryFactory().date).toEqual(1493589600000);
     });
 
     it('creates a new entry with a duration', () => {

@@ -1,17 +1,16 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
-import { HealthDataChartPane } from '../index';
+import { HealthDataChartPane, mapDataToObject } from '../index';
 import  HealthDataChartPaneContainer from '../index';
 import HealthDataChart from '../chart';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 
-
 const data = {
-  duration: [{ date: 1, value: 1 }, { date: 2, value: 3 }],
-  weight: [{ date: 1, value: 4 }, { date: 2, value: 6 }],
-  bodyFat: [{ date: 1, value: 3 }, { date: 2, value: 8 }]
+  duration: [{ date: '1-Jan-70', value: 1 }, { date: 2, value: 3 }],
+  weight: [{ date: '1-Jan-70', value: 4 }, { date: 2, value: 6 }],
+  bodyFat: [{ date: '1-Jan-70', value: 3 }, { date: 2, value: 8 }]
 };
 
 const renderComponent = (props = {}) => shallow(
@@ -38,7 +37,7 @@ describe('<HealthDataChartPane />', () => {
 
     it('should have the correct data', () => {
       expect(renderComponent().childAt(0).props().data)
-        .toEqual([{ date: 1, value: 1 }, { date: 2, value: 3 }]);
+        .toEqual([{ date: '1-Jan-70', value: 1 }, { date: 2, value: 3 }]);
     });
   });
 
@@ -52,7 +51,7 @@ describe('<HealthDataChartPane />', () => {
     });
 
     it('should have the correct data', () => {
-      expect(renderComponent().childAt(1).props().data).toEqual([{ date: 1, value: 4 }, { date: 2, value: 6 }]);
+      expect(renderComponent().childAt(1).props().data).toEqual([{ date: '1-Jan-70', value: 4 }, { date: 2, value: 6 }]);
     });
   });
 
@@ -66,7 +65,7 @@ describe('<HealthDataChartPane />', () => {
     });
 
     it('should have the correct data', () => {
-      expect(renderComponent().childAt(2).props().data).toEqual([{ date: 1, value: 3 }, { date: 2, value: 8 }]);
+      expect(renderComponent().childAt(2).props().data).toEqual([{ date: '1-Jan-70', value: 3 }, { date: 2, value: 8 }]);
     });
   });
 
@@ -77,8 +76,8 @@ describe('<HealthDataChartPane />', () => {
 
       const store = mockStore({
         data: [
-          { date: 1, duration: 1, weight: 4, bodyFat: 3 },
-          { date: 2, duration: 3, weight: 6, bodyFat: 8 }
+          { date: 1505345773000, duration: 1, weight: 4, bodyFat: 3 },
+          { date: 1505323763000, duration: 3, weight: 6, bodyFat: 8 }
         ],
       });
 
@@ -88,9 +87,9 @@ describe('<HealthDataChartPane />', () => {
         </Provider>
       );
 
-      expect(wrapper.find(HealthDataChart).at(0).node.props.data).toEqual([{ date: 1, value: 1 }, { date: 2, value: 3 }]);
-      expect(wrapper.find(HealthDataChart).at(1).node.props.data).toEqual([{ date: 1, value: 4 }, { date: 2, value: 6 }]);
-      expect(wrapper.find(HealthDataChart).at(2).node.props.data).toEqual([{ date: 1, value: 3 }, { date: 2, value: 8 }]);
+      expect(wrapper.find(HealthDataChart).at(0).node.props.data).toEqual([{ date: '14-Sep-17', value: 1 }, { date: '13-Sep-17', value: 3 }]);
+      expect(wrapper.find(HealthDataChart).at(1).node.props.data).toEqual([{ date: '14-Sep-17', value: 4 }, { date: '13-Sep-17', value: 6 }]);
+      expect(wrapper.find(HealthDataChart).at(2).node.props.data).toEqual([{ date: '14-Sep-17', value: 3 }, { date: '13-Sep-17', value: 8 }]);
     });
   });
 });

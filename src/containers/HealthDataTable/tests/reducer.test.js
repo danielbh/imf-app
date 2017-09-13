@@ -9,7 +9,7 @@ describe('HealthDataTable reducer', () => {
   it('adds an entry', () => {
     const newEntry = {
       id: 'id',
-      date: '2017-09-22',
+      date: 1505344302,
       duration: '11',
       weight: '69',
       bodyFat: '14'
@@ -18,7 +18,7 @@ describe('HealthDataTable reducer', () => {
     // Table form submit formats date differently so we need to account for this in action creator
     const addedEntry = {
       id: 'id',
-      date: '22-Sep-17',
+      date: 1505344302,
       duration: '11',
       weight: '69',
       bodyFat: '14'

@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 import {
   ADD_ENTRY,
   DELETE_ENTRY
@@ -10,7 +8,7 @@ export const healthDataTable = (state = [], action = {}) => {
     case ADD_ENTRY:
       return [...state, {
         id: action.id,
-        date: moment(action.date).format('D-MMM-YY'),
+        date: action.date,
         duration: action.duration,
         weight: action.weight,
         bodyFat: action.bodyFat

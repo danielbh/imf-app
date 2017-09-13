@@ -196,15 +196,16 @@ describe('<HealthDataTable />', () => {
 
       const store = mockStore({
         data: [
-          { date: 1, duration: 1, weight: 4, bodyFat: 3 },
-          { date: 2, duration: 3, weight: 6, bodyFat: 8 }
+          { date: 1505345773000, duration: 1, weight: 4, bodyFat: 3 },
+          { date: 1505323763000, duration: 3, weight: 6, bodyFat: 8 }
         ]
       });
 
       const expected = [
-        { date: 1, duration: 1, weight: 4, bodyFat: 3 },
-        { date: 2, duration: 3, weight: 6, bodyFat: 8 }
-      ]
+        { date: '14-Sep-17', duration: 1, weight: 4, bodyFat: 3 },
+        { date: '13-Sep-17', duration: 3, weight: 6, bodyFat: 8 }
+      ];
+
       const wrapper = mount(
         <Provider store={store}>
           <HealthDataTableContainer />
