@@ -2,10 +2,13 @@
  * Create the store with asynchronously loaded reducers
  */
 import { createStore, compose } from 'redux';
+import moment from 'moment'
 import app from './containers/App/reducers';
-import importedData from './data.json';
+import { generateFakeEntries } from './scripts/generateFakeEntries';
 
-export default function configureStore(initialState = { data: importedData }) {
+const data = generateFakeEntries(30,  moment().subtract(1, 'years'), moment());
+
+export default function configureStore(initialState = { data }) {
 
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose
   const composeEnhancers =

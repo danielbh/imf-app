@@ -1,10 +1,9 @@
-import {date}  from 'faker';
-import {generateFakeEntries} from "../generateFakeEntries";
+import { date }  from 'faker';
+import moment from 'moment'
+import { generateFakeEntries } from "../generateFakeEntries";
 
-const generateFrom = () => {
-  const from = new Date();
-  from.setFullYear(from.getFullYear() - 1);
-  return from
+const generateFrom = (unit = 'years', amount = 1) => {
+  return moment().subtract(amount, unit)
 };
 
 const generateFakeEntriesFactory = (length = 1) => generateFakeEntries(length, generateFrom(), new Date());
