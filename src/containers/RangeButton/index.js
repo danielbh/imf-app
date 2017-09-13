@@ -2,17 +2,17 @@ import { connect } from 'react-redux';
 import { setDateRange } from './actions';
 import Link from '../../components/Link';
 
-const mapStateToProps = (state, ownProps) => ({
-  active: ownProps.range === state.dateRange,
+export const mapStateToProps = (state, ownProps) => ({
+  active: state.dateRange === ownProps.range,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+export const mapDispatchToProps = (dispatch, ownProps) => ({
   onClick() {
     dispatch(setDateRange(ownProps.dateRange));
   },
 });
 
-const RangeButton = connect(
+export const RangeButton = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Link);
