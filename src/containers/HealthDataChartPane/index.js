@@ -26,7 +26,7 @@ HealthDataChartPane.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  data: mapDataToObject(state.data)
+  data: mapDataToObject(state.data, state.dateRange)
 });
 
 export default connect(mapStateToProps)(HealthDataChartPane);

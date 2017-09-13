@@ -1,13 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const A = styled.a`
+   text-decoration: none;
+   display: block;
+   margin: 2px;
+`;
+
+const SPAN = styled.span`
+   text-decoration: underlined;
+   display: block;
+   margin: 2px;
+`;
 
 const Link = ({ active, children, onClick }) => {
+
   if (active) {
-    return <span>{children}</span>;
+    return <SPAN className="btn btn-primary">{children}</SPAN>;
   }
 
   return (
-    <a
+    <A
+      className="btn btn-default"
       href="#"
       onClick={e => {
         e.preventDefault();
@@ -15,7 +30,7 @@ const Link = ({ active, children, onClick }) => {
       }}
     >
       {children}
-    </a>
+    </A>
   );
 };
 

@@ -3,7 +3,7 @@ import { setDateRange } from './actions';
 import Link from '../../components/Link';
 
 export const mapStateToProps = (state, ownProps) => ({
-  active: state.dateRange === ownProps.range,
+  active: state.dateRange === ownProps.dateRange,
 });
 
 export const mapDispatchToProps = (dispatch, ownProps) => ({

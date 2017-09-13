@@ -24,11 +24,11 @@ describe('<RangeButton />', () => {
   describe('mapStateToProps', () => {
     describe('active prop', () => {
       it('returns true when ownProp.range === state.dateRange', () => {
-        expect(mapStateToProps({dateRange: 'ALL'}, {range: 'ALL' })).toEqual({ active: true })
+        expect(mapStateToProps({ dateRange: 'ALL' }, { dateRange: 'ALL' })).toEqual({ active: true })
       });
 
       it('returns false when ownProp.range !== state.dateRange', () => {
-        expect(mapStateToProps({dateRange: 'WEEK'}, {range: 'ALL'})).toEqual({ active: false })
+        expect(mapStateToProps({ dateRange: 'WEEK' }, { dateRange: 'ALL' })).toEqual({ active: false })
       });
     });
   });

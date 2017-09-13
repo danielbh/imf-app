@@ -3,7 +3,9 @@
  */
 import React from 'react';
 import { shallow } from 'enzyme';
-import Link from '../index'
+import Link from '../index';
+import renderer from 'react-test-renderer';
+import 'jest-styled-components';
 
 const renderComponent = (props) => shallow(
   <Link {...props} />
@@ -15,11 +17,13 @@ describe('<Link />', () => {
   });
 
   it('displays span when active is true', () => {
-    expect(renderComponent({active: true}).type()).toEqual('span');
+    const tree = renderer.create(<Link active={true} />).toJSON()
+    expect(tree.type).toEqual('span');
   });
 
   it('displays anchor tag when active is false', () => {
-    expect(renderComponent({active: false}).type()).toEqual('a');
+    const tree = renderer.create(<Link active={false} />).toJSON()
+    expect(tree.type).toEqual('a');
   });
 
   it('calls onClick callback', () => {
