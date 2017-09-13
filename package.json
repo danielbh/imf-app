@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "faker": "^4.1.0",
     "immutable": "^3.8.1",
     "moment": "^2.18.1",
     "node-uuid": "^1.4.8",
+    "ramda": "^0.24.1",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.3",
     "react-bootstrap-table": "^4.0.2",
