@@ -9,8 +9,8 @@ import configureMockStore from 'redux-mock-store';
 import uuid from 'node-uuid';
 import { Provider } from 'react-redux';
 
-
-import HealthDataTableContainer, { HealthDataTable, mapDispatchToProps } from '../index';
+import { YEAR } from "../../App/constants";
+import HealthDataTableContainer, { HealthDataTable, mapDispatchToProps, mapStateToProps } from '../index';
 import { addEntry, deleteEntries } from '../actions';
 
 import {
@@ -237,6 +237,23 @@ describe('<HealthDataTable />', () => {
         };
         result.addRow(newEntry);
         expect(dispatch).toHaveBeenCalledWith(addEntry(newEntry));
+      });
+    });
+
+    describe('mapStateToProps', () => {
+      it('passes dateRange getEntriesInRange into mapDataToObject', () => {
+
+        // Set dates to first epoch time, and set date range so they won't appear when passed through selector
+        const state = {
+          data: [
+            { date: 1, duration: 1, weight: 4, bodyFat: 3 },
+            { date: 1, duration: 3, weight: 6, bodyFat: 8 }
+          ],
+          dateRange: YEAR
+        };
+
+        expect(mapStateToProps(state)).toEqual({ data: [] });
+
       });
     });
 

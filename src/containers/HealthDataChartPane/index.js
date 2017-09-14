@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import HealthDataChart from './chart';
+import { getEntriesInRange } from "../App/selectors";
 
 export const HealthDataChartPane = ({ data }) => (
   <div>
@@ -39,8 +40,8 @@ function mapDataToObject(data) {
   }, { duration: [], weight: [], bodyFat: [] });
 }
 
-const mapStateToProps = state => ({
-  data: mapDataToObject(state.data)
+export const mapStateToProps = state => ({
+  data: mapDataToObject(getEntriesInRange(state.data, state.dateRange))
 });
 
 export default connect(mapStateToProps)(HealthDataChartPane);

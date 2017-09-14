@@ -1,8 +1,8 @@
 import { random, date, finance } from 'faker';
-import { times, sort } from 'ramda';
+import { times } from 'ramda';
 
 export function generateFakeEntries(length, from, to) {
-  const randomLeftRight = (left, right)=> (max, min) => random.boolean ? left(max, min) : right(max, min);
+  const randomLeftRight = (left, right) => (max, min) => random.boolean ? left(max, min) : right(max, min);
   const generateInt = (max, min) => random.number({ max, min, precision: 1 });
   // Finance is the easiest way to make a float variable.
   const generateFloat = (max, min) => finance.amount(min, max, 1);
@@ -16,6 +16,6 @@ export function generateFakeEntries(length, from, to) {
     bodyFat: generateNumber(25, 5)
   }), length);
 
-  return sort((a, b) => a.date - b.date, unsorted);
+  return unsorted.sort((a, b) => a.date - b.date);
 }
 

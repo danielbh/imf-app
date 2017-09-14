@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { addEntry, deleteEntries } from './actions';
 import { validateDate, validateBodyFat, validateWeight, validateDuration } from './insertValidation';
+import { getEntriesInRange } from "../App/selectors";
 
 // IMPORTANT: Default css behavior is overridden to hide toastr notification which appears on invalid insert
 // submits. The recommended solution does not work. See documentation here:
@@ -83,21 +84,19 @@ HealthDataTable.propTypes = {
   deleteRows: PropTypes.func.isRequired
 };
 
-export function mapDispatchToProps(dispatch) {
-  return {
-    addRow: row => dispatch(addEntry(row)),
-    deleteRows: ids => dispatch(deleteEntries(ids))
-  };
-}
+export const mapDispatchToProps = (dispatch) => ({
+  addRow: row => dispatch(addEntry(row)),
+  deleteRows: ids => dispatch(deleteEntries(ids))
+});
 
-const convertDatesToHR = data => data.reduce((acc, val) => {
-  val.date = moment(val.date).format('D-MMM-YY');
-  acc.push(val);
-  return acc;
-}, []);
 
-const mapStateToProps = state => ({
-  data: convertDatesToHR(state.data)
+const convertDatesToHR = data => data.map(e => ({
+  ...e,
+  date: moment(e.date).format('D-MMM-YY')
+}));
+
+export const mapStateToProps = state => ({
+  data: convertDatesToHR(getEntriesInRange(state.data, state.dateRange))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HealthDataTable);

@@ -6,7 +6,14 @@ import moment from 'moment'
 import app from './containers/App/reducers';
 import { generateFakeEntries } from './scripts/generateFakeEntries';
 
-const data = generateFakeEntries(30,  moment().subtract(1, 'years'), moment());
+const data = [
+    ...generateFakeEntries(5,  moment().subtract(1, 'weeks'), moment()),
+    ...generateFakeEntries(5,  moment().subtract(1, 'months'), moment()),
+    ...generateFakeEntries(5,  moment().subtract(3, 'months'), moment()),
+    ...generateFakeEntries(5,  moment().subtract(1, 'years'), moment()),
+    ...generateFakeEntries(5,  moment().subtract(2, 'years'), moment())
+].sort((a, b) => a.date - b.date);
+
 
 export default function configureStore(initialState = { data }) {
 

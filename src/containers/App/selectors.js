@@ -10,12 +10,12 @@ import {
   YEAR
 } from "../App/constants";
 
-export const getEntriesInRange = (state, range) => {
+export const getEntriesInRange = (data, dateRange) => {
 
   const returnEntriesInRange =
-    (units, thresh = 1) => state.filter(e => moment(moment()).diff(e.date, units) < thresh);
+    (units, thresh = 1) => data.filter(e => moment(moment()).diff(e.date, units) < thresh);
 
-  switch(range) {
+  switch(dateRange) {
     case WEEK:
       return returnEntriesInRange('weeks');
     case MONTH:
@@ -25,6 +25,6 @@ export const getEntriesInRange = (state, range) => {
     case YEAR:
       return returnEntriesInRange('years');
     default:
-      return state;
+      return data;
   }
 };

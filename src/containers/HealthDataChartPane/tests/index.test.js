@@ -1,11 +1,12 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
-import { HealthDataChartPane, mapDataToObject } from '../index';
+import { HealthDataChartPane, mapStateToProps } from '../index';
 import  HealthDataChartPaneContainer from '../index';
 import HealthDataChart from '../chart';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
+import { YEAR } from "../../App/constants";
 
 const data = {
   duration: [{ date: '1-Jan-70', value: 1 }, { date: 2, value: 3 }],
@@ -69,6 +70,23 @@ describe('<HealthDataChartPane />', () => {
     });
   });
 
+  describe('mapStateToProps', () => {
+    it('passes dateRange getEntriesInRange into mapDataToObject', () => {
+
+      // Set dates to first epoch time, and set date range so they won't appear when passed through selector
+      const state = {
+        data: [
+          { date: 1, duration: 1, weight: 4, bodyFat: 3 },
+          { date: 1, duration: 3, weight: 6, bodyFat: 8 }
+        ],
+        dateRange: YEAR
+      };
+
+      expect(mapStateToProps(state)).toEqual({ data: {"bodyFat": [], "duration": [], "weight": [] } });
+
+    });
+  });
+
   describe('test connect', () => {
 
     it('should pass the data from connect', () => {
@@ -87,9 +105,11 @@ describe('<HealthDataChartPane />', () => {
         </Provider>
       );
 
-      expect(wrapper.find(HealthDataChart).at(0).node.props.data).toEqual([{ date: '14-Sep-17', value: 1 }, { date: '13-Sep-17', value: 3 }]);
-      expect(wrapper.find(HealthDataChart).at(1).node.props.data).toEqual([{ date: '14-Sep-17', value: 4 }, { date: '13-Sep-17', value: 6 }]);
-      expect(wrapper.find(HealthDataChart).at(2).node.props.data).toEqual([{ date: '14-Sep-17', value: 3 }, { date: '13-Sep-17', value: 8 }]);
+      const node = wrapper.find(HealthDataChart);
+
+      expect(node.at(0).node.props.data).toEqual([{ date: '14-Sep-17', value: 1 }, { date: '13-Sep-17', value: 3 }]);
+      expect(node.at(1).node.props.data).toEqual([{ date: '14-Sep-17', value: 4 }, { date: '13-Sep-17', value: 6 }]);
+      expect(node.at(2).node.props.data).toEqual([{ date: '14-Sep-17', value: 3 }, { date: '13-Sep-17', value: 8 }]);
     });
   });
 });
