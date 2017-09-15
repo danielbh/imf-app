@@ -4,7 +4,7 @@
 import React from 'react';
 import 'jest-styled-components'
 import { shallow } from 'enzyme';
-import DateRangeToolbar from '../index'
+import Toolbar from '../index'
 import {
   selectWeek,
   selectMonth,
@@ -14,10 +14,10 @@ import {
 } from '../../../containers/RangeButton/actions'
 
 const renderComponent = (props) => shallow(
-  <DateRangeToolbar {...props} />
+  <Toolbar {...props} />
 );
 
-describe('<DateRangeToolbar />', () => {
+describe('<Toolbar />', () => {
   it('matches snapshot', () => {
     expect(renderComponent()).toMatchSnapshot();
   });

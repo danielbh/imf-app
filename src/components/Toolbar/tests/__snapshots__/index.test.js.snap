@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DateRangeToolbar /> matches snapshot 1`] = `
+exports[`<Toolbar /> matches snapshot 1`] = `
 ShallowWrapper {
   "complexSelector": ComplexSelector {
     "buildPredicate": [Function],
@@ -70,7 +70,7 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 2,
       "_context": Object {},
-      "_currentElement": <DateRangeToolbar />,
+      "_currentElement": <Toolbar />,
       "_debugID": 1,
       "_hostContainerInfo": null,
       "_hostParent": null,
@@ -164,6 +164,6 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <DateRangeToolbar />,
+  "unrendered": <Toolbar />,
 }
 `;

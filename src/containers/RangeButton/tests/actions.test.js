@@ -12,7 +12,7 @@ import {
   YEAR
 } from "../../App/constants";
 
-describe('DateRangeToolbar actions', () => {
+describe('Toolbar actions', () => {
   it('selects week', () => {
     expect(setDateRange(WEEK)).toEqual({ type: 'SET_DATE_RANGE', range: 'WEEK' })
   });

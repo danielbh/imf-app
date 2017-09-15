@@ -4,7 +4,7 @@ import HealthDataChartPane from '../../containers/HealthDataChartPane';
 import HealthDataTable from '../../containers/HealthDataTable';
 import CenteredSection from '../CenteredSection';
 import Section from '../Section';
-import Toolbar from '../DateRangeToolbar';
+import Toolbar from '../Toolbar';
 
 const Dashboard = () => (
   <article>

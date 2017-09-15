@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import RangeButton from '../../containers/RangeButton/index'
+import ChartTabs from '../ChartTabs';
 
 import {
   WEEK,
@@ -21,18 +22,14 @@ const Wrapper = styled.div`
   justify-content: flex-end;
 `;
 
-const DateRangeToolbar = () => (
+const Toolbar = () => (
   <Wrapper>
-    <RangeButton dateRange={WEEK}>1W</RangeButton>
-    <RangeButton dateRange={MONTH}>1M</RangeButton>
-    <RangeButton dateRange={THREE_MONTHS}>3M</RangeButton>
-    <RangeButton dateRange={YEAR}>1Y</RangeButton>
-    <RangeButton dateRange={ALL}>ALL</RangeButton>
+      <RangeButton dateRange={WEEK}>1W</RangeButton>
+      <RangeButton dateRange={MONTH}>1M</RangeButton>
+      <RangeButton dateRange={THREE_MONTHS}>3M</RangeButton>
+      <RangeButton dateRange={YEAR}>1Y</RangeButton>
+      <RangeButton dateRange={ALL}>ALL</RangeButton>
   </Wrapper>
 );
 
-DateRangeToolbar.propTypes = {};
-
-DateRangeToolbar.defaultProps = {};
-
-export default DateRangeToolbar
+export default Toolbar
