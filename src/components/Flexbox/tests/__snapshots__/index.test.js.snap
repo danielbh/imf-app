@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Toolbar /> matches snapshot 1`] = `
+exports[`<Flexbox /> matches snapshot 1`] = `
 ShallowWrapper {
   "complexSelector": ComplexSelector {
     "buildPredicate": [Function],
@@ -8,15 +8,9 @@ ShallowWrapper {
     "findWhereUnwrapped": [Function],
   },
   "length": 1,
-  "node": <Flexbox>
-    <ChartTabs />
-    <RangeButtons />
-</Flexbox>,
+  "node": <styled.div />,
   "nodes": Array [
-    <Flexbox>
-      <ChartTabs />
-      <RangeButtons />
-</Flexbox>,
+    <styled.div />,
   ],
   "options": Object {},
   "renderer": ReactShallowRenderer {
@@ -24,7 +18,7 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 2,
       "_context": Object {},
-      "_currentElement": <Toolbar />,
+      "_currentElement": <Flexbox />,
       "_debugID": 1,
       "_hostContainerInfo": null,
       "_hostParent": null,
@@ -52,15 +46,9 @@ ShallowWrapper {
       "_pendingReplaceState": false,
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
-        "_currentElement": <Flexbox>
-          <ChartTabs />
-          <RangeButtons />
-</Flexbox>,
+        "_currentElement": <styled.div />,
         "_debugID": 2,
-        "_renderedOutput": <Flexbox>
-          <ChartTabs />
-          <RangeButtons />
-</Flexbox>,
+        "_renderedOutput": <styled.div />,
       },
       "_renderedNodeType": 1,
       "_rootNodeID": 0,
@@ -72,6 +60,6 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <Toolbar />,
+  "unrendered": <Flexbox />,
 }
 `;

@@ -11,7 +11,7 @@ const Dashboard = () => (
     <Helmet
       title="Home Page"
       meta={[
-        { name: 'description', content: 'A health metric tracker' },
+        { name: 'description', content: 'A health metric tracker' }
       ]}
     />
     <div>

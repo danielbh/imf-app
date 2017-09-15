@@ -1,13 +1,15 @@
 import React from 'react';
-import RangeButtons from '../../components/RangeButtons'
-import FlexRowEnd from '../../components/FlexRowEnd';
+import PropTypes from 'prop-types';
+
+import ButtonBar from '../../components/ButtonBar'
+import Flexbox from '../../components/Flexbox';
 import ChartTabs from '../ChartTabs';
 
-
 const Toolbar = () => (
-  <FlexRowEnd>
-       <RangeButtons/>
-  </FlexRowEnd>
+  <Flexbox>
+       <ChartTabs />
+       <ButtonBar />
+  </Flexbox>
 );
 
 export default Toolbar

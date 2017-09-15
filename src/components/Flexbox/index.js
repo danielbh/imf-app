@@ -1,9 +1,10 @@
 /**
  * Created by danielhollcraft on 9/15/17.
  */
+import React from 'react';
 import styled from 'styled-components';
 
-const FlexRowEnd = styled.div`
+const Wrapper = styled.div`
   margin: 0; 
   display: -webkit-box;
   display: -moz-box;
@@ -14,4 +15,11 @@ const FlexRowEnd = styled.div`
   justify-content: flex-end;
 `;
 
-export default FlexRowEnd;
+const Flexbox = ({children}) => (
+  <Wrapper>{children}</Wrapper>
+);
+
+Flexbox.propTypes = {};
+Flexbox.defaultProps = {};
+
+export default Flexbox;

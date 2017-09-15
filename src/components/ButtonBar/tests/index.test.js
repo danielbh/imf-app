@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import RangeButtons from '../index'
 
-describe('<RangeButtons />', () => {
+describe('<ButtonBar />', () => {
   it('matches snapshot', () => {
     expect(shallow(<RangeButtons />)).toMatchSnapshot();
   });
