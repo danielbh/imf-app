@@ -1,12 +1,13 @@
 import { date }  from 'faker';
 import moment from 'moment'
+import { random } from 'faker';
 import { generateFakeEntries } from "../generateFakeEntries";
 
-const generateFrom = (unit = 'years', amount = 1) => {
-  return moment().subtract(amount, unit)
+const generateDate = (amount = 1, unit = 'years', future = true) => {
+  return future ? moment().add(amount, unit) : moment().subtract(amount, unit)
 };
 
-const generateFakeEntriesFactory = (length = 1) => generateFakeEntries(length, generateFrom(), new Date());
+const generateFakeEntriesFactory = (length = 1) => generateFakeEntries(length, generateDate(), new Date());
 
 // FIXME: Make tests more deterministic
 
@@ -27,11 +28,11 @@ describe('generateFakeEntries', () => {
   });
 
   it('should call date.between when creating an entry', () => {
-    const between = jest.spyOn(date, 'between');
-    const getTime = jest.spyOn(Date.prototype, 'getTime');
-    generateFakeEntries(1, 1, 2);
-    expect(between).toHaveBeenCalledWith(1,2);
-    expect(getTime).toHaveBeenCalled();
+    const threeSecondsAgo = generateDate(3, 'seconds', false);
+    const now = new Date();
+    const actual = generateFakeEntries(1, threeSecondsAgo, now)[0];
+    expect(actual.date).toBeGreaterThanOrEqual(new Date(generateDate(3, 'seconds', false)).getTime());
+    expect(actual.date).toBeLessThanOrEqual(now.getTime());
   });
 
   it('creates a duration between constraints', () => {
@@ -53,7 +54,15 @@ describe('generateFakeEntries', () => {
   });
 
   it('returns a sorted list', () => {
-    const list = generateFakeEntries(2, generateFrom(), new Date());
+    const list = generateFakeEntries(2, generateDate(), new Date());
     expect(list[0].date).toBeLessThan(list[1].date)
+  });
+
+  it('randomly generates float for number properties', () => {
+    random.boolean = jest.fn().mockReturnValue(false);
+    const entry = generateFakeEntries(1, generateDate(), new Date())[0];
+    expect(entry.duration % 1).not.toEqual(0);
+    expect(entry.weight % 1).not.toEqual(0);
+    expect(entry.bodyFat % 1).not.toEqual(0);
   });
 });
