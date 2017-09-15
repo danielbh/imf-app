@@ -6,7 +6,7 @@ import {
 } from '../actions';
 
 const addEntryFactory = () => addEntry({
-  date: '1-May-17',
+  date: '2017-May-1',
   duration: '11',
   weight: '69',
   bodyFat: '14'
@@ -26,7 +26,7 @@ describe('HealthDataTable actions', () => {
     });
 
     it('creates a new entry with a date', () => {
-      expect(addEntryFactory().date).toEqual(1493589600000);
+      expect(addEntryFactory().date).toEqual(1493593200000);
     });
 
     it('creates a new entry with a duration', () => {

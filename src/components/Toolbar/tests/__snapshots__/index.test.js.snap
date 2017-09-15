@@ -9,59 +9,11 @@ ShallowWrapper {
   },
   "length": 1,
   "node": <styled.div>
-    <Connect(Link)
-        dateRange="WEEK"
-    >
-        1W
-    </Connect(Link)>
-    <Connect(Link)
-        dateRange="MONTH"
-    >
-        1M
-    </Connect(Link)>
-    <Connect(Link)
-        dateRange="THREE_MONTHS"
-    >
-        3M
-    </Connect(Link)>
-    <Connect(Link)
-        dateRange="YEAR"
-    >
-        1Y
-    </Connect(Link)>
-    <Connect(Link)
-        dateRange="ALL"
-    >
-        ALL
-    </Connect(Link)>
+    <RangeButtons />
 </styled.div>,
   "nodes": Array [
     <styled.div>
-      <Connect(Link)
-            dateRange="WEEK"
-      >
-            1W
-      </Connect(Link)>
-      <Connect(Link)
-            dateRange="MONTH"
-      >
-            1M
-      </Connect(Link)>
-      <Connect(Link)
-            dateRange="THREE_MONTHS"
-      >
-            3M
-      </Connect(Link)>
-      <Connect(Link)
-            dateRange="YEAR"
-      >
-            1Y
-      </Connect(Link)>
-      <Connect(Link)
-            dateRange="ALL"
-      >
-            ALL
-      </Connect(Link)>
+      <RangeButtons />
 </styled.div>,
   ],
   "options": Object {},
@@ -99,59 +51,11 @@ ShallowWrapper {
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
         "_currentElement": <styled.div>
-          <Connect(Link)
-                    dateRange="WEEK"
-          >
-                    1W
-          </Connect(Link)>
-          <Connect(Link)
-                    dateRange="MONTH"
-          >
-                    1M
-          </Connect(Link)>
-          <Connect(Link)
-                    dateRange="THREE_MONTHS"
-          >
-                    3M
-          </Connect(Link)>
-          <Connect(Link)
-                    dateRange="YEAR"
-          >
-                    1Y
-          </Connect(Link)>
-          <Connect(Link)
-                    dateRange="ALL"
-          >
-                    ALL
-          </Connect(Link)>
+          <RangeButtons />
 </styled.div>,
         "_debugID": 2,
         "_renderedOutput": <styled.div>
-          <Connect(Link)
-                    dateRange="WEEK"
-          >
-                    1W
-          </Connect(Link)>
-          <Connect(Link)
-                    dateRange="MONTH"
-          >
-                    1M
-          </Connect(Link)>
-          <Connect(Link)
-                    dateRange="THREE_MONTHS"
-          >
-                    3M
-          </Connect(Link)>
-          <Connect(Link)
-                    dateRange="YEAR"
-          >
-                    1Y
-          </Connect(Link)>
-          <Connect(Link)
-                    dateRange="ALL"
-          >
-                    ALL
-          </Connect(Link)>
+          <RangeButtons />
 </styled.div>,
       },
       "_renderedNodeType": 1,
