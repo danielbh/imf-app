@@ -6,7 +6,7 @@ import  HealthDataChartPaneContainer from '../index';
 import HealthDataChart from '../chart';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import { YEAR } from "../../App/constants";
+import { YEAR } from "../../../constants";
 
 const data = {
   duration: [{ date: '1-Jan-70', value: 1 }, { date: 2, value: 3 }],

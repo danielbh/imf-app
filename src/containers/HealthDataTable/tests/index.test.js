@@ -9,7 +9,7 @@ import configureMockStore from 'redux-mock-store';
 import uuid from 'node-uuid';
 import { Provider } from 'react-redux';
 
-import { YEAR } from "../../App/constants";
+import { YEAR } from "../../../constants";
 import HealthDataTableContainer, { HealthDataTable, mapDispatchToProps, mapStateToProps } from '../index';
 import { addEntry, deleteEntries } from '../actions';
 

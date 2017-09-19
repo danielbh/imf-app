@@ -10,7 +10,7 @@ import {
   MONTH,
   THREE_MONTHS,
   YEAR
-} from "../../App/constants";
+} from "../../../constants";
 
 describe('Toolbar actions', () => {
   it('selects week', () => {

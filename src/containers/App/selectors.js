@@ -8,7 +8,7 @@ import {
   MONTH,
   THREE_MONTHS,
   YEAR
-} from "../App/constants";
+} from "../../constants";
 
 export const getEntriesInRange = (data, dateRange) => {
 
