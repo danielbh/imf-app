@@ -2,24 +2,32 @@
  * Created by danielhollcraft on 9/15/17.
  */
 import React from 'react';
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-const Wrapper = styled.div`
-  margin: 0; 
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-flow: row wrap;
-  justify-content: flex-end;
-`;
-
-const Flexbox = ({children}) => (
-  <Wrapper>{children}</Wrapper>
+const Flexbox = ({
+   margin = 0,
+   flexFlow ='row wrap',
+   justifyContent = 'flex-end',
+   children
+}) => (
+  <div
+    style={{
+      margin,
+      display: 'flex',
+      flexFlow,
+      justifyContent
+    }}
+  >
+    {children}
+  </div>
 );
 
-Flexbox.propTypes = {};
+Flexbox.propTypes = {
+  margin: PropTypes.number,
+  display: PropTypes.string,
+  flexFlow: PropTypes.string,
+  justifyContent: PropTypes.string
+};
 Flexbox.defaultProps = {};
 
 export default Flexbox;

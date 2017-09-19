@@ -8,12 +8,16 @@ ShallowWrapper {
     "findWhereUnwrapped": [Function],
   },
   "length": 1,
-  "node": <Flexbox>
+  "node": <Flexbox
+    justifyContent="space-around"
+>
     <ChartTabs />
     <RangeButtons />
 </Flexbox>,
   "nodes": Array [
-    <Flexbox>
+    <Flexbox
+      justifyContent="space-around"
+>
       <ChartTabs />
       <RangeButtons />
 </Flexbox>,
@@ -52,12 +56,16 @@ ShallowWrapper {
       "_pendingReplaceState": false,
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
-        "_currentElement": <Flexbox>
+        "_currentElement": <Flexbox
+          justifyContent="space-around"
+>
           <ChartTabs />
           <RangeButtons />
 </Flexbox>,
         "_debugID": 2,
-        "_renderedOutput": <Flexbox>
+        "_renderedOutput": <Flexbox
+          justifyContent="space-around"
+>
           <ChartTabs />
           <RangeButtons />
 </Flexbox>,

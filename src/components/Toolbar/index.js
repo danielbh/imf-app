@@ -6,7 +6,7 @@ import Flexbox from '../../components/Flexbox';
 import ChartTabs from '../ChartTabs';
 
 const Toolbar = () => (
-  <Flexbox>
+  <Flexbox justifyContent="space-around">
        <ChartTabs />
        <ButtonBar />
   </Flexbox>

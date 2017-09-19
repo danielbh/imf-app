@@ -8,9 +8,27 @@ ShallowWrapper {
     "findWhereUnwrapped": [Function],
   },
   "length": 1,
-  "node": <styled.div />,
+  "node": <div
+    style={
+        Object {
+            "display": "flex",
+            "flexFlow": "row wrap",
+            "justifyContent": "flex-end",
+            "margin": 0,
+          }
+    }
+/>,
   "nodes": Array [
-    <styled.div />,
+    <div
+      style={
+            Object {
+                  "display": "flex",
+                  "flexFlow": "row wrap",
+                  "justifyContent": "flex-end",
+                  "margin": 0,
+                }
+      }
+/>,
   ],
   "options": Object {},
   "renderer": ReactShallowRenderer {
@@ -46,11 +64,29 @@ ShallowWrapper {
       "_pendingReplaceState": false,
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
-        "_currentElement": <styled.div />,
+        "_currentElement": <div
+          style={
+                    Object {
+                              "display": "flex",
+                              "flexFlow": "row wrap",
+                              "justifyContent": "flex-end",
+                              "margin": 0,
+                            }
+          }
+/>,
         "_debugID": 2,
-        "_renderedOutput": <styled.div />,
+        "_renderedOutput": <div
+          style={
+                    Object {
+                              "display": "flex",
+                              "flexFlow": "row wrap",
+                              "justifyContent": "flex-end",
+                              "margin": 0,
+                            }
+          }
+/>,
       },
-      "_renderedNodeType": 1,
+      "_renderedNodeType": 0,
       "_rootNodeID": 0,
       "_topLevelWrapper": null,
       "_updateBatchNumber": null,

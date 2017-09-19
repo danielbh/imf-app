@@ -9,8 +9,6 @@ const generateDate = (amount = 1, unit = 'years', future = true) => {
 
 const generateFakeEntriesFactory = (length = 1) => generateFakeEntries(length, generateDate(), new Date());
 
-// FIXME: Make tests more deterministic
-
 describe('generateFakeEntries', () => {
 
   it('should define id in array object element ', () => {
