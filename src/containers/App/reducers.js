@@ -5,13 +5,15 @@
 import { combineReducers } from 'redux';
 import { dateRange } from '../RangeButton/reducer'
 import { healthDataTable } from '../HealthDataTable/reducer'
+import { tab } from "../ChartTabs/reducer";
 
 /**
  * Creates the app reducer
  */
 const app = combineReducers({
     data: healthDataTable,
-    dateRange
+    dateRange,
+    tab
 });
 
 export default app;

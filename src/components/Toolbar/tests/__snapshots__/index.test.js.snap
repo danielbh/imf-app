@@ -11,14 +11,14 @@ ShallowWrapper {
   "node": <Flexbox
     justifyContent="space-around"
 >
-    <ChartTabs />
+    <Connect(ChartTabs) />
     <RangeButtons />
 </Flexbox>,
   "nodes": Array [
     <Flexbox
       justifyContent="space-around"
 >
-      <ChartTabs />
+      <Connect(ChartTabs) />
       <RangeButtons />
 </Flexbox>,
   ],
@@ -59,14 +59,14 @@ ShallowWrapper {
         "_currentElement": <Flexbox
           justifyContent="space-around"
 >
-          <ChartTabs />
+          <Connect(ChartTabs) />
           <RangeButtons />
 </Flexbox>,
         "_debugID": 2,
         "_renderedOutput": <Flexbox
           justifyContent="space-around"
 >
-          <ChartTabs />
+          <Connect(ChartTabs) />
           <RangeButtons />
 </Flexbox>,
       },

@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab } from 'react-bootstrap';
+import { selectTab } from "./actions";
+import { connect } from 'react-redux';
 
-const ChartTabs = ({handleSelect}) => {
+export const ChartTabs = ({ handleSelect }) => {
   return (
       <Tabs defaultActiveKey={1} onSelect={ handleSelect } >
         <Tab eventKey={1} title="Duration" />
@@ -15,4 +17,8 @@ const ChartTabs = ({handleSelect}) => {
 ChartTabs.propTypes = {};
 ChartTabs.defaultProps = {};
 
-export default ChartTabs;
+export const mapDispatchToProps = (dispatch) => ({
+  handleSelect: key => dispatch(selectTab(key))
+});
+
+export default connect(null, mapDispatchToProps)(ChartTabs);
