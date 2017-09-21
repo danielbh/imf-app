@@ -5,7 +5,7 @@
 import {
   ALL,
   SET_DATE_RANGE
-} from "../../constants";
+} from "./constants";
 
 export const dateRange = (state = ALL, action = {}) => {
   switch (action.type) {

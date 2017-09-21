@@ -7,7 +7,7 @@ import {
   THREE_MONTHS,
   YEAR,
   ALL
-} from "../../constants";
+} from "../../containers/RangeButton/constants";
 
 const RangeButtons = () => (
   <Flexbox>

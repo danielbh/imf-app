@@ -6,7 +6,9 @@ import  HealthDataChartPaneContainer from '../index';
 import HealthDataChart from '../chart';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import { YEAR } from "../../../constants";
+import { YEAR } from "../../RangeButton/constants";
+import { DURATION, WEIGHT, BODY_FAT } from "../../ChartTabs/constants";
+
 
 const data = {
   duration: [{ date: '1-Jan-70', value: 1 }, { date: 2, value: 3 }],
@@ -14,59 +16,59 @@ const data = {
   bodyFat: [{ date: '1-Jan-70', value: 3 }, { date: 2, value: 8 }]
 };
 
-const renderComponent = (props = {}) => shallow(
+const renderComponent = (tab) => shallow(
   <HealthDataChartPane
     data={data}
-    {...props}
+    tab={tab}
   />
 );
 
 describe('<HealthDataChartPane />', () => {
 
-  it('should have 3 charts', () => {
-    expect(renderComponent().find(HealthDataChart).length).toEqual(3);
+  it('should have 1 chart', () => {
+    expect(renderComponent(DURATION).find(HealthDataChart).length).toEqual(1);
   });
 
   describe('Duration chart', () => {
     it('should have the correct title', () => {
-      expect(renderComponent().childAt(0).props().title).toEqual('Duration');
+      expect(renderComponent(DURATION).props().title).toEqual('Duration');
     });
 
     it('should have the correct color', () => {
-      expect(renderComponent().childAt(0).props().color).toEqual('green');
+      expect(renderComponent(DURATION).props().color).toEqual('green');
     });
 
     it('should have the correct data', () => {
-      expect(renderComponent().childAt(0).props().data)
+      expect(renderComponent(DURATION).props().data)
         .toEqual([{ date: '1-Jan-70', value: 1 }, { date: 2, value: 3 }]);
     });
   });
 
   describe('Weight chart', () => {
     it('should have the correct title', () => {
-      expect(renderComponent().childAt(1).props().title).toEqual('Weight (kg)');
+      expect(renderComponent(WEIGHT).props().title).toEqual('Weight (kg)');
     });
 
     it('should have the correct color', () => {
-      expect(renderComponent().childAt(1).props().color).toEqual('blue');
+      expect(renderComponent(WEIGHT).props().color).toEqual('blue');
     });
 
     it('should have the correct data', () => {
-      expect(renderComponent().childAt(1).props().data).toEqual([{ date: '1-Jan-70', value: 4 }, { date: 2, value: 6 }]);
+      expect(renderComponent(WEIGHT).props().data).toEqual([{ date: '1-Jan-70', value: 4 }, { date: 2, value: 6 }]);
     });
   });
 
   describe('Body Fat chart', () => {
     it('should have the correct title', () => {
-      expect(renderComponent().childAt(2).props().title).toEqual('Body Fat %');
+      expect(renderComponent(BODY_FAT).props().title).toEqual('Body Fat %');
     });
 
     it('should have the correct color', () => {
-      expect(renderComponent().childAt(2).props().color).toEqual('red');
+      expect(renderComponent(BODY_FAT).props().color).toEqual('red');
     });
 
     it('should have the correct data', () => {
-      expect(renderComponent().childAt(2).props().data).toEqual([{ date: '1-Jan-70', value: 3 }, { date: 2, value: 8 }]);
+      expect(renderComponent(BODY_FAT).props().data).toEqual([{ date: '1-Jan-70', value: 3 }, { date: 2, value: 8 }]);
     });
   });
 
@@ -85,6 +87,10 @@ describe('<HealthDataChartPane />', () => {
       expect(mapStateToProps(state)).toEqual({ data: {"bodyFat": [], "duration": [], "weight": [] } });
 
     });
+
+    it('passes tab state to props', () => {
+      expect(mapStateToProps({ data: [], tab: DURATION }).tab).toEqual('DURATION');
+    });
   });
 
   describe('test connect', () => {
@@ -97,6 +103,7 @@ describe('<HealthDataChartPane />', () => {
           { date: 1505345773000, duration: 1, weight: 4, bodyFat: 3 },
           { date: 1505323763000, duration: 3, weight: 6, bodyFat: 8 }
         ],
+        tab: DURATION
       });
 
       const wrapper = mount(
@@ -106,10 +113,7 @@ describe('<HealthDataChartPane />', () => {
       );
 
       const node = wrapper.find(HealthDataChart);
-
       expect(node.at(0).node.props.data).toEqual([{ date: '14-Sep-17', value: 1 }, { date: '13-Sep-17', value: 3 }]);
-      expect(node.at(1).node.props.data).toEqual([{ date: '14-Sep-17', value: 4 }, { date: '13-Sep-17', value: 6 }]);
-      expect(node.at(2).node.props.data).toEqual([{ date: '14-Sep-17', value: 3 }, { date: '13-Sep-17', value: 8 }]);
     });
   });
 });

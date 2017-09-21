@@ -1,13 +1,14 @@
 import { tab } from "../reducer";
-import { SELECT_DURATION, SELECT_BODY_FAT } from "../constants";
+import { DURATION, BODY_FAT } from "../constants";
 
 
 describe('ChartTabs reducer', () => {
   it('returns a reducer with default action', () => {
-    expect(tab()).toEqual('SELECT_DURATION');
+    expect(tab()).toEqual('DURATION');
   });
 
   it('returns a reducer with passed in action', () => {
-    expect(tab(undefined, { type: SELECT_BODY_FAT })).toEqual('SELECT_BODY_FAT');
+    expect(tab(undefined, { type: BODY_FAT })).toEqual('BODY_FAT');
   });
+
 });

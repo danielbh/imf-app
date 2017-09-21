@@ -9,21 +9,45 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import HealthDataChart from './chart';
 import { getEntriesInRange } from "../App/selectors";
+import { DURATION, WEIGHT, BODY_FAT } from "../ChartTabs/constants";
 
-export const HealthDataChartPane = ({ data }) => (
-  <div>
-    <HealthDataChart title="Duration" color="green" data={data.duration} />
-    <HealthDataChart title="Weight (kg)" color="blue" data={data.weight} />
-    <HealthDataChart title="Body Fat %" color="red" data={data.bodyFat} />
-  </div>
-);
+export const HealthDataChartPane = ({ tab = DURATION, data }) => {
+
+  const selectedTab = (tab) => {
+    const props = {
+      DURATION: {
+        title: 'Duration',
+        color: 'green',
+        chartData: data.duration
+      },
+      WEIGHT: {
+        title: 'Weight (kg)',
+        color: 'blue',
+        chartData: data.weight
+      },
+      BODY_FAT: {
+        title: 'Body Fat %',
+        color: 'red',
+        chartData: data.bodyFat
+      }
+    };
+
+    return props[tab]
+  };
+
+  const { title, color,  chartData } = selectedTab(tab);
+
+  return <HealthDataChart title={title} color={color} data={chartData} />
+
+};
 
 HealthDataChartPane.propTypes = {
   data: PropTypes.shape({
     duration: PropTypes.array,
     weight: PropTypes.array,
     bodyFat: PropTypes.array
-  }),
+  }).isRequired,
+  tab: PropTypes.oneOf([DURATION, WEIGHT, BODY_FAT]).isRequired
 };
 
 /**
@@ -41,7 +65,8 @@ function mapDataToObject(data) {
 }
 
 export const mapStateToProps = state => ({
-  data: mapDataToObject(getEntriesInRange(state.data, state.dateRange))
+  data: mapDataToObject(getEntriesInRange(state.data, state.dateRange)),
+  tab: state.tab
 });
 
 export default connect(mapStateToProps)(HealthDataChartPane);

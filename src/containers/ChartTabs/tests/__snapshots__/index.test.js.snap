@@ -10,6 +10,7 @@ ShallowWrapper {
   "length": 1,
   "node": <Uncontrolled(Tabs)
     defaultActiveKey={1}
+    id="tab-id-required-for-accessibility"
     onSelect={undefined}
 >
     <Tab
@@ -28,6 +29,7 @@ ShallowWrapper {
   "nodes": Array [
     <Uncontrolled(Tabs)
       defaultActiveKey={1}
+      id="tab-id-required-for-accessibility"
       onSelect={undefined}
 >
       <Tab
@@ -80,6 +82,7 @@ ShallowWrapper {
       "_renderedComponent": NoopInternalComponent {
         "_currentElement": <Uncontrolled(Tabs)
           defaultActiveKey={1}
+          id="tab-id-required-for-accessibility"
           onSelect={undefined}
 >
           <Tab
@@ -98,6 +101,7 @@ ShallowWrapper {
         "_debugID": 2,
         "_renderedOutput": <Uncontrolled(Tabs)
           defaultActiveKey={1}
+          id="tab-id-required-for-accessibility"
           onSelect={undefined}
 >
           <Tab

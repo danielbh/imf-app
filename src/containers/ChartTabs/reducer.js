@@ -1,13 +1,14 @@
 import {
-  SELECT_DURATION,
-  SELECT_WEIGHT,
-  SELECT_BODY_FAT,
+  DURATION,
+  WEIGHT,
+  BODY_FAT,
 } from './constants'
 
-export const tab = (state = SELECT_DURATION, action = {}) => {
+export const tab = (state = DURATION, action = {}) => {
   switch (action.type) {
-    case SELECT_WEIGHT:
-    case SELECT_BODY_FAT:
+    case WEIGHT:
+    case BODY_FAT:
+    case DURATION:
       return action.type;
     default:
       return state;

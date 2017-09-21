@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 export const ChartTabs = ({ handleSelect }) => {
   return (
-      <Tabs defaultActiveKey={1} onSelect={ handleSelect } >
+      <Tabs defaultActiveKey={1} onSelect={ handleSelect } id="tab-id-required-for-accessibility" >
         <Tab eventKey={1} title="Duration" />
         <Tab eventKey={2} title="Weight (kg)" />
         <Tab eventKey={3} title="Body Fat %" />
@@ -14,7 +14,9 @@ export const ChartTabs = ({ handleSelect }) => {
   );
 };
 
-ChartTabs.propTypes = {};
+ChartTabs.propTypes = {
+  handleSelect: PropTypes.func.isRequired
+};
 ChartTabs.defaultProps = {};
 
 export const mapDispatchToProps = (dispatch) => ({

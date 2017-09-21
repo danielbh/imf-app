@@ -1,4 +1,4 @@
 
-export const SELECT_DURATION = 'SELECT_DURATION';
-export const SELECT_WEIGHT = 'SELECT_WEIGHT';
-export const SELECT_BODY_FAT = 'SELECT_BODY_FAT';
+export const DURATION = 'DURATION';
+export const WEIGHT = 'WEIGHT';
+export const BODY_FAT = 'BODY_FAT';
