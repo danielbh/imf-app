@@ -7,7 +7,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import H4 from '../../components/H4';
 
 const Wrapper = styled.div`
   width: 90%;
@@ -17,12 +16,9 @@ const Wrapper = styled.div`
   display: -webkit-flex;
   align-items: center;
   justify-content: center;
-  
-  .title {
-     width: 20%;
-  }
 `;
 
+// TODO: Will use title later so leaving it for now
 const HealthDataChart = ({ data, color, title }) => {
   const { xValues, yValues } = data.reduce((acc, e) => {
     acc.xValues.push(e.date);
@@ -35,8 +31,7 @@ const HealthDataChart = ({ data, color, title }) => {
 
   return (
     <Wrapper>
-      <H4 className="title">{title}</H4>
-      <ResponsiveContainer width="80%" aspect={3}>
+      <ResponsiveContainer width="100%" aspect={3}>
         <AreaChart
           data={data}
           margin={{ top: 5, right: 0, left: 0, bottom: 5 }}

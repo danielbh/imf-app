@@ -9,16 +9,11 @@ ShallowWrapper {
   },
   "length": 1,
   "node": <styled.div>
-    <H4
-        className="title"
-    >
-        title
-    </H4>
     <ResponsiveContainer
         aspect={3}
         debounce={0}
         height="100%"
-        width="80%"
+        width="100%"
     >
         <AreaChart
             barCategoryGap="10%"
@@ -204,16 +199,11 @@ ShallowWrapper {
 </styled.div>,
   "nodes": Array [
     <styled.div>
-      <H4
-            className="title"
-      >
-            title
-      </H4>
       <ResponsiveContainer
             aspect={3}
             debounce={0}
             height="100%"
-            width="80%"
+            width="100%"
       >
             <AreaChart
                   barCategoryGap="10%"
@@ -503,16 +493,11 @@ ShallowWrapper {
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
         "_currentElement": <styled.div>
-          <H4
-                    className="title"
-          >
-                    title
-          </H4>
           <ResponsiveContainer
                     aspect={3}
                     debounce={0}
                     height="100%"
-                    width="80%"
+                    width="100%"
           >
                     <AreaChart
                               barCategoryGap="10%"
@@ -698,16 +683,11 @@ ShallowWrapper {
 </styled.div>,
         "_debugID": 2,
         "_renderedOutput": <styled.div>
-          <H4
-                    className="title"
-          >
-                    title
-          </H4>
           <ResponsiveContainer
                     aspect={3}
                     debounce={0}
                     height="100%"
-                    width="80%"
+                    width="100%"
           >
                     <AreaChart
                               barCategoryGap="10%"
