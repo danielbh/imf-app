@@ -2,7 +2,8 @@
  * Create the store with asynchronously loaded reducers
  */
 import { createStore, compose } from 'redux';
-import moment from 'moment'
+import moment from 'moment';
+import { fromJS } from 'immutable'
 import app from './containers/App/reducers';
 import { generateFakeEntries } from './scripts/generateFakeEntries';
 
@@ -26,7 +27,7 @@ export default function configureStore(initialState = { data }) {
 
   return createStore(
     app,
-    initialState,
+    fromJS(initialState),
     composeEnhancers()
   );
 }

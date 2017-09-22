@@ -1,18 +1,20 @@
+import { fromJS } from 'immutable';
 import {
   ADD_ENTRY,
   DELETE_ENTRY
 } from './constants';
 
-export const healthDataTable = (state = [], action = {}) => {
+
+export const healthDataTable = (state = fromJS({data: []}), action = {}) => {
   switch (action.type) {
     case ADD_ENTRY:
-      return [...state, {
+      return state.push({
         id: action.id,
         date: action.date,
         duration: action.duration,
         weight: action.weight,
         bodyFat: action.bodyFat
-      }];
+      });
     case DELETE_ENTRY:
       return state.filter(entry => !action.ids.find(id => id === entry.id));
 

@@ -14,6 +14,7 @@ import {
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import { toJS } from 'immutable'
 import { addEntry, deleteEntries } from './actions';
 import { validateDate, validateBodyFat, validateWeight, validateDuration } from './insertValidation';
 import { getEntriesInRange } from "../App/selectors";
@@ -32,7 +33,7 @@ const Wrapper = styled.div`
 export const HealthDataTable = ({ data, addRow, deleteRows }) => (
   <Wrapper>
     <BootstrapTable
-      data={data}
+      data={toJS(data)}
       exportCSV
       selectRow={{ mode: 'checkbox' }}
       deleteRow
@@ -79,7 +80,7 @@ export const HealthDataTable = ({ data, addRow, deleteRows }) => (
 
 
 HealthDataTable.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.object.isRequired,
   addRow: PropTypes.func.isRequired,
   deleteRows: PropTypes.func.isRequired
 };
@@ -96,7 +97,7 @@ const convertDatesToHR = data => data.map(e => ({
 }));
 
 export const mapStateToProps = state => ({
-  data: convertDatesToHR(getEntriesInRange(state.data, state.dateRange))
+  data: convertDatesToHR(getEntriesInRange(state.get('data'), state.get('dateRange')))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HealthDataTable);
