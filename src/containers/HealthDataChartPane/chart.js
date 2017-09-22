@@ -6,7 +6,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import H4 from '../../components/H4';
 
 const Wrapper = styled.div`
@@ -37,16 +37,22 @@ const HealthDataChart = ({ data, color, title }) => {
     <Wrapper>
       <H4 className="title">{title}</H4>
       <ResponsiveContainer width="80%" aspect={3}>
-        <LineChart
+        <AreaChart
           data={data}
           margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
         >
+          <defs>
+            <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor={color} stopOpacity={0.8}/>
+              <stop offset="95%" stopColor={color} stopOpacity={0}/>
+            </linearGradient>
+          </defs>
           <XAxis domain={xDomain} dataKey="date" interval={5} />
           <YAxis domain={yDomain} padding={{ bottom: 5 }} />
           <CartesianGrid strokeDasharray="2 2" vertical={false} horizontal={false} />
           <Tooltip />
-          <Line type="monotone" dataKey="value" dot={false} stroke={color} />
-        </LineChart>
+          <Area type="monotone" dataKey="value" fillOpacity={1} fill="url(#colorValue)" stroke={color} />
+        </AreaChart>
       </ResponsiveContainer>
     </Wrapper>
   );
