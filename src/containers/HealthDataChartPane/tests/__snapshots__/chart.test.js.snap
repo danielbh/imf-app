@@ -93,7 +93,7 @@ ShallowWrapper {
                 }
                 height={30}
                 hide={false}
-                interval={5}
+                interval="preserveStartEnd"
                 mirror={false}
                 orientation="bottom"
                 padding={
@@ -120,6 +120,7 @@ ShallowWrapper {
                 }
                 height={0}
                 hide={false}
+                interval={2}
                 mirror={false}
                 orientation="left"
                 padding={
@@ -186,7 +187,7 @@ ShallowWrapper {
                 fill="url(#colorValue)"
                 fillOpacity={1}
                 hide={false}
-                isAnimationActive={true}
+                isAnimationActive={false}
                 legendType="line"
                 points={Array []}
                 stroke="#FFFFFF"
@@ -283,7 +284,7 @@ ShallowWrapper {
                         }
                         height={30}
                         hide={false}
-                        interval={5}
+                        interval="preserveStartEnd"
                         mirror={false}
                         orientation="bottom"
                         padding={
@@ -310,6 +311,7 @@ ShallowWrapper {
                         }
                         height={0}
                         hide={false}
+                        interval={2}
                         mirror={false}
                         orientation="left"
                         padding={
@@ -376,7 +378,7 @@ ShallowWrapper {
                         fill="url(#colorValue)"
                         fillOpacity={1}
                         hide={false}
-                        isAnimationActive={true}
+                        isAnimationActive={false}
                         legendType="line"
                         points={Array []}
                         stroke="#FFFFFF"
@@ -577,7 +579,7 @@ ShallowWrapper {
                                         }
                                         height={30}
                                         hide={false}
-                                        interval={5}
+                                        interval="preserveStartEnd"
                                         mirror={false}
                                         orientation="bottom"
                                         padding={
@@ -604,6 +606,7 @@ ShallowWrapper {
                                         }
                                         height={0}
                                         hide={false}
+                                        interval={2}
                                         mirror={false}
                                         orientation="left"
                                         padding={
@@ -670,7 +673,7 @@ ShallowWrapper {
                                         fill="url(#colorValue)"
                                         fillOpacity={1}
                                         hide={false}
-                                        isAnimationActive={true}
+                                        isAnimationActive={false}
                                         legendType="line"
                                         points={Array []}
                                         stroke="#FFFFFF"
@@ -767,7 +770,7 @@ ShallowWrapper {
                                         }
                                         height={30}
                                         hide={false}
-                                        interval={5}
+                                        interval="preserveStartEnd"
                                         mirror={false}
                                         orientation="bottom"
                                         padding={
@@ -794,6 +797,7 @@ ShallowWrapper {
                                         }
                                         height={0}
                                         hide={false}
+                                        interval={2}
                                         mirror={false}
                                         orientation="left"
                                         padding={
@@ -860,7 +864,7 @@ ShallowWrapper {
                                         fill="url(#colorValue)"
                                         fillOpacity={1}
                                         hide={false}
-                                        isAnimationActive={true}
+                                        isAnimationActive={false}
                                         legendType="line"
                                         points={Array []}
                                         stroke="#FFFFFF"

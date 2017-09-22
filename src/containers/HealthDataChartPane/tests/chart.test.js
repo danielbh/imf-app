@@ -1,10 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import H4 from '../../../components/H4';
 import HealthDataChart from '../chart';
-import { ResponsiveContainer, AreaChart, XAxis, YAxis } from 'recharts';
-
 const data = [
   { date: 1, value: 1 },
   { date: 2, value: 3 },

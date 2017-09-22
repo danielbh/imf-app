@@ -42,11 +42,18 @@ const HealthDataChart = ({ data, color, title }) => {
               <stop offset="95%" stopColor={color} stopOpacity={0}/>
             </linearGradient>
           </defs>
-          <XAxis domain={xDomain} dataKey="date" interval={5} />
-          <YAxis domain={yDomain} padding={{ bottom: 5 }} />
+          <XAxis domain={xDomain} dataKey="date" interval="preserveStartEnd" />
+          <YAxis domain={yDomain} padding={{ bottom: 5 }} interval={2} />
           <CartesianGrid strokeDasharray="2 2" vertical={false} horizontal={false} />
           <Tooltip />
-          <Area type="monotone" dataKey="value" fillOpacity={1} fill="url(#colorValue)" stroke={color} />
+          <Area
+            type="monotone"
+            dataKey="value"
+            isAnimationActive={false}
+            fillOpacity={1}
+            fill="url(#colorValue)"
+            stroke={color}
+          />
         </AreaChart>
       </ResponsiveContainer>
     </Wrapper>
