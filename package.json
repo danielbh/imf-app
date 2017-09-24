@@ -1,0 +1,18 @@
+{
+  "name": "fasting-tracker-app",
+  "description": "Fasting Tracker App",
+  "version": "0.0.1",
+  "main": "server/index.js",
+  "author": "Daniel Hollcraft",
+  "license": "MIT",
+  "scripts": {
+    "start:server": "babel-watch server/index"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-watch": "^2.0.7"
+  }
+}
