@@ -16,7 +16,7 @@ let data = [
 // frontend.
 app.get('/api/entries', (req, res) => res.status(200).send(data));
 
-app.post('/api/entries/:data', (req, res) => {
+app.post('/api/entries', (req, res) => {
   const { date, duration, weight, bodyFat } = req.query;
   const id = random.uuid();
   data.push({ id, date, duration, weight, bodyFat });
