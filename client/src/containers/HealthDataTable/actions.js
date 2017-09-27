@@ -42,6 +42,7 @@ export const fetchEntries = () => dispatch => {
   dispatch(requestEntries());
   return axios.get('api/entries')
     .then(({ data }) => dispatch(receiveEntries(data)))
+    // TODO: dispatch error message to display
     .catch((error) => error);
 };
 

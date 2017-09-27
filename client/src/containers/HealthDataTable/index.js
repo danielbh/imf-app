@@ -36,13 +36,13 @@ export class HealthDataTable extends Component {
     entries: PropTypes.array.isRequired,
     addRow: PropTypes.func.isRequired,
     deleteRows: PropTypes.func.isRequired,
+    fetchEntriesIfNeeded: PropTypes.func.isRequired,
     isFetching: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
-    dispatch: PropTypes.func.isRequired
   };
 
   componentDidMount() {
-    this.props.dispatch(fetchEntriesIfNeeded());
+    this.props.fetchEntriesIfNeeded();
   }
 
   render() {
@@ -101,16 +101,18 @@ export class HealthDataTable extends Component {
 export const mapDispatchToProps = (dispatch) => ({
   addRow: row => dispatch(addEntry(row)),
   deleteRows: ids => dispatch(deleteEntry(ids)),
-  dispatch
+  fetchEntriesIfNeeded: () => dispatch(fetchEntriesIfNeeded())
 });
 
 
-const convertDatesToHR = entries => entries.map(e => ({
+const makeDatesReadable = entries => entries.map(e => ({
   ...e,
   date: moment(e.date).format('D-MMM-YY')
 }));
 
 export const mapStateToProps = state => {
+  // isFetching is for controlling loading component which will be added later.
+  // We set a default value so that when the component first loads its in a loading state until data fetch is terminated
   const { isFetching, lastUpdated, items: entries } = state.entries || {
     isFetching: true,
     items: []
@@ -119,7 +121,7 @@ export const mapStateToProps = state => {
   return {
     isFetching,
     lastUpdated,
-    entries: convertDatesToHR(getEntriesInRange(entries, state.dateRange))
+    entries: makeDatesReadable(getEntriesInRange(entries, state.dateRange))
   }
 };
 

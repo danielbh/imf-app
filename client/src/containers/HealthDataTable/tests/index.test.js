@@ -9,9 +9,9 @@ import configureMockStore from 'redux-mock-store';
 import uuid from 'node-uuid';
 import { Provider } from 'react-redux';
 
-import { YEAR } from "../../RangeButton/constants";
+import { ALL } from '../../RangeButton/constants';
 import HealthDataTableContainer, { HealthDataTable, mapDispatchToProps, mapStateToProps } from '../index';
-import { addEntry, deleteEntry } from '../actions';
+import actions, { addEntry, deleteEntry, fetchEntriesIfNeeded } from '../actions';
 
 import {
   validateDate,
@@ -20,8 +20,9 @@ import {
   validateWeight
 } from '../insertValidation';
 
-const renderComponent = () => shallow(
+const renderComponent = (fetchEntriesIfNeeded) => shallow(
   <HealthDataTable
+    fetchEntriesIfNeeded={fetchEntriesIfNeeded}
     entries={['entries']}
     addRow={() => 'addRow'}
     deleteRows={() => 'deleteRows'}
@@ -37,6 +38,15 @@ const weightColumn = () => renderBootstrapTable().childAt(3);
 const bodyFatColumn = () => renderBootstrapTable().childAt(4);
 
 describe('<HealthDataTable />', () => {
+
+  describe('componentDidMount', () => {
+    it('calls fetchEntriesIfNeeded inside dispatch', () => {
+      const fetchEntriesIfNeeded = jest.fn();
+      renderComponent(fetchEntriesIfNeeded).instance().componentDidMount();
+      expect(fetchEntriesIfNeeded).toHaveBeenCalled()
+    });
+  });
+
   describe('<BootstrapTable/>', () => {
     it('contains <BootstrapTable/>', () => {
       expect(renderBootstrapTable().type()).toEqual(BootstrapTable);
@@ -193,7 +203,6 @@ describe('<HealthDataTable />', () => {
 
     it('should pass entries from connect', () => {
       const mockStore = configureMockStore();
-
       const store = mockStore({
         entries: {
           items: [
@@ -239,39 +248,66 @@ describe('<HealthDataTable />', () => {
         result.addRow(newEntry);
         expect(dispatch).toHaveBeenCalledWith(addEntry(newEntry));
       });
+
+      describe('deleteRows', () => {
+        it('should be injected', () => {
+          const dispatch = jest.fn();
+          const result = mapDispatchToProps(dispatch);
+          expect(result.deleteRows).toBeDefined();
+        });
+
+        it('should dispatch deleteRows action when called', () => {
+          const dispatch = jest.fn();
+          const result = mapDispatchToProps(dispatch);
+          result.deleteRows(['id']);
+          expect(dispatch).toHaveBeenCalledWith(deleteEntry(['id']));
+        });
+      });
+
+      describe('fetchEntriesIfNeeded', () => {
+        it('should be injected', () => {
+          const dispatch = jest.fn();
+          const result = mapDispatchToProps(dispatch);
+          expect(result.fetchEntriesIfNeeded).toBeDefined();
+        });
+
+        it('should dispatch deleteRows action when called', () => {
+          const dispatch = jest.fn();
+          actions.fetchEntriesIfNeeded = jest.fn();
+          const result = mapDispatchToProps(dispatch);
+          result.fetchEntriesIfNeeded();
+          expect(dispatch).toHaveBeenCalledWith(fetchEntriesIfNeeded());
+        });
+      });
     });
 
     describe('mapStateToProps', () => {
-      it('passes dateRange getEntriesInRange into mapDataToObject', () => {
-
-        // Set dates to first epoch time, and set date range so they won't appear when passed through selector
+      it('passes dateRange and entries into getEntriesInRange then to mapDataToObject', () => {
         const state = {
           entries: {
             items: [
               { date: 1, duration: 1, weight: 4, bodyFat: 3 },
               { date: 1, duration: 3, weight: 6, bodyFat: 8 }
-            ] },
-          dateRange: YEAR
+            ],
+            isFetching: true,
+            lastUpdated: 1
+          },
+          dateRange: ALL
         };
 
-        expect(mapStateToProps(state)).toEqual({ entries: [] });
-
-      });
+        const expected = {
+          entries: [
+            {bodyFat: 3, date: '1-Jan-70', duration: 1, weight: 4},
+            {bodyFat: 8, date: '1-Jan-70', duration: 3, weight: 6}],
+          isFetching: true,
+          lastUpdated: 1
+        };
+        expect(mapStateToProps(state)).toEqual(expected);
+      })
     });
 
-    describe('deleteRows', () => {
-      it('should be injected', () => {
-        const dispatch = jest.fn();
-        const result = mapDispatchToProps(dispatch);
-        expect(result.deleteRows).toBeDefined();
-      });
-
-      it('should dispatch deleteRows action when called', () => {
-        const dispatch = jest.fn();
-        const result = mapDispatchToProps(dispatch);
-        result.deleteRows(['id']);
-        expect(dispatch).toHaveBeenCalledWith(deleteEntry(['id']));
-      });
+    it('has the correct defaults for entries object when entries is not defined', () => {
+      expect(true).toEqual(false)
     });
   });
 });

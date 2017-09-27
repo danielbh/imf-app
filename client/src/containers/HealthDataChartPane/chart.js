@@ -20,6 +20,7 @@ const Wrapper = styled.div`
 
 // TODO: Will use title later so leaving it for now
 const HealthDataChart = ({ entries, color, title }) => {
+
   const { xValues, yValues } = entries.reduce((acc, e) => {
     acc.xValues.push(e.date);
     acc.yValues.push(e.value);

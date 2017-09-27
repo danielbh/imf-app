@@ -100,7 +100,7 @@ describe('HealthDataTable actions', () => {
         expect(dispatch.mock.calls[1]).toEqual([{"entries": undefined, "receivedAt": 1, "type": "RECEIVE_ENTRIES"}]);
       });
 
-      it('return error on unsuccessful fetch attempt', async () => {
+      it('returns error on unsuccessful fetch attempt', async () => {
         const dispatch = jest.fn();
         axios.get = jest.fn(() => Promise.reject(new Error('Error!')));
         await expect(fetchEntries()(dispatch)).resolves.toEqual(new Error('Error!'));
