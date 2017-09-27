@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 
 import { YEAR } from "../../RangeButton/constants";
 import HealthDataTableContainer, { HealthDataTable, mapDispatchToProps, mapStateToProps } from '../index';
-import { addEntry, deleteEntries } from '../actions';
+import { addEntry, deleteEntry } from '../actions';
 
 import {
   validateDate,
@@ -22,7 +22,7 @@ import {
 
 const renderComponent = () => shallow(
   <HealthDataTable
-    data={['data']}
+    entries={['entries']}
     addRow={() => 'addRow'}
     deleteRows={() => 'deleteRows'}
   />
@@ -42,8 +42,8 @@ describe('<HealthDataTable />', () => {
       expect(renderBootstrapTable().type()).toEqual(BootstrapTable);
     });
 
-    it('has a data prop with the correct value ', () => {
-      expect(renderBootstrapTable().props().data).toEqual(['data']);
+    it('has a entries prop with the correct value ', () => {
+      expect(renderBootstrapTable().props().data).toEqual(['entries']);
     });
 
     it('has pagination', () => {
@@ -191,14 +191,15 @@ describe('<HealthDataTable />', () => {
 
   describe('test connect', () => {
 
-    it('should pass the data from connect', () => {
+    it('should pass entries from connect', () => {
       const mockStore = configureMockStore();
 
       const store = mockStore({
-        data: [
-          { date: 1505345773000, duration: 1, weight: 4, bodyFat: 3 },
-          { date: 1505323763000, duration: 3, weight: 6, bodyFat: 8 }
-        ]
+        entries: {
+          items: [
+            { date: 1505345773000, duration: 1, weight: 4, bodyFat: 3 },
+            { date: 1505323763000, duration: 3, weight: 6, bodyFat: 8 }
+          ]}
       });
 
       const expected = [
@@ -245,14 +246,15 @@ describe('<HealthDataTable />', () => {
 
         // Set dates to first epoch time, and set date range so they won't appear when passed through selector
         const state = {
-          data: [
-            { date: 1, duration: 1, weight: 4, bodyFat: 3 },
-            { date: 1, duration: 3, weight: 6, bodyFat: 8 }
-          ],
+          entries: {
+            items: [
+              { date: 1, duration: 1, weight: 4, bodyFat: 3 },
+              { date: 1, duration: 3, weight: 6, bodyFat: 8 }
+            ] },
           dateRange: YEAR
         };
 
-        expect(mapStateToProps(state)).toEqual({ data: [] });
+        expect(mapStateToProps(state)).toEqual({ entries: [] });
 
       });
     });
@@ -268,7 +270,7 @@ describe('<HealthDataTable />', () => {
         const dispatch = jest.fn();
         const result = mapDispatchToProps(dispatch);
         result.deleteRows(['id']);
-        expect(dispatch).toHaveBeenCalledWith(deleteEntries(['id']));
+        expect(dispatch).toHaveBeenCalledWith(deleteEntry(['id']));
       });
     });
   });

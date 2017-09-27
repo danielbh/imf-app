@@ -4,6 +4,6 @@ import RangeButtons from '../index'
 
 describe('<ButtonBar />', () => {
   it('matches snapshot', () => {
-    expect(shallow(<RangeButtons />)).toMatchSnapshot();
+     expect(shallow(<RangeButtons />)).toMatchSnapshot();
   });
 });

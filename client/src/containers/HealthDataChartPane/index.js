@@ -11,24 +11,24 @@ import HealthDataChart from './chart';
 import { getEntriesInRange } from "../App/selectors";
 import { DURATION, WEIGHT, BODY_FAT } from "../ChartTabs/constants";
 
-export const HealthDataChartPane = ({ tab = DURATION, data }) => {
+export const HealthDataChartPane = ({ tab = DURATION, entries }) => {
 
   const selectedTab = (tab) => {
     const props = {
       DURATION: {
         title: 'Duration',
         color: 'green',
-        chartData: data.duration
+        chartData: entries.duration
       },
       WEIGHT: {
         title: 'Weight (kg)',
         color: 'blue',
-        chartData: data.weight
+        chartData: entries.weight
       },
       BODY_FAT: {
         title: 'Body Fat %',
         color: 'red',
-        chartData: data.bodyFat
+        chartData: entries.bodyFat
       }
     };
 
@@ -37,12 +37,12 @@ export const HealthDataChartPane = ({ tab = DURATION, data }) => {
 
   const { title, color,  chartData } = selectedTab(tab);
 
-  return <HealthDataChart title={title} color={color} data={chartData} />
+  return <HealthDataChart title={title} color={color} entries={chartData} />
 
 };
 
 HealthDataChartPane.propTypes = {
-  data: PropTypes.shape({
+  entries: PropTypes.shape({
     duration: PropTypes.array,
     weight: PropTypes.array,
     bodyFat: PropTypes.array
@@ -51,11 +51,11 @@ HealthDataChartPane.propTypes = {
 };
 
 /**
- * Convert data from array to object
- * @param data
+ * Convert entries from array to object
+ * @param entries
  */
-function mapDataToObject(data) {
-  return data.reduce((result, e) => {
+function mapEntriesToObject(entries) {
+  return entries.reduce((result, e) => {
     const date = moment(e.date).format('D-MMM-YY');
     result.duration.push({ date, value: e.duration });
     result.weight.push({ date, value: e.weight });
@@ -65,7 +65,7 @@ function mapDataToObject(data) {
 }
 
 export const mapStateToProps = state => ({
-  data: mapDataToObject(getEntriesInRange(state.data, state.dateRange)),
+  entries: mapEntriesToObject(getEntriesInRange(state.entries.items || [], state.dateRange)),
   tab: state.tab
 });
 

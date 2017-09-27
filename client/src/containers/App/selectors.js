@@ -10,10 +10,10 @@ import {
   YEAR
 } from "../RangeButton/constants";
 
-export const getEntriesInRange = (data, dateRange) => {
+export const getEntriesInRange = (entries, dateRange) => {
 
   const returnEntriesInRange =
-    (units, thresh = 1) => data.filter(e => moment(moment()).diff(e.date, units) < thresh);
+    (units, thresh = 1) => entries.filter(e => moment(moment()).diff(e.date, units) < thresh);
 
   switch(dateRange) {
     case WEEK:
@@ -25,6 +25,6 @@ export const getEntriesInRange = (data, dateRange) => {
     case YEAR:
       return returnEntriesInRange('years');
     default:
-      return data;
+      return entries;
   }
 };

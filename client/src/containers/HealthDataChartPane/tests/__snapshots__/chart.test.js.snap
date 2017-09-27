@@ -160,6 +160,7 @@ ShallowWrapper {
                 }
                 cursor={true}
                 cursorStyle={Object {}}
+                filterNull={true}
                 isAnimationActive={true}
                 itemSorter={[Function]}
                 itemStyle={Object {}}
@@ -351,6 +352,7 @@ ShallowWrapper {
                         }
                         cursor={true}
                         cursorStyle={Object {}}
+                        filterNull={true}
                         isAnimationActive={true}
                         itemSorter={[Function]}
                         itemStyle={Object {}}
@@ -398,7 +400,7 @@ ShallowWrapper {
       "_context": Object {},
       "_currentElement": <HealthDataChart
         color="#FFFFFF"
-        data={
+        entries={
                 Array [
                         Object {
                           "date": 1,
@@ -441,7 +443,7 @@ ShallowWrapper {
         "context": Object {},
         "props": Object {
           "color": "#FFFFFF",
-          "data": Array [
+          "entries": Array [
             Object {
               "date": 1,
               "value": 1,
@@ -646,6 +648,7 @@ ShallowWrapper {
                                         }
                                         cursor={true}
                                         cursorStyle={Object {}}
+                                        filterNull={true}
                                         isAnimationActive={true}
                                         itemSorter={[Function]}
                                         itemStyle={Object {}}
@@ -837,6 +840,7 @@ ShallowWrapper {
                                         }
                                         cursor={true}
                                         cursorStyle={Object {}}
+                                        filterNull={true}
                                         isAnimationActive={true}
                                         itemSorter={[Function]}
                                         itemStyle={Object {}}
@@ -888,7 +892,7 @@ ShallowWrapper {
   "root": [Circular],
   "unrendered": <HealthDataChart
     color="#FFFFFF"
-    data={
+    entries={
         Array [
             Object {
               "date": 1,

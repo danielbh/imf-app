@@ -5,7 +5,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import H1 from '../../../components/H1';
 import NotFound from '../index';
 
 describe('<NotFound />', () => {
@@ -14,6 +13,6 @@ describe('<NotFound />', () => {
       <NotFound />
     );
     expect(renderedComponent.contains(
-      <H1>404 Page not found.</H1>)).toEqual(true);
+      <h1>404 Page not found.</h1>)).toEqual(true);
   });
 });

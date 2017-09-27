@@ -1,7 +1,8 @@
 /**
  * Create the store with asynchronously loaded reducers
  */
-import { createStore, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 import app from './containers/App/reducers';
 
 export default function configureStore(initialState = {}) {
@@ -16,6 +17,6 @@ export default function configureStore(initialState = {}) {
   return createStore(
     app,
     initialState,
-    composeEnhancers()
+    composeEnhancers(applyMiddleware(thunk))
   );
 }

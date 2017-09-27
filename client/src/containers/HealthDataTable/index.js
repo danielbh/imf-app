@@ -5,7 +5,7 @@
  */
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   BootstrapTable,
@@ -14,9 +14,10 @@ import {
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { addEntry, deleteEntries } from './actions';
+import { addEntry, deleteEntry } from './actions';
 import { validateDate, validateBodyFat, validateWeight, validateDuration } from './insertValidation';
 import { getEntriesInRange } from "../App/selectors";
+import { fetchEntriesIfNeeded } from "./actions";
 
 // IMPORTANT: Default css behavior is overridden to hide toastr notification which appears on invalid insert
 // submits. The recommended solution does not work. See documentation here:
@@ -29,74 +30,97 @@ const Wrapper = styled.div`
   }
 `;
 
-export const HealthDataTable = ({ data, addRow, deleteRows }) => (
-  <Wrapper>
-    <BootstrapTable
-      data={data}
-      exportCSV
-      selectRow={{ mode: 'checkbox' }}
-      deleteRow
-      insertRow
-      pagination
-      options={{
-        afterInsertRow: addRow,
-        afterDeleteRow: deleteRows,
-        handleConfirmDeleteRow: next => next() // Overrides default behavior which triggers an alert.
-      }}
-    >
-      <TableHeaderColumn
-        dataField="id"
-        isKey
-        hidden
-        export
-        hiddenOnInsert
-        autoValue
-      >id</TableHeaderColumn>
+export class HealthDataTable extends Component {
 
-      <TableHeaderColumn
-        dataField="date"
-        editable={{ type: 'date', validator: validateDate }}
-      >Date</TableHeaderColumn>
+  static propTypes = {
+    entries: PropTypes.array.isRequired,
+    addRow: PropTypes.func.isRequired,
+    deleteRows: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    lastUpdated: PropTypes.number,
+    dispatch: PropTypes.func.isRequired
+  };
 
-      <TableHeaderColumn
-        dataField="duration"
-        editable={{ type: 'number', validator: validateDuration }}
-      >Duration (hrs)</TableHeaderColumn>
+  componentDidMount() {
+    this.props.dispatch(fetchEntriesIfNeeded());
+  }
 
-      <TableHeaderColumn
-        dataField="weight"
-        editable={{ type: 'number', validator: validateWeight }}
-      >Weight (kg)</TableHeaderColumn>
+  render() {
+    const { entries, addRow, deleteRows } = this.props;
 
-      <TableHeaderColumn
-        dataField="bodyFat"
-        editable={{ type: 'number', validator: validateBodyFat }}
-      >Body Fat %</TableHeaderColumn>
+    return (
+      <Wrapper>
+        <BootstrapTable
+          data={entries}
+          exportCSV
+          selectRow={{ mode: 'checkbox' }}
+          deleteRow
+          insertRow
+          pagination
+          options={{
+            afterInsertRow: addRow,
+            afterDeleteRow: deleteRows,
+            handleConfirmDeleteRow: next => next() // Overrides default behavior which triggers an alert.
+          }}
+        >
+          <TableHeaderColumn
+            dataField="id"
+            isKey
+            hidden
+            export
+            hiddenOnInsert
+            autoValue
+          >id</TableHeaderColumn>
 
-    </BootstrapTable>
-  </Wrapper>
-);
+          <TableHeaderColumn
+            dataField="date"
+            editable={{ type: 'date', validator: validateDate }}
+          >Date</TableHeaderColumn>
 
+          <TableHeaderColumn
+            dataField="duration"
+            editable={{ type: 'number', validator: validateDuration }}
+          >Duration (hrs)</TableHeaderColumn>
 
-HealthDataTable.propTypes = {
-  data: PropTypes.array.isRequired,
-  addRow: PropTypes.func.isRequired,
-  deleteRows: PropTypes.func.isRequired
-};
+          <TableHeaderColumn
+            dataField="weight"
+            editable={{ type: 'number', validator: validateWeight }}
+          >Weight (kg)</TableHeaderColumn>
+
+          <TableHeaderColumn
+            dataField="bodyFat"
+            editable={{ type: 'number', validator: validateBodyFat }}
+          >Body Fat %</TableHeaderColumn>
+
+        </BootstrapTable>
+      </Wrapper>
+    )
+  }
+}
 
 export const mapDispatchToProps = (dispatch) => ({
   addRow: row => dispatch(addEntry(row)),
-  deleteRows: ids => dispatch(deleteEntries(ids))
+  deleteRows: ids => dispatch(deleteEntry(ids)),
+  dispatch
 });
 
 
-const convertDatesToHR = data => data.map(e => ({
+const convertDatesToHR = entries => entries.map(e => ({
   ...e,
   date: moment(e.date).format('D-MMM-YY')
 }));
 
-export const mapStateToProps = state => ({
-  data: convertDatesToHR(getEntriesInRange(state.data, state.dateRange))
-});
+export const mapStateToProps = state => {
+  const { isFetching, lastUpdated, items: entries } = state.entries || {
+    isFetching: true,
+    items: []
+  };
+
+  return {
+    isFetching,
+    lastUpdated,
+    entries: convertDatesToHR(getEntriesInRange(entries, state.dateRange))
+  }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(HealthDataTable);

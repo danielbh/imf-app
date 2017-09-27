@@ -52,7 +52,7 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 2,
       "_context": Object {},
-      "_currentElement": <ChartTabs />,
+      "_currentElement": <Unknown />,
       "_debugID": 1,
       "_hostContainerInfo": null,
       "_hostParent": null,
@@ -128,6 +128,6 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <ChartTabs />,
+  "unrendered": <Unknown />,
 }
 `;

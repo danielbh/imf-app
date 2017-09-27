@@ -1,6 +1,6 @@
 import { getEntriesInRange } from '../selectors';
 
-const data = [
+const entries = [
   { "id":"1", "date":"22-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
   { "id":"1", "date":"21-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
   { "id":"1", "date":"17-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
@@ -27,14 +27,14 @@ describe('dateRange reducer', () => {
   });
 
   it('selects entries that happened in the past week', () => {
-    expect(getEntriesInRange(data, 'WEEK')).toEqual([
+    expect(getEntriesInRange(entries, 'WEEK')).toEqual([
       { "id":"1", "date":"22-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"21-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 }
     ])
   });
 
   it('selects entries that happened in the last month', () => {
-    expect(getEntriesInRange(data, 'MONTH')).toEqual([
+    expect(getEntriesInRange(entries, 'MONTH')).toEqual([
       { "id":"1", "date":"22-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"21-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"17-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
@@ -43,7 +43,7 @@ describe('dateRange reducer', () => {
   });
 
   it('selects entries that happened in the last three months', () => {
-    expect(getEntriesInRange(data, 'THREE_MONTHS')).toEqual([
+    expect(getEntriesInRange(entries, 'THREE_MONTHS')).toEqual([
       { "id":"1", "date":"22-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"21-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"17-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
@@ -54,7 +54,7 @@ describe('dateRange reducer', () => {
   });
 
   it('selects entries that happened in the last year', () => {
-    expect(getEntriesInRange(data, 'YEAR')).toEqual([
+    expect(getEntriesInRange(entries, 'YEAR')).toEqual([
       { "id":"1", "date":"22-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"21-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
       { "id":"1", "date":"17-Mar-17", "duration": 15, "weight": 70, "bodyFat": 16 },
@@ -67,6 +67,6 @@ describe('dateRange reducer', () => {
   });
 
   it('selects all entries', () => {
-    expect(getEntriesInRange(data, 'ALL')).toEqual(data)
+    expect(getEntriesInRange(entries, 'ALL')).toEqual(entries)
   });
 });

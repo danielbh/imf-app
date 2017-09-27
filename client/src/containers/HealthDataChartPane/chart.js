@@ -19,8 +19,8 @@ const Wrapper = styled.div`
 `;
 
 // TODO: Will use title later so leaving it for now
-const HealthDataChart = ({ data, color, title }) => {
-  const { xValues, yValues } = data.reduce((acc, e) => {
+const HealthDataChart = ({ entries, color, title }) => {
+  const { xValues, yValues } = entries.reduce((acc, e) => {
     acc.xValues.push(e.date);
     acc.yValues.push(e.value);
     return acc;
@@ -33,7 +33,7 @@ const HealthDataChart = ({ data, color, title }) => {
     <Wrapper>
       <ResponsiveContainer width="100%" aspect={3}>
         <AreaChart
-          data={data}
+          data={entries}
           margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
         >
           <defs>
@@ -63,7 +63,7 @@ const HealthDataChart = ({ data, color, title }) => {
 HealthDataChart.propTypes = {
   title: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired
+  entries: PropTypes.array.isRequired
 };
 
 export default HealthDataChart;

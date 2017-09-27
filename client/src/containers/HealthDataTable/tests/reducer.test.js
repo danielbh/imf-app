@@ -1,13 +1,17 @@
-import { healthDataTable } from '../reducer';
+import { entries } from '../reducer';
 
 describe('HealthDataTable reducer', () => {
 
   it('returns initial state', () => {
-    expect(healthDataTable()).toEqual([]);
+    expect(entries()).toEqual({
+      isFetching: false,
+      didInvalidate: false,
+      items: []
+    });
   });
 
   it('adds an entry', () => {
-    const newEntry = {
+    const newState = {
       id: 'id',
       date: 1505344302,
       duration: '11',
@@ -16,17 +20,14 @@ describe('HealthDataTable reducer', () => {
     };
 
     // Table form submit formats date differently so we need to account for this in action creator
-    const addedEntry = {
-      id: 'id',
-      date: 1505344302,
-      duration: '11',
-      weight: '69',
-      bodyFat: '14'
-    };
+    const expectedState = {
+      didInvalidate: false,
+      isFetching: false,
+      items: [{bodyFat: '14', date: 1505344302, duration: '11', id: 'id', weight: '69'}]};
 
-    const expected = [addedEntry];
+    const expected = expectedState;
 
-    expect(healthDataTable(undefined, { ...newEntry, type: 'ADD_ENTRY' })).toEqual(expected);
+    expect(entries(undefined, { ...newState, type: 'ADD_ENTRY' })).toEqual(expected);
   });
 
   it('deletes an entry', () => {
@@ -39,8 +40,41 @@ describe('HealthDataTable reducer', () => {
 
     const expected = ([first, second] = initialState) => ([first, second]);
 
-    expect(healthDataTable(initialState, { ids: ['id3', 'id4'], type: 'DELETE_ENTRY' }))
+    expect(entries(initialState, { ids: ['id3', 'id4'], type: 'DELETE_ENTRY' }))
       .toEqual(expected());
+  });
+
+  it('requests entries', () => {
+    expect(entries({
+      isFetching: false,
+      didInvalidate: true,
+      items: []
+    }, { type: 'REQUEST_ENTRIES' })).toEqual({
+      isFetching: true,
+      didInvalidate: false,
+      items: []
+    })
+  });
+
+  it('receives entries', () => {
+    expect(entries({
+      isFetching: true,
+      didInvalidate: true,
+      items: []
+    }, { type: 'RECEIVE_ENTRIES', receivedAt: 1, entries: ['entries yay!'] })).toEqual({
+      isFetching: false,
+      didInvalidate: false,
+      items: ['entries yay!'],
+      lastUpdated: 1
+    })
+  });
+
+  it('invalidates entries', () => {
+    expect(entries({
+      didInvalidate: false,
+    }, { type: 'INVALIDATE_ENTRIES'  })).toEqual({
+      didInvalidate: true,
+    })
   });
 });
 

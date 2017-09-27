@@ -1,6 +1,6 @@
 import { dateRange } from '../reducer'
 
-describe('dataRange', () => {
+describe('dateRange', () => {
   it('returns a default state of ALL', () => {
     expect(dateRange()).toEqual('ALL')
   });

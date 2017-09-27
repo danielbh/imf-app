@@ -10,7 +10,7 @@ import { YEAR } from "../../RangeButton/constants";
 import { DURATION, WEIGHT, BODY_FAT } from "../../ChartTabs/constants";
 
 
-const data = {
+const entries = {
   duration: [{ date: '1-Jan-70', value: 1 }, { date: 2, value: 3 }],
   weight: [{ date: '1-Jan-70', value: 4 }, { date: 2, value: 6 }],
   bodyFat: [{ date: '1-Jan-70', value: 3 }, { date: 2, value: 8 }]
@@ -18,7 +18,7 @@ const data = {
 
 const renderComponent = (tab) => shallow(
   <HealthDataChartPane
-    data={data}
+    entries={entries}
     tab={tab}
   />
 );
@@ -38,8 +38,8 @@ describe('<HealthDataChartPane />', () => {
       expect(renderComponent(DURATION).props().color).toEqual('green');
     });
 
-    it('should have the correct data', () => {
-      expect(renderComponent(DURATION).props().data)
+    it('should have the correct entries', () => {
+      expect(renderComponent(DURATION).props().entries)
         .toEqual([{ date: '1-Jan-70', value: 1 }, { date: 2, value: 3 }]);
     });
   });
@@ -53,8 +53,8 @@ describe('<HealthDataChartPane />', () => {
       expect(renderComponent(WEIGHT).props().color).toEqual('blue');
     });
 
-    it('should have the correct data', () => {
-      expect(renderComponent(WEIGHT).props().data).toEqual([{ date: '1-Jan-70', value: 4 }, { date: 2, value: 6 }]);
+    it('should have the correct entries', () => {
+      expect(renderComponent(WEIGHT).props().entries).toEqual([{ date: '1-Jan-70', value: 4 }, { date: 2, value: 6 }]);
     });
   });
 
@@ -67,42 +67,42 @@ describe('<HealthDataChartPane />', () => {
       expect(renderComponent(BODY_FAT).props().color).toEqual('red');
     });
 
-    it('should have the correct data', () => {
-      expect(renderComponent(BODY_FAT).props().data).toEqual([{ date: '1-Jan-70', value: 3 }, { date: 2, value: 8 }]);
+    it('should have the correct entries', () => {
+      expect(renderComponent(BODY_FAT).props().entries).toEqual([{ date: '1-Jan-70', value: 3 }, { date: 2, value: 8 }]);
     });
   });
 
   describe('mapStateToProps', () => {
-    it('passes dateRange getEntriesInRange into mapDataToObject', () => {
+    it('passes dateRange getEntriesInRange into mapEntriesToObject', () => {
 
       // Set dates to first epoch time, and set date range so they won't appear when passed through selector
       const state = {
-        data: [
+        entries: [
           { date: 1, duration: 1, weight: 4, bodyFat: 3 },
           { date: 1, duration: 3, weight: 6, bodyFat: 8 }
         ],
         dateRange: YEAR
       };
 
-      expect(mapStateToProps(state)).toEqual({ data: {"bodyFat": [], "duration": [], "weight": [] } });
+      expect(mapStateToProps(state)).toEqual({ entries: {"bodyFat": [], "duration": [], "weight": [] } });
 
     });
 
     it('passes tab state to props', () => {
-      expect(mapStateToProps({ data: [], tab: DURATION }).tab).toEqual('DURATION');
+      expect(mapStateToProps({ entries: [], tab: DURATION }).tab).toEqual('DURATION');
     });
   });
 
   describe('test connect', () => {
 
-    it('should pass the data from connect', () => {
+    it('should pass the entries from connect', () => {
       const mockStore = configureMockStore();
 
       const store = mockStore({
-        data: [
+        entries: { items: [
           { date: 1505345773000, duration: 1, weight: 4, bodyFat: 3 },
           { date: 1505323763000, duration: 3, weight: 6, bodyFat: 8 }
-        ],
+        ] },
         tab: DURATION
       });
 
@@ -113,7 +113,7 @@ describe('<HealthDataChartPane />', () => {
       );
 
       const node = wrapper.find(HealthDataChart);
-      expect(node.at(0).node.props.data).toEqual([{ date: '14-Sep-17', value: 1 }, { date: '13-Sep-17', value: 3 }]);
+      expect(node.at(0).node.props.entries).toEqual([{ date: '14-Sep-17', value: 1 }, { date: '13-Sep-17', value: 3 }]);
     });
   });
 });

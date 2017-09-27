@@ -8,11 +8,15 @@
   "scripts": {
     "start:server": "babel-watch server/index"
   },
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.16.2",
+    "redux-thunk": "^2.2.0"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "babel-watch": "^2.0.7"
+    "babel-watch": "^2.0.7",
+    "react-test-renderer": "16"
   }
 }
