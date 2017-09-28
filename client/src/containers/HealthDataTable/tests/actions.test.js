@@ -1,5 +1,3 @@
-import uuid from 'node-uuid';
-
 import {
   addEntry,
   deleteEntry,
@@ -12,7 +10,7 @@ import {
 
 import axios from 'axios'
 
-const addEntryFactory = () => addEntry({
+const addEntryPartial = addEntry({
   date: '2017-May-1',
   duration: '11',
   weight: '69',
@@ -22,16 +20,48 @@ const addEntryFactory = () => addEntry({
 describe('HealthDataTable actions', () => {
 
   describe('Add Entry Action', () => {
-    it('receives an action with the correct value', () => {
-      uuid.v4 = jest.fn().mockReturnValueOnce('fake-id');
-      expect(addEntryFactory()).toEqual({
-        type: 'ADD_ENTRY',
+    it('calls dispatch twice on POST request success', async () => {
+      const dispatch = jest.fn();
+      axios.post = jest.fn((url) => Promise.resolve(''));
+      await addEntryPartial(dispatch);
+      expect(dispatch).toHaveBeenCalledTimes(2);
+    });
+
+    it('calls REQUEST_ADD_ENTRY action', async () => {
+      const dispatch = jest.fn();
+      axios.post = jest.fn((url) => Promise.resolve(''));
+      await addEntryPartial(dispatch);
+      expect(dispatch.mock.calls[0][0]).toEqual({ type: 'REQUEST_ADD_ENTRY' });
+    });
+
+    it('makes a POST request with the correct URL', async () => {
+      const dispatch = jest.fn();
+      axios.post = jest.fn((url) => Promise.resolve(''));
+      await addEntryPartial(dispatch);
+      expect(axios.post)
+        .toHaveBeenCalledWith('api/entries', {
+          bodyFat: '14', date: 1493589600000, duration: '11', weight: '69'
+        });
+    });
+
+    it('calls RECEIVE_NEW_ENTRY action on success', async () => {
+      const dispatch = jest.fn();
+      axios.post = jest.fn((url) => Promise.resolve({ id: 'fake-id' }));
+      await addEntryPartial(dispatch);
+      expect(dispatch.mock.calls[1][0]).toEqual({
+        type: 'RECEIVE_NEW_ENTRY',
         id: 'fake-id',
         date: 1493589600000,
         duration: '11',
         weight: '69',
         bodyFat: '14'
       });
+    });
+
+    it('returns error on failed POST request', async () => {
+      const dispatch = jest.fn();
+      axios.post = jest.fn(() => Promise.reject(new Error('Error!')));
+      await expect(addEntryPartial(dispatch)).resolves.toEqual(new Error('Error!'));
     });
   });
 
@@ -85,6 +115,13 @@ describe('HealthDataTable actions', () => {
         expect(dispatch.mock.calls.length).toEqual(2);
       });
 
+      it('makes the GET request with the correct url', async () => {
+        const dispatch = jest.fn();
+        axios.get = jest.fn((url) => Promise.resolve(''));
+        await fetchEntries()(dispatch);
+        expect(axios.get).toHaveBeenCalledWith('api/entries');
+      });
+
       it('calls requestEntries on fetch attempt', async () => {
         const dispatch = jest.fn();
         axios.get = jest.fn((url) => Promise.resolve(''));
@@ -94,10 +131,11 @@ describe('HealthDataTable actions', () => {
 
       it('calls receiveEntries with correct data on success', async () => {
         const dispatch = jest.fn();
-        axios.get = jest.fn((url) => Promise.resolve(''));
+        axios.get = jest.fn((url) => Promise.resolve({data: ['entry1', 'entry2'] }));
         Date.now = jest.fn(() => 1);
         await fetchEntries()(dispatch);
-        expect(dispatch.mock.calls[1]).toEqual([{"entries": undefined, "receivedAt": 1, "type": "RECEIVE_ENTRIES"}]);
+        expect(dispatch.mock.calls[1][0])
+          .toEqual({entries: ['entry1', 'entry2'], receivedAt: 1, type: 'RECEIVE_ENTRIES'});
       });
 
       it('returns error on unsuccessful fetch attempt', async () => {

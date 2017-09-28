@@ -6,7 +6,6 @@ import {
 } from 'react-bootstrap-table';
 
 import configureMockStore from 'redux-mock-store';
-import uuid from 'node-uuid';
 import { Provider } from 'react-redux';
 
 import { ALL } from '../../RangeButton/constants';
@@ -244,17 +243,11 @@ describe('<HealthDataTable />', () => {
 
       it('should dispatch addRow action when called', () => {
         // fake uuid for action creator
-        uuid.v4 = jest.fn().mockReturnValue('fake-id');
         const dispatch = jest.fn();
+        actions.addEntry = jest.fn();
         const result = mapDispatchToProps(dispatch);
-        const newEntry = {
-          date: '1-May-17',
-          duration: '11',
-          weight: '69',
-          bodyFat: '14'
-        };
-        result.addRow(newEntry);
-        expect(dispatch).toHaveBeenCalledWith(addEntry(newEntry));
+        result.addRow({});
+        expect(dispatch).toHaveBeenCalledWith(actions.addEntry({}));
       });
 
       describe('deleteRows', () => {

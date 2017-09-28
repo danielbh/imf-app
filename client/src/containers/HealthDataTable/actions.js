@@ -1,35 +1,41 @@
-import uuid from 'node-uuid';
 import axios from 'axios';
 
 import {
-  ADD_ENTRY,
+  RECEIVE_NEW_ENTRY,
+  REQUEST_ADD_ENTRY,
   REQUEST_ENTRIES,
   RECEIVE_ENTRIES,
   INVALIDATE_ENTRIES,
   DELETE_ENTRY
 } from './constants';
 
-export const addEntry = ({ date, duration, weight, bodyFat }) => ({
-  type: ADD_ENTRY,
+const receiveNewEntry = ({ id, date, duration, weight, bodyFat }) => ({
+  type: RECEIVE_NEW_ENTRY,
   date: new Date(date).getTime(),
   duration,
   weight,
   bodyFat,
-  id: uuid.v4() // TODO: Change to server generated id later
-});
-
-export const deleteEntry = id => ({
-  type: DELETE_ENTRY,
   id
 });
 
-export const invalidateEntries = () => ({
-  type: INVALIDATE_ENTRIES,
-});
+export const addEntry = ({ date, duration, weight, bodyFat }) => dispatch => {
+  const timeStamp = new Date(date).getTime();
+  const newData = { date: timeStamp, duration, weight, bodyFat};
 
-export const requestEntries = () => ({
-  type: REQUEST_ENTRIES
-});
+  dispatch(requestAddEntry());
+
+  return axios.post('api/entries', newData)
+    .then(({ id }) => dispatch(receiveNewEntry({ id, ...newData })))
+    .catch((error) => error);
+};
+
+export const requestAddEntry = () => ({ type: REQUEST_ADD_ENTRY });
+
+export const deleteEntry = id => ({ type: DELETE_ENTRY, id });
+
+export const invalidateEntries = () => ({ type: INVALIDATE_ENTRIES });
+
+export const requestEntries = () => ({ type: REQUEST_ENTRIES });
 
 export const receiveEntries = (entries, receivedAt = Date.now()) => ({
   type: RECEIVE_ENTRIES,
