@@ -12,12 +12,16 @@ const entries = [
   { date: 100, value: 9 }
 ];
 
-const renderComponent = (props = {}) => shallow(
-  <HealthDataChart color="#FFFFFF" title="title" id="id" entries={entries} {...props} />
+const renderComponent = (entries) => shallow(
+  <HealthDataChart color="#FFFFFF" title="title" id="id" entries={entries} />
 );
 
 describe('<HealthDataChart />', () => {
-    it('matches snapshot', () => {
-      expect(renderComponent()).toMatchSnapshot();
-    });
+  it('matches snapshot', () => {
+    expect(renderComponent(entries)).toMatchSnapshot();
+  });
+
+  it("renders when 'No Data' entries is empty", () => {
+    expect(renderComponent([]).childAt(0).text()).toEqual('No Data')
+  });
 });

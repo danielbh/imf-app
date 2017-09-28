@@ -46,8 +46,7 @@ export const fetchEntries = () => dispatch => {
     .catch((error) => error);
 };
 
-const shouldFetchEntries = (state) => {
-  const entries = state.entries;
+const shouldFetchEntries = ({ entries }) => {
   if(!entries.items.length) return true;
   if(entries.isFetching) return false;
   return entries.didInvalidate;
@@ -55,5 +54,6 @@ const shouldFetchEntries = (state) => {
 
 export const fetchEntriesIfNeeded = () => (dispatch, getState) => {
   if (shouldFetchEntries(getState())) return dispatch(fetchEntries())
+  // TODO: Add fail fetch
 };
 

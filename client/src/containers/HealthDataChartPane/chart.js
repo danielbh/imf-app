@@ -30,7 +30,7 @@ const HealthDataChart = ({ entries, color, title }) => {
   const xDomain = [Math.min.apply(0, xValues.reverse()), Math.max.apply(0, xValues.reverse())];
   const yDomain = [Math.min.apply(0, yValues), Math.max.apply(0, yValues)];
 
-  return (
+  const chart = (
     <Wrapper>
       <ResponsiveContainer width="100%" aspect={3}>
         <AreaChart
@@ -59,7 +59,9 @@ const HealthDataChart = ({ entries, color, title }) => {
       </ResponsiveContainer>
     </Wrapper>
   );
-}
+
+  return entries.length > 0 ? chart : <Wrapper>No Data</Wrapper>
+};
 
 HealthDataChart.propTypes = {
   title: PropTypes.string.isRequired,

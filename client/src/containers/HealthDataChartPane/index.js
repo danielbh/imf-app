@@ -36,7 +36,7 @@ export const HealthDataChartPane = ({ tab = DURATION, entries }) => {
   };
 
   const { title, color,  chartData } = selectedTab(tab);
-
+  // TODO: Add rendering of progress calculations Example: 10 kg lost etc...
   return <HealthDataChart title={title} color={color} entries={chartData} />
 
 };

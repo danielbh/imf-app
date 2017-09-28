@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 
 import { ALL } from '../../RangeButton/constants';
 import HealthDataTableContainer, { HealthDataTable, mapDispatchToProps, mapStateToProps } from '../index';
-import actions, { addEntry, deleteEntry, fetchEntriesIfNeeded } from '../actions';
+import * as actions from '../actions';
 
 import {
   validateDate,
@@ -19,6 +19,8 @@ import {
   validateBodyFat,
   validateWeight
 } from '../insertValidation';
+
+const { addEntry, deleteEntry, fetchEntriesIfNeeded } = actions;
 
 const renderComponent = (fetchEntriesIfNeeded) => shallow(
   <HealthDataTable
@@ -208,13 +210,19 @@ describe('<HealthDataTable />', () => {
           items: [
             { date: 1505345773000, duration: 1, weight: 4, bodyFat: 3 },
             { date: 1505323763000, duration: 3, weight: 6, bodyFat: 8 }
-          ]}
+          ],
+          isFetching: false,
+          lastUpdated: 1505345773000
+        }
       });
 
       const expected = [
         { date: '14-Sep-17', duration: 1, weight: 4, bodyFat: 3 },
         { date: '13-Sep-17', duration: 3, weight: 6, bodyFat: 8 }
       ];
+
+      // This test assumes that data has already been fetched
+      actions.fetchEntriesIfNeeded = jest.fn(() => ({type: 'FAKE_TYPE'}));
 
       const wrapper = mount(
         <Provider store={store}>
@@ -271,12 +279,12 @@ describe('<HealthDataTable />', () => {
           expect(result.fetchEntriesIfNeeded).toBeDefined();
         });
 
-        it('should dispatch deleteRows action when called', () => {
+        it('should dispatch fetchEntriesIfNeeded action when called',  () => {
           const dispatch = jest.fn();
           actions.fetchEntriesIfNeeded = jest.fn();
           const result = mapDispatchToProps(dispatch);
           result.fetchEntriesIfNeeded();
-          expect(dispatch).toHaveBeenCalledWith(fetchEntriesIfNeeded());
+          expect(dispatch).toHaveBeenCalledWith(actions.fetchEntriesIfNeeded());
         });
       });
     });
@@ -307,7 +315,9 @@ describe('<HealthDataTable />', () => {
     });
 
     it('has the correct defaults for entries object when entries is not defined', () => {
-      expect(true).toEqual(false)
+      expect(mapStateToProps({
+        dateRange: ALL
+      })).toEqual({ entries: [], isFetching: true, lastUpdated: undefined });
     });
   });
 });
