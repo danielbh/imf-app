@@ -19,7 +19,7 @@ import {
   validateWeight
 } from '../insertValidation';
 
-const { addEntry, deleteEntry, fetchEntriesIfNeeded } = actions;
+const { deleteEntry, fetchEntriesIfNeeded } = actions;
 
 const renderComponent = (fetchEntriesIfNeeded) => shallow(
   <HealthDataTable
@@ -78,7 +78,7 @@ describe('<HealthDataTable />', () => {
     });
 
     it('should pass add row to BootstrapTable', () => {
-      expect(renderBootstrapTable().props().options.afterInsertRow()).toEqual('addRow');
+      expect(renderBootstrapTable().props().options.onAddRow()).toEqual('addRow');
     });
 
     it('should pass delete rows to BootstrapTable', () => {

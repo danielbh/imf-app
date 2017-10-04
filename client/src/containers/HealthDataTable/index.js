@@ -22,8 +22,6 @@ import { fetchEntriesIfNeeded } from "./actions";
 // IMPORTANT: Default css behavior is overridden to hide toastr notification which appears on invalid insert
 // submits. The recommended solution does not work. See documentation here:
 // http://allenfang.github.io/react-bootstrap-table/docs.html#beforeShowError
-// At the moment this is also not supported in the unit testing framework. Please see the following link
-// for more information: https://github.com/styled-components/jest-styled-components/issues/64
 const Wrapper = styled.div`
   .s-alert-wrapper {
      display: none;
@@ -58,7 +56,7 @@ export class HealthDataTable extends Component {
           insertRow
           pagination
           options={{
-            afterInsertRow: addRow,
+            onAddRow: row => { addRow(row) },
             afterDeleteRow: deleteRows,
             handleConfirmDeleteRow: next => next() // Overrides default behavior which triggers an alert.
           }}
