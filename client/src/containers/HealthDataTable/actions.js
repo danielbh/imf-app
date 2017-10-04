@@ -22,6 +22,7 @@ export const addEntry = ({ date, duration, weight, bodyFat }) => dispatch => {
   const timeStamp = new Date(date).getTime();
   const newData = { date: timeStamp, duration, weight, bodyFat};
 
+  // TODO: Implement later for optimistic rendering and offline storage
   dispatch(requestAddEntry());
 
   return axios.post('api/entries', newData)

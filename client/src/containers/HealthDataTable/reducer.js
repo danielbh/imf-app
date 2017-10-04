@@ -1,5 +1,5 @@
 import {
-  ADD_ENTRY,
+  RECEIVE_NEW_ENTRY,
   REQUEST_ENTRIES,
   RECEIVE_ENTRIES,
   INVALIDATE_ENTRIES,
@@ -33,7 +33,7 @@ export const entries = (
         ...state,
         didInvalidate: true
       };
-    case ADD_ENTRY:
+    case RECEIVE_NEW_ENTRY:
       return {
         ...state,
         items: state.items.concat({
@@ -45,7 +45,6 @@ export const entries = (
         })};
     case DELETE_ENTRY:
       return state.filter(entry => !action.ids.find(id => id === entry.id));
-
     default:
       return state;
   }

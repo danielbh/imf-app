@@ -1,8 +1,8 @@
 import express from 'express';
 import moment from 'moment';
+import bodyParser from 'body-parser';
 import { random } from 'faker';
 import { generateFakeEntries } from './scripts/dev/generateFakeEntries';
-const app = express();
 
 let data = [
   ...generateFakeEntries(5,  moment().subtract(1, 'weeks'), moment()),
@@ -12,12 +12,15 @@ let data = [
   ...generateFakeEntries(5,  moment().subtract(2, 'years'), moment())
 ].sort((a, b) => a.date - b.date);
 
+const app = express();
+app.use(bodyParser.json());
+
 // This is a development server not meant for production. It is being used as a quick tool for the React
 // frontend.
 app.get('/api/entries', (req, res) => res.status(200).send(data));
 
 app.post('/api/entries', (req, res) => {
-  const { date, duration, weight, bodyFat } = req.query;
+  const { date, duration, weight, bodyFat } = req.body;
   const id = random.uuid();
   data.push({ id, date, duration, weight, bodyFat });
   res.status(200).send({ id });

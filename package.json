@@ -6,7 +6,9 @@
   "author": "Daniel Hollcraft",
   "license": "MIT",
   "scripts": {
-    "start:server": "babel-watch server/index"
+    "start:server": "babel-watch server/index",
+    "start:client": "cd client && yarn start",
+    "dev": "concurrently 'yarn start:server' 'yarn start:client'"
   },
   "dependencies": {},
   "devDependencies": {
@@ -14,6 +16,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-watch": "^2.0.7",
+    "concurrently": "^3.5.0",
     "nightwatch": "^0.9.16",
     "react-test-renderer": "16"
   }
