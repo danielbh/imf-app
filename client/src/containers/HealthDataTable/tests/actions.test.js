@@ -1,12 +1,12 @@
 import {
   addEntry,
   deleteEntries,
-  receiveDeleteEntries,
   invalidateEntries,
   receiveEntries,
   requestEntries,
   fetchEntries,
-  fetchEntriesIfNeeded
+  fetchEntriesIfNeeded,
+  receiveDeletedEntryIds
 } from '../actions';
 
 import axios from 'axios'
@@ -25,7 +25,7 @@ describe('HealthDataTable actions', () => {
   describe('Add Entry Action', () => {
     it('calls dispatch twice on POST request success', async () => {
       const dispatch = jest.fn();
-      axios.post = jest.fn((url) => Promise.resolve(''));
+      axios.post = jest.fn((url) => Promise.resolve({ data: { id: 'fake-id' } }));
       await addEntryPartial(dispatch);
       expect(dispatch).toHaveBeenCalledTimes(2);
     });
@@ -49,7 +49,7 @@ describe('HealthDataTable actions', () => {
 
     it('calls RECEIVE_NEW_ENTRY action on success', async () => {
       const dispatch = jest.fn();
-      axios.post = jest.fn((url) => Promise.resolve({ id: 'fake-id' }));
+      axios.post = jest.fn((url) => Promise.resolve({ data: { id: 'fake-id' } }));
       await addEntryPartial(dispatch);
       expect(dispatch.mock.calls[1][0]).toEqual({
         type: 'RECEIVE_NEW_ENTRY',
@@ -71,7 +71,7 @@ describe('HealthDataTable actions', () => {
   describe('Delete Entry Action', () => {
     it('calls dispatch twice on DELETE request success', async () => {
       const dispatch = jest.fn();
-      axios.delete = jest.fn(url => Promise.resolve(''));
+      axios.post = jest.fn(url => Promise.resolve({ data: { ids: ['fake-id'] } }));
       await deleteEntriesPartial(dispatch);
       expect(dispatch).toHaveBeenCalledTimes(2);
     });
@@ -83,30 +83,30 @@ describe('HealthDataTable actions', () => {
       expect(dispatch.mock.calls[0][0]).toEqual({ type: 'REQUEST_DELETE_ENTRIES' });
     });
 
-    it('makes a DELETE request with the correct URL', async () => {
+    it('makes a POST request with the correct URL', async () => {
       const dispatch = jest.fn();
-      axios.delete = jest.fn((url) => Promise.resolve(''));
+      axios.post = jest.fn((url) => Promise.resolve(''));
       await deleteEntriesPartial(dispatch);
-      expect(axios.delete)
-        .toHaveBeenCalledWith('api/entries', {ids: ['id1', 'id2', 'id3']});
+      expect(axios.post)
+        .toHaveBeenCalledWith('api/entries/delete', { ids: ['id1', 'id2', 'id3']});
     });
 
     it('calls RECEIVE_DELETE_ENTRIES action on success', async () => {
       const dispatch = jest.fn();
-      axios.delete = jest.fn((url) => Promise.resolve({ ids: ['id1', 'id2', 'id3'] }));
+      axios.post = jest.fn((url) => Promise.resolve({ data: { ids: ['id1', 'id2', 'id3'] } }));
       await deleteEntriesPartial(dispatch);
       expect(dispatch.mock.calls[1][0])
         .toEqual({ type: 'RECEIVE_DELETED_ENTRY_IDS', ids: ['id1', 'id2', 'id3'] });
     });
 
     it('creates the correct result for RECEIVE_DELETE_ENTRIES', () => {
-      expect(receiveDeleteEntries({ type: 'RECEIVE_DELETED_ENTRY_IDS', ids: ['id1', 'id2', 'id3'] }))
+      expect(receiveDeletedEntryIds({ ids: ['id1', 'id2', 'id3'] }))
         .toEqual({ type: 'RECEIVE_DELETED_ENTRY_IDS', ids: ['id1', 'id2', 'id3'] })
     });
 
     it('returns error on failed DELETE request', async () => {
       const dispatch = jest.fn();
-      axios.delete = jest.fn(() => Promise.reject(new Error('Error!')));
+      axios.post = jest.fn(() => Promise.reject(new Error('Error!')));
       await expect(deleteEntriesPartial(dispatch)).resolves.toEqual(new Error('Error!'));
     });
   });

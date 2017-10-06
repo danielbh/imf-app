@@ -12,15 +12,27 @@ describe('HealthDataTable reducer', () => {
 
 
   it('deletes an entry', () => {
-    const initialState = [
-      { id: 'id1', date: '1-May-17', duration: '11', weight: '69', bodyFat: '14' },
-      { id: 'id2', date: '1-May-17', duration: '11', weight: '69', bodyFat: '14' },
-      { id: 'id3', date: '1-May-17', duration: '11', weight: '69', bodyFat: '14' },
-      { id: 'id4', date: '1-May-17', duration: '11', weight: '69', bodyFat: '14' }
-    ];
+    const initialState = {
+      isFetching: false,
+      didInvalidate: false,
+      items: [
+        { id: 'id1', date: '1-May-17', duration: '11', weight: '69', bodyFat: '14' },
+        { id: 'id2', date: '1-May-17', duration: '11', weight: '69', bodyFat: '14' },
+        { id: 'id3', date: '1-May-17', duration: '11', weight: '69', bodyFat: '14' },
+        { id: 'id4', date: '1-May-17', duration: '11', weight: '69', bodyFat: '14' }
+      ]};
 
-    expect(entries(initialState, { ids: ['id3', 'id4'], type: 'DELETE_ENTRY' }))
-      .toEqual([initialState[0], initialState[1]]);
+    const expectedStateAfter = {
+      isFetching: false,
+      didInvalidate: false,
+      items: [
+        { id: 'id1', date: '1-May-17', duration: '11', weight: '69', bodyFat: '14' },
+        { id: 'id2', date: '1-May-17', duration: '11', weight: '69', bodyFat: '14' },
+      ]
+    };
+
+    expect(entries(initialState, { ids: ['id3', 'id4'], type: 'RECEIVE_DELETED_ENTRY_IDS' }))
+      .toEqual(expectedStateAfter);
   });
 
   describe('Get entries', () => {
@@ -78,7 +90,7 @@ describe('HealthDataTable reducer', () => {
     });
 
     it('attempts to add an entry', () => {
-        // TODO: Do later for optimistic rendering and offline storage
+      // TODO: Do later for optimistic rendering and offline storage
     });
   });
 });

@@ -3,7 +3,7 @@ import {
   REQUEST_ENTRIES,
   RECEIVE_ENTRIES,
   INVALIDATE_ENTRIES,
-  DELETE_ENTRY
+  RECEIVE_DELETED_ENTRY_IDS
 } from './constants';
 
 export const entries = (
@@ -43,8 +43,11 @@ export const entries = (
           weight: action.weight,
           bodyFat: action.bodyFat
         })};
-    case DELETE_ENTRY:
-      return state.filter(entry => !action.ids.find(id => id === entry.id));
+    case RECEIVE_DELETED_ENTRY_IDS:
+      return {
+        ...state,
+        items: state.items.filter(entry => !action.ids.find(id => id === entry.id))
+      };
     default:
       return state;
   }

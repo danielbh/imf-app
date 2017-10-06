@@ -18,7 +18,7 @@ export const addEntry = ({ date, duration, weight, bodyFat }) => dispatch => {
   dispatch(requestAddEntry());
 
   return axios.post('api/entries', newData)
-    .then(({ id }) => dispatch(receiveNewEntry({ id, ...newData })))
+    .then(({ data: { id } }) => dispatch(receiveNewEntry({ id, ...newData })))
     .catch((error) => error);
 };
 
@@ -36,15 +36,14 @@ const receiveNewEntry = ({ id, date, duration, weight, bodyFat }) => ({
 export const deleteEntries = ids => dispatch =>  {
   // TODO: Implement later for optimistic rendering and offline storage
   dispatch(requestDeleteEntries());
-
-  return axios.delete('api/entries', { ids })
-    .then(({ ids }) => dispatch(receiveDeleteEntries({ type: RECEIVE_DELETED_ENTRY_IDS, ids })))
+  return axios.post('api/entries/delete', { ids })
+    .then(({ data: { ids } }) => dispatch(receiveDeletedEntryIds({ ids })))
     .catch((error) => error);
 };
 
 export const requestDeleteEntries = () => ({ type: REQUEST_DELETE_ENTRIES });
 
-export const receiveDeleteEntries = ({ type, ids }) => ({type, ids});
+export const receiveDeletedEntryIds = ({ ids }) => ({ type: RECEIVE_DELETED_ENTRY_IDS, ids });
 
 export const invalidateEntries = () => ({ type: INVALIDATE_ENTRIES });
 
