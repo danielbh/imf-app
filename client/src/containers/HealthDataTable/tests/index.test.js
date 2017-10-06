@@ -19,7 +19,7 @@ import {
   validateWeight
 } from '../insertValidation';
 
-const { deleteEntry, fetchEntriesIfNeeded } = actions;
+const { fetchEntriesIfNeeded } = actions;
 
 const renderComponent = (fetchEntriesIfNeeded, addRow) => shallow(
   <HealthDataTable
@@ -244,7 +244,6 @@ describe('<HealthDataTable />', () => {
       });
 
       it('should dispatch addRow action when called', () => {
-        // fake uuid for action creator
         const dispatch = jest.fn();
         actions.addEntry = jest.fn();
         const result = mapDispatchToProps(dispatch);
@@ -261,9 +260,10 @@ describe('<HealthDataTable />', () => {
 
         it('should dispatch deleteRows action when called', () => {
           const dispatch = jest.fn();
+          actions.deleteEntries = jest.fn();
           const result = mapDispatchToProps(dispatch);
           result.deleteRows(['id']);
-          expect(dispatch).toHaveBeenCalledWith(deleteEntry(['id']));
+          expect(dispatch).toHaveBeenCalledWith(actions.deleteEntries(['id']));
         });
       });
 

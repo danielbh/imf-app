@@ -14,7 +14,7 @@ import {
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { addEntry, deleteEntry } from './actions';
+import { addEntry, deleteEntries } from './actions';
 import { validateDate, validateBodyFat, validateWeight, validateDuration } from './insertValidation';
 import { getEntriesInRange } from "../App/selectors";
 import { fetchEntriesIfNeeded } from "./actions";
@@ -100,7 +100,7 @@ export class HealthDataTable extends Component {
 
 export const mapDispatchToProps = (dispatch) => ({
   addRow: row => dispatch(addEntry(row)),
-  deleteRows: ids => dispatch(deleteEntry(ids)),
+  deleteRows: ids => dispatch(deleteEntries(ids)),
   fetchEntriesIfNeeded: () => dispatch(fetchEntriesIfNeeded())
 });
 

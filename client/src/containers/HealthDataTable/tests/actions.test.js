@@ -1,6 +1,7 @@
 import {
   addEntry,
-  deleteEntry,
+  deleteEntries,
+  receiveDeleteEntries,
   invalidateEntries,
   receiveEntries,
   requestEntries,
@@ -16,6 +17,8 @@ const addEntryPartial = addEntry({
   weight: '69',
   bodyFat: '14'
 });
+
+const deleteEntriesPartial = deleteEntries(['id1', 'id2', 'id3']);
 
 describe('HealthDataTable actions', () => {
 
@@ -66,8 +69,45 @@ describe('HealthDataTable actions', () => {
   });
 
   describe('Delete Entry Action', () => {
-    it('receives an action with the correct value', () => {
-      expect(deleteEntry('fake-id')).toEqual({ type: 'DELETE_ENTRY', id: 'fake-id' });
+    it('calls dispatch twice on DELETE request success', async () => {
+      const dispatch = jest.fn();
+      axios.delete = jest.fn(url => Promise.resolve(''));
+      await deleteEntriesPartial(dispatch);
+      expect(dispatch).toHaveBeenCalledTimes(2);
+    });
+
+    it('calls REQUEST_DELETE_ENTRIES action', async () => {
+      const dispatch = jest.fn();
+      axios.delete = jest.fn((url) => Promise.resolve(''));
+      await deleteEntriesPartial(dispatch);
+      expect(dispatch.mock.calls[0][0]).toEqual({ type: 'REQUEST_DELETE_ENTRIES' });
+    });
+
+    it('makes a DELETE request with the correct URL', async () => {
+      const dispatch = jest.fn();
+      axios.delete = jest.fn((url) => Promise.resolve(''));
+      await deleteEntriesPartial(dispatch);
+      expect(axios.delete)
+        .toHaveBeenCalledWith('api/entries', {ids: ['id1', 'id2', 'id3']});
+    });
+
+    it('calls RECEIVE_DELETE_ENTRIES action on success', async () => {
+      const dispatch = jest.fn();
+      axios.delete = jest.fn((url) => Promise.resolve({ ids: ['id1', 'id2', 'id3'] }));
+      await deleteEntriesPartial(dispatch);
+      expect(dispatch.mock.calls[1][0])
+        .toEqual({ type: 'RECEIVE_DELETED_ENTRY_IDS', ids: ['id1', 'id2', 'id3'] });
+    });
+
+    it('creates the correct result for RECEIVE_DELETE_ENTRIES', () => {
+      expect(receiveDeleteEntries({ type: 'RECEIVE_DELETED_ENTRY_IDS', ids: ['id1', 'id2', 'id3'] }))
+        .toEqual({ type: 'RECEIVE_DELETED_ENTRY_IDS', ids: ['id1', 'id2', 'id3'] })
+    });
+
+    it('returns error on failed DELETE request', async () => {
+      const dispatch = jest.fn();
+      axios.delete = jest.fn(() => Promise.reject(new Error('Error!')));
+      await expect(deleteEntriesPartial(dispatch)).resolves.toEqual(new Error('Error!'));
     });
   });
 

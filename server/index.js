@@ -26,8 +26,8 @@ app.post('/api/entries', (req, res) => {
   res.status(200).send({ id });
 });
 
-app.delete('/api/entries/:id', (req, res) => {
-  data = data.filter(e => e.id !== req.params.id);
+app.delete('/api/entries', (req, res) => {
+  data = req.body.ids.filter(e => e.id !== req.params.id);
   res.status(200).send({ id: req.params.id});
 });
 
