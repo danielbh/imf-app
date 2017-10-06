@@ -56,6 +56,8 @@ export class HealthDataTable extends Component {
           insertRow
           pagination
           options={{
+            // Please see https://github.com/AllenFang/react-bootstrap-table/issues/1455 on why it is necessary to
+            // wrap onAddRow in a callback.
             onAddRow: row => { addRow(row) },
             afterDeleteRow: deleteRows,
             handleConfirmDeleteRow: next => next() // Overrides default behavior which triggers an alert.

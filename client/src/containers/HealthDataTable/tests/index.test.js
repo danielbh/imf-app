@@ -21,17 +21,17 @@ import {
 
 const { deleteEntry, fetchEntriesIfNeeded } = actions;
 
-const renderComponent = (fetchEntriesIfNeeded) => shallow(
+const renderComponent = (fetchEntriesIfNeeded, addRow) => shallow(
   <HealthDataTable
     fetchEntriesIfNeeded={fetchEntriesIfNeeded}
     entries={['entries']}
-    addRow={() => 'addRow'}
+    addRow={addRow}
     deleteRows={() => 'deleteRows'}
   />
 );
 
-// We use a function to decouple tests.
-const renderBootstrapTable = () => renderComponent().childAt(0);
+// We use functions to decouple tests.
+const renderBootstrapTable = addRow => renderComponent(null, addRow).childAt(0);
 const idColumn = () => renderBootstrapTable().childAt(0);
 const dateColumn = () => renderBootstrapTable().childAt(1);
 const durationColumn = () => renderBootstrapTable().childAt(2);
@@ -78,7 +78,9 @@ describe('<HealthDataTable />', () => {
     });
 
     it('should pass add row to BootstrapTable', () => {
-      expect(renderBootstrapTable().props().options.onAddRow()).toEqual('addRow');
+      const addRow = jest.fn();
+      renderBootstrapTable(addRow).props().options.onAddRow();
+      expect(addRow).toHaveBeenCalled();
     });
 
     it('should pass delete rows to BootstrapTable', () => {
