@@ -31,11 +31,11 @@ const Wrapper = styled.div`
 export class HealthDataTable extends Component {
 
   static propTypes = {
-    entries: PropTypes.array.isRequired,
-    addRow: PropTypes.func.isRequired,
-    deleteRows: PropTypes.func.isRequired,
-    fetchEntriesIfNeeded: PropTypes.func.isRequired,
-    isFetching: PropTypes.bool.isRequired,
+    entries: PropTypes.array,
+    addRow: PropTypes.func,
+    deleteRows: PropTypes.func,
+    fetchEntriesIfNeeded: PropTypes.func,
+    isFetching: PropTypes.bool,
     lastUpdated: PropTypes.number,
   };
 

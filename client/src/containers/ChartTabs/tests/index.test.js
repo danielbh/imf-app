@@ -3,7 +3,8 @@ import { shallow } from 'enzyme';
 import { ChartTabs, mapDispatchToProps } from '../index'
 import { selectTab } from "../actions";
 
-const ChartTabsComponent = handleSelect => shallow(<ChartTabs handleSelect = { handleSelect } />);
+const ChartTabsComponent =
+  handleSelect => shallow(<ChartTabs handleSelect={handleSelect} />);
 
 describe('<ChartTabs />', () => {
   it('matches snapshot', () => {

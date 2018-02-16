@@ -15,7 +15,7 @@ export const ChartTabs = ({ handleSelect }) => {
 };
 
 ChartTabs.propTypes = {
-  handleSelect: PropTypes.func.isRequired
+  handleSelect: PropTypes.func
 };
 ChartTabs.defaultProps = {};
 

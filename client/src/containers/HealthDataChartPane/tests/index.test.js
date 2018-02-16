@@ -1,11 +1,10 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-
-import { HealthDataChartPane, mapStateToProps } from '../index';
-import  HealthDataChartPaneContainer from '../index';
-import HealthDataChart from '../chart';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
+import { HealthDataChartPane, mapStateToProps } from '../index';
+import HealthDataChartPaneContainer from '../index';
+import HealthDataChart from '../chart';
 import { YEAR } from "../../RangeButton/constants";
 import { DURATION, WEIGHT, BODY_FAT } from "../../ChartTabs/constants";
 
@@ -84,7 +83,7 @@ describe('<HealthDataChartPane />', () => {
         dateRange: YEAR
       };
 
-      expect(mapStateToProps(state)).toEqual({ entries: {"bodyFat": [], "duration": [], "weight": [] } });
+      expect(mapStateToProps(state)).toEqual({ entries: { "bodyFat": [], "duration": [], "weight": [] } });
 
     });
 
@@ -99,10 +98,12 @@ describe('<HealthDataChartPane />', () => {
       const mockStore = configureMockStore();
 
       const store = mockStore({
-        entries: { items: [
-          { date: 1505345773000, duration: 1, weight: 4, bodyFat: 3 },
-          { date: 1505323763000, duration: 3, weight: 6, bodyFat: 8 }
-        ] },
+        entries: {
+          items: [
+            { date: 1505432173000, duration: 1, weight: 4, bodyFat: 3 },
+            { date: 1505345773000, duration: 3, weight: 6, bodyFat: 8 }
+          ]
+        },
         tab: DURATION
       });
 

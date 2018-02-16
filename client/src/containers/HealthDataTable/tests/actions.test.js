@@ -43,7 +43,7 @@ describe('HealthDataTable actions', () => {
       await addEntryPartial(dispatch);
       expect(axios.post)
         .toHaveBeenCalledWith('api/entries', {
-          bodyFat: '14', date: 1493589600000, duration: '11', weight: '69'
+          bodyFat: '14', date: 1493611200000, duration: '11', weight: '69'
         });
     });
 
@@ -54,7 +54,7 @@ describe('HealthDataTable actions', () => {
       expect(dispatch.mock.calls[1][0]).toEqual({
         type: 'RECEIVE_NEW_ENTRY',
         id: 'fake-id',
-        date: 1493589600000,
+        date: 1493611200000,
         duration: '11',
         weight: '69',
         bodyFat: '14'

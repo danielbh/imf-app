@@ -209,11 +209,11 @@ describe('<HealthDataTable />', () => {
       const store = mockStore({
         entries: {
           items: [
-            { date: 1505345773000, duration: 1, weight: 4, bodyFat: 3 },
-            { date: 1505323763000, duration: 3, weight: 6, bodyFat: 8 }
+            { date: 1505432173000, duration: 1, weight: 4, bodyFat: 3 },
+            { date: 1505345773000, duration: 3, weight: 6, bodyFat: 8 }
           ],
           isFetching: false,
-          lastUpdated: 1505345773000
+          lastUpdated: 1505432173000
         }
       });
 
@@ -223,7 +223,7 @@ describe('<HealthDataTable />', () => {
       ];
 
       // This test assumes that data has already been fetched
-      actions.fetchEntriesIfNeeded = jest.fn(() => ({type: 'FAKE_TYPE'}));
+      actions.fetchEntriesIfNeeded = jest.fn(() => ({ type: 'FAKE_TYPE' }));
 
       const wrapper = mount(
         <Provider store={store}>
@@ -274,7 +274,7 @@ describe('<HealthDataTable />', () => {
           expect(result.fetchEntriesIfNeeded).toBeDefined();
         });
 
-        it('should dispatch fetchEntriesIfNeeded action when called',  () => {
+        it('should dispatch fetchEntriesIfNeeded action when called', () => {
           const dispatch = jest.fn();
           actions.fetchEntriesIfNeeded = jest.fn();
           const result = mapDispatchToProps(dispatch);
@@ -289,8 +289,8 @@ describe('<HealthDataTable />', () => {
         const state = {
           entries: {
             items: [
-              { date: 1, duration: 1, weight: 4, bodyFat: 3 },
-              { date: 1, duration: 3, weight: 6, bodyFat: 8 }
+              { date: 1505432173000, duration: 1, weight: 4, bodyFat: 3 },
+              { date: 1505345773000, duration: 3, weight: 6, bodyFat: 8 }
             ],
             isFetching: true,
             lastUpdated: 1
@@ -300,8 +300,8 @@ describe('<HealthDataTable />', () => {
 
         const expected = {
           entries: [
-            {bodyFat: 3, date: '1-Jan-70', duration: 1, weight: 4},
-            {bodyFat: 8, date: '1-Jan-70', duration: 3, weight: 6}],
+            { bodyFat: 3, date: '14-Sep-17', duration: 1, weight: 4 },
+            { bodyFat: 8, date: '13-Sep-17', duration: 3, weight: 6 }],
           isFetching: true,
           lastUpdated: 1
         };

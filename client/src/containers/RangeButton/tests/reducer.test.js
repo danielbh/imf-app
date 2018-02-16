@@ -6,6 +6,6 @@ describe('dateRange', () => {
   });
 
   it('returns inputed action.range', () => {
-    expect(dateRange('ALL', {type:'SET_DATE_RANGE', range: 'WEEK'})).toEqual('WEEK')
+    expect(dateRange('ALL', { type: 'SET_DATE_RANGE', range: 'WEEK' })).toEqual('WEEK')
   });
 });
