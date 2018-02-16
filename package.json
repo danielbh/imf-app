@@ -6,6 +6,8 @@
   "author": "Daniel Hollcraft",
   "license": "MIT",
   "scripts": {
+    "test:client": "cd client && npm test",
+    "test:server": "cd server && jest --watch",
     "setup": "npm i && cd client && npm i && cd ../server && npm i",
     "start:server": "babel-watch server/index",
     "start:client": "cd client && npm start",

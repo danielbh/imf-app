@@ -3,6 +3,7 @@ import { times } from 'ramda';
 
 export function generateFakeEntries(length, from, to) {
   const randomLeftRight = (left, right) => (max, min) => random.boolean() ? left(max, min) : right(max, min);
+
   const generateInt = (max, min) => random.number({ max, min, precision: 1 });
 
   // Sometimes the result is rounded to a whole number because the 10ths place is 0.
@@ -16,6 +17,7 @@ export function generateFakeEntries(length, from, to) {
 
   const unsorted = times(() => ({
     id: random.uuid(),
+    // We subtract one so that it
     date: date.between(from, to).getTime(),
     duration: generateNumber(24, 0),
     weight: generateNumber(50, 72),

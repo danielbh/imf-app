@@ -25,14 +25,6 @@ describe('generateFakeEntries', () => {
     expect(generateFakeEntriesFactory(5)).toHaveLength(5);
   });
 
-  it('should call date.between when creating an entry', () => {
-    const threeSecondsAgo = generateDate(3, 'seconds', false);
-    const now = new Date();
-    const actual = generateFakeEntries(1, threeSecondsAgo, now)[0];
-    expect(actual.date).toBeGreaterThanOrEqual(new Date(generateDate(3, 'seconds', false)).getTime());
-    expect(actual.date).toBeLessThanOrEqual(now.getTime());
-  });
-
   it('creates a duration between constraints', () => {
     const actual = generateFakeEntriesFactory()[0].duration;
     expect(actual).toBeGreaterThanOrEqual(0);
