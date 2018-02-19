@@ -21,6 +21,13 @@
     "babel-watch": "^2.0.7",
     "concurrently": "^3.5.0",
     "nightwatch": "^0.9.16",
-    "react-test-renderer": "16"
+    "react-test-renderer": "16",
+    "babel-eslint": "^8.1.2",
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "^21.12.2",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.4.0"
   }
 }
