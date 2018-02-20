@@ -9,5 +9,5 @@
 // ***********************************************
 
 Cypress.Commands.add('goToHomePage', () => {
-  cy.visit(Cypress.env('HOST'))
+  cy.visit(Cypress.env('baseUrl'))
 })

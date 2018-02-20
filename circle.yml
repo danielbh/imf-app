@@ -1,0 +1,64 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:7.10
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run tests!
+      - run:
+          name: Running client unit tests
+          command: npm test:client
+      - run:
+          name: Running server unit tests
+          command: npm test:server
+
+      # Run cypress
+      - run:
+          command: npm run dev
+          background: true
+      - run:
+          name: Waiting for local server to start
+          command: $(npm bin)/wait-on http://localhost:3000 --interval 1000 --timeout 180000
+      - run:
+          name: Running Cypress tests
+          command: |
+            if [ -n "$DOCS_RECORD_KEY" ]; then
+              $(npm bin)/cypress run --record --key $CY_RECORD_KEY
+            else
+              $(npm bin)/cypress run
+            fi
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
+
+

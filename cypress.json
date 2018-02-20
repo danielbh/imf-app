@@ -1,6 +1,6 @@
 {
   "projectId": "e4xdhk",
   "env": {
-    "HOST": "http://localhost:3000"
+    "baseUrl": "http://localhost:3000"
   }
 }

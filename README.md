@@ -1,0 +1,1 @@
+# Intermittent Fasting App Testing Demo [![CircleCI](https://circleci.com/gh/cypress-io/cypress-documentation.svg?style=svg)](https://circleci.com/gh/cypress-io/cypress-documentation) [![Cypress Dashboard](https://img.shields.io/badge/cypress-dashboard-brightgreen.svg)](https://dashboard.cypress.io/#/projects/e4xdhk/runs)

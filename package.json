@@ -7,8 +7,10 @@
   "license": "MIT",
   "scripts": {
     "test:client": "cd client && npm test",
-    "test:server": "cd server && jest --watch",
+    "test:server": "cd server && jest",
+    "test:server:watch": "cd server && jest --watch",
     "e2e": "cypress open",
+    "e2e:run": "cypress run",
     "setup": "npm i && cd client && npm i && cd ../server && npm i",
     "start:server": "babel-watch server/index",
     "start:client": "cd client && npm start",
