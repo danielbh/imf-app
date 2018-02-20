@@ -48,8 +48,8 @@ jobs:
       - run:
           name: Running Cypress tests
           command: |
-            if [ -n "$DOCS_RECORD_KEY" ]; then
-              $(npm bin)/cypress run --record --key b52bee5a-f1f9-4ed8-8456-7348df8471ca
+            if [ -n "$CYPRESS_RECORD_KEY" ]; then
+              $(npm bin)/cypress run --record --key $CYPRESS_RECORD_KEY
             else
               $(npm bin)/cypress run
             fi

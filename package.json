@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "test:client": "cd client && npm test",
+    "test:client:cov": "cd client && npm run coverage",
     "test:server": "cd server && jest",
     "test:server:watch": "cd server && jest --watch",
     "e2e": "cypress open",
