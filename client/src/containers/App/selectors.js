@@ -13,7 +13,7 @@ import {
 export const getEntriesInRange = (entries, dateRange) => {
 
   const returnEntriesInRange =
-    (units, thresh = 1) => entries.filter(e => moment(moment()).diff(e.date, units) < thresh);
+    (units, thresh = 1) => entries.filter(e => moment().diff(e.date, units) < thresh);
 
   switch(dateRange) {
     case WEEK:
