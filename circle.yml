@@ -49,7 +49,7 @@ jobs:
           name: Running Cypress tests
           command: |
             if [ -n "$DOCS_RECORD_KEY" ]; then
-              $(npm bin)/cypress run --record --key $CY_RECORD_KEY
+              $(npm bin)/cypress run --record --key $CYPRESS_RECORD_KEY
             else
               $(npm bin)/cypress run
             fi
