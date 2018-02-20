@@ -20,7 +20,9 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: npm run setup
+      - run:
+        name: Install dependencies
+        command: npm run setup
 
       - save_cache:
           paths:
@@ -37,6 +39,7 @@ jobs:
 
       # Run cypress
       - run:
+          name: Run local app server
           command: npm run dev
           background: true
       - run:
