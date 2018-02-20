@@ -36,10 +36,10 @@ jobs:
       # run tests!
       - run:
           name: Running client unit tests
-          command: npm test:client
+          command: npm run test:client
       - run:
           name: Running server unit tests
-          command: npm test:server
+          command: npm run test:server
 
       # Run cypress
       - run:
