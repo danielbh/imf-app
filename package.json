@@ -7,7 +7,11 @@
   "license": "MIT",
   "scripts": {
     "test:client": "cd client && npm test",
-    "test:server": "cd server && jest --watch",
+    "test:client:cov": "cd client && npm run coverage",
+    "test:server": "cd server && npm test",
+    "test:server:watch": "cd server && npm run test:watch",
+    "e2e": "cypress open",
+    "e2e:run": "cypress run",
     "setup": "npm i && cd client && npm i && cd ../server && npm i",
     "start:server": "babel-watch server/index",
     "start:client": "cd client && npm start",
@@ -16,11 +20,20 @@
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-watch": "^2.0.7",
     "concurrently": "^3.5.0",
-    "nightwatch": "^0.9.16",
-    "react-test-renderer": "16"
+    "cypress": "^2.0.2",
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-cypress": "^2.0.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "^21.12.2",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.4.0",
+    "react-test-renderer": "16",
+    "wait-on": "^2.1.0"
   }
 }
