@@ -14,6 +14,10 @@
       "es6"
     ]
   },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
   "devDependencies": {
     "jest": "^22.3.0"
   }

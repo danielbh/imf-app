@@ -8,8 +8,8 @@
   "scripts": {
     "test:client": "cd client && npm test",
     "test:client:cov": "cd client && npm run coverage",
-    "test:server": "cd server && jest",
-    "test:server:watch": "cd server && jest --watch",
+    "test:server": "cd server && npm test",
+    "test:server:watch": "cd server && npm run test:watch",
     "e2e": "cypress open",
     "e2e:run": "cypress run",
     "setup": "npm i && cd client && npm i && cd ../server && npm i",
